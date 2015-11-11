@@ -345,14 +345,22 @@ if ( ! is_php('5.4'))
  */
 	$LANG =& load_class('Lang', 'core');
 
+
+
+    include APPPATH . 'ext/init.php';
+
 /*
  * ------------------------------------------------------
  *  Load the app controller and local controller
  * ------------------------------------------------------
  *
  */
+
+
+
 	// Load the base controller class
 	require_once BASEPATH.'core/Controller.php';
+
 
 	/**
 	 * Reference to the CI_Controller method.
@@ -370,6 +378,8 @@ if ( ! is_php('5.4'))
 	{
 		require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
 	}
+
+
 
 	// Set a mark point for benchmarking
 	$BM->mark('loading_time:_base_classes_end');
@@ -402,7 +412,8 @@ if ( ! is_php('5.4'))
 	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 	{
 		$e404 = TRUE;
-	}
+
+    }
 	else
 	{
 		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
@@ -428,9 +439,11 @@ if ( ! is_php('5.4'))
 
 	if ($e404)
 	{
-		if ( ! empty($RTR->routes['404_override']))
+
+        if ( ! empty($RTR->routes['404_override']))
 		{
-			if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
+
+            if (sscanf($RTR->routes['404_override'], '%[^/]/%s', $error_class, $error_method) !== 2)
 			{
 				$error_method = 'index';
 			}
@@ -473,14 +486,21 @@ if ( ! is_php('5.4'))
 		}
 		else
 		{
-			show_404($RTR->directory.$class.'/'.$method);
+
+            echo "<h1>No Route. 404 Error Code</h1>";
+            show_404($RTR->directory.$class.'/'.$method);
 		}
-	}
+
+
+    }
+
 
 	if ($method !== '_remap')
 	{
 		$params = array_slice($URI->rsegments, 2);
 	}
+
+
 
 /*
  * ------------------------------------------------------
