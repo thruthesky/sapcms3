@@ -13,6 +13,5 @@ $sys['theme'] = 'default';
 
 function layout() {
     global $sys;
-
     return $sys['theme'] . '/layout';
 }

@@ -16,3 +16,4 @@ foreach (glob(VIEWPATH . "*", GLOB_ONLYDIR) as $filename) {
     if ( file_exists($path) ) include $path;
 }
 
+$route['(:any)'] = 'routeany/load/$1';

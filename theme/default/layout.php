@@ -3,9 +3,9 @@
 ?><!doctype html>
 <html>
 <head>
-    <title><?php echo $title?></title>
+    <title><?php echo $this->data['title']?></title>
 </head>
 <body>
-<?php include "templates/$page.php"?>
+<?php include "templates/{$this->data['page']}.php"?>
 </body>
 </html>

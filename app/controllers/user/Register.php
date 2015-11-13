@@ -6,7 +6,7 @@ class Register extends MY_Controller {
         $data = [
             'page' => 'user.register',
             'title' => 'This is title',
-            'list' => [
+            'no' => [
                 'No 1. Get the car',
                 'No 2. Ride and Test the car',
             ]
@@ -14,3 +14,4 @@ class Register extends MY_Controller {
         $this->render( $data );
     }
 }
+
