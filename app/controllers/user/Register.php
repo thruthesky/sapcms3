@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Register extends CI_Controller {
-
+class Register extends MY_Controller {
     public function form()
     {
         $data = [
@@ -11,13 +9,8 @@ class Register extends CI_Controller {
             'list' => [
                 'No 1. Get the car',
                 'No 2. Ride and Test the car',
-                'No 3. Read manual',
             ]
         ];
-        $this->load->view( layout(), $data );
-    }
-    public function welcome()
-    {
-        echo 'Welcome Admin Index page.';
+        $this->render( $data );
     }
 }
