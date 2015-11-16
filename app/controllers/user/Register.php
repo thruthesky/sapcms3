@@ -44,12 +44,15 @@ class Register extends MY_Controller {
         $another->set('field', "This should be in another object");
         print_r($another);
         echo '<hr>';
+
+        $t->set('AAA', '1234')
+            ->set('BBB', '5555');
+        print_r($t);
+        echo '<hr>';
     }
 
     public function create() {
-        $c = entity('entity_config');
-        //$c->init();
-        //$c->
+
     }
 }
 
