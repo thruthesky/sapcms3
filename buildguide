@@ -1,6 +1,20 @@
 
 
-모델 객체를 생성 할 때, 아래와 같이 변수를 주어야 새로운 객체를 생성한다.
+
+- $this->input->post_get() 은 post 에 없으면 get 의 값을 확인한다. 반대는 get_post() 이다.
+post_get() 을 in() 함수로 대체하도록 한다.
+
+- $this->input->cookie() 쿠키 아이템을 가져온다.
+- $this->input->server() $_SERVER 아이템을 가져온다.
+
+in('post_get');
+in()->get()
+in()->post()
+in()->cookie()
+in()->server()
+
+
+- 모델 객체를 생성 할 때, 아래와 같이 변수를 주어야 새로운 객체를 생성한다.
 
     $ci->load->model('entity', $table);
     $entity = $ci->entity->$table;
