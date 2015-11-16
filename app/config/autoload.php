@@ -126,4 +126,5 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('entity/entity'=>'entity');
+$autoload['model'] = array('entity/entity'=>'entity', 'post/post' => 'post', 'meta/meta' => 'meta');
+
