@@ -1,0 +1,11 @@
+
+
+모델 객체를 생성 할 때, 아래와 같이 변수를 주어야 새로운 객체를 생성한다.
+
+    $ci->load->model('entity', $table);
+    $entity = $ci->entity->$table;
+
+아래와 같이 변수를 주지 않으면 모델을 여러번 로드해도 하나의 객체만 사용한다. 즉, 처음 한번 로드한 객체를 계속 사용하는 것이다.
+
+    $ci->load->model('entity', 'temp');
+    $entity = $ci->entity->temp;
