@@ -1,17 +1,17 @@
 <?php
-
 /**
  * Load Routes in each theme.
  */
-foreach (glob(VIEWPATH . "*", GLOB_ONLYDIR) as $dir) {
+foreach ( getThemes() as $dir) {
     $path = "$dir/init.php";
     if ( file_exists($path) ) include $path;
 }
 
-$sys['theme'] = 'default';
 
-
-function layout() {
-    global $sys;
-    return $sys['theme'] . '/layout';
+setModels( glob(APPPATH . "models/*", GLOB_ONLYDIR) );
+foreach ( getModels() as $dir) {
+    $path = "$dir/Routes.php";
+    if ( file_exists($path) ) include $path;
 }
+
+

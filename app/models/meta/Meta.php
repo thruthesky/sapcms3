@@ -6,6 +6,8 @@ class Meta extends Entity {
     }
 
     public function init() {
+
+
         parent::init();
         $this->load->dbforge();
         $fields = array(
@@ -25,6 +27,12 @@ class Meta extends Entity {
     public function uninit() {
         entity($this->getTable())->uninit();
     }
+
+
+    public function unitTest() {
+        echo "Meta Unit Test<hr>";
+    }
+
 
     public function setTable($name) {
         $name = $name . '_meta';

@@ -6,8 +6,9 @@ class Post extends Entity {
     public function __construct() {
         parent::__construct();
     }
-    public function init() {
-        $config = entity('post_config')->init();
+
+    public function install() {
+        $config = entity(TABLE_POST_CONFIG)->init();
         $fields = array(
             'id_user' => array(
                 'type' => 'CHAR',
@@ -46,9 +47,10 @@ class Post extends Entity {
                 'type' => 'LONGTEXT',
             ),
         );
+
         $this->dbforge->add_column($config->getTable(), $fields);
 
-        $data = entity('post_data')->init();
+        $data = entity(TABLE_POST_DATA)->init();
         $fields = array(
             'id_user' => array(
                 'type' => 'CHAR',
@@ -76,12 +78,25 @@ class Post extends Entity {
 
         return $this;
     }
-    public function uninit() {
+    public function uninstall() {
         entity('post_config')->uninit();
         entity('post_data')->uninit();
     }
 
+
+    public function unitTest() {
+        echo "Post Unit Test<hr>";
+    }
+
+
     private function testInput() {
+
+        post_config()
+            ->create()
+            ->set('name', 'temp')
+            ->set('description', 'Temporary forum...')
+            ->save();
+
         post_config()
             ->create()
             ->set('name', 'freetalk')
@@ -89,8 +104,4 @@ class Post extends Entity {
             ->save();
     }
 
-
-    public function load($id) {
-
-    }
 }

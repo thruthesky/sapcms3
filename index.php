@@ -35,7 +35,10 @@
  * @since	Version 1.0.0
  * @filesource
  */
-
+/**
+ *
+ */
+include 'app/ext/sapcms3_function.php';
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

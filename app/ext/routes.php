@@ -1,19 +1,28 @@
 <?php
 
+
+
 /**
  * Load Routes in each controller.
  */
-foreach (glob(APPPATH . "controllers/*", GLOB_ONLYDIR) as $filename) {
+setControllers( glob(APPPATH . "controllers/*", GLOB_ONLYDIR) );
+
+foreach ( getControllers() as $filename) {
     $path = "$filename/Routes.php";
     if ( file_exists($path) ) include $path;
 }
+
 
 /**
  * Load Routes in each theme.
  */
-foreach (glob(VIEWPATH . "*", GLOB_ONLYDIR) as $filename) {
+setThemes( glob(VIEWPATH . "*", GLOB_ONLYDIR) );
+foreach ( getThemes() as $filename) {
     $path = "$filename/Routes.php";
     if ( file_exists($path) ) include $path;
 }
 
-$route['(:any)'] = 'routeany/load/$1';
+
+/**
+ * Input extra routes here if any.
+ */
