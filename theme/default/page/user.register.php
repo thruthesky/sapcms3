@@ -1,6 +1,6 @@
 <h1>User Registration</h1>
 <?php echo validation_errors(); ?>
-<?php echo form_open('form'); ?>
+<?php echo form_open('/user/register'); ?>
 
 <h5>Username</h5>
 <input type="text" name="username" value="" size="50" />
