@@ -1,2 +1,2 @@
 <?php
-$route['install'] = 'install/install_router/page';
+$route['install'] = 'install/Install_controller/page';

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Install extends MY_Controller {
+class Install_controller extends MY_Controller {
 
     public function page() {
 

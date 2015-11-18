@@ -1,7 +1,7 @@
 <?php
 class Entity extends CI_Model {
     private $table;
-    private $record = [];
+    protected $record = [];
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -10,7 +10,7 @@ class Entity extends CI_Model {
         $this->table = $name;
         return $this;
     }
-    protected function getTable() {
+    public function getTable() {
         return $this->table;
     }
 
@@ -36,53 +36,41 @@ class Entity extends CI_Model {
         $this->dbforge->create_table( $this->getTable() );
         return $this;
     }
+
+    /**
+     *
+     * Return TRUE if  the table of the Entity exists.
+     * @note It is an aliash of $this->db->table_exists()
+     *
+     * @return mixed
+     */
+    public function tableExists() {
+        return $this->db->table_exists($this->getTable());
+    }
     public function uninit() {
         $this->load->dbforge();
         $this->dbforge->drop_table( $this->getTable() );
     }
 
 
-    public function unitTest() {
-        echo "<b>Entity Unit Test</b><hr>";
-
-        $this->load->library('unit_test');
-        $entity = entity('temp_entity');
-        $this->unit->run( $entity instanceof Entity, TRUE, 'Entity Instance Test');
-
-        $entity->init();
-        $entity->create()->save();
-        $this->unit->run( $this->db->count_all($entity->getTable()), 1, 'Insert a row and Count' );
-
-        $entities = $entity->loadAll();
-        $this->unit->run( count($entities), 1, 'count entity', 'loadAll()');
-
-        $entity2 = entity('temp_entity_2');
-        $this->unit->run( $entity2 instanceof Entity, TRUE, 'Entity Instance Test');
-
-        $entity2->init();
-        $item1 = $entity2->create()->save();
-        $item2 = $entity2->create()->save();
-
-        $this->unit->run( $this->db->count_all($entity2->getTable()), 2, 'Entity Count All');
-
-
-        $entity->uninit();
-        $entity2->uninit();
-
-    }
-
     /**
      * Returns $this after clearing the $this->record.
+     *      - Meaning you can call create() method as much time as you want on an Entity object.
      *      - It clears $this->record to create another record.
      *          If it does not clear $this->record['id'],
      *              it will create error
      *              because on $this->save(), $this->record['id'] will be duplicated.
      * @return $this
+     *
+     * @code Creating items on a single Entity object.
+     *    $item1 = $entity2->create()->save();
+     *    $item2 = $entity2->create()->save();
+     * @endcode
      */
     public function create() {
         $this->record = [];
-        $this->set('created', time());
-        $this->set('updated', 0);
+        self::set('created', time());
+        self::set('updated', 0);
         return $this;
     }
 
@@ -92,25 +80,55 @@ class Entity extends CI_Model {
         return $this;
     }
 
+    /**
+     *
+     */
+    public function delete() {
+        $this->db->delete($this->getTable(), ['id'=>self::get('id')]);
+        $this->record = [];
+    }
+
+    /**
+     *
+     *
+     *
+     * @note Use this method when you cannot use $this->set() directly for some inheritance reason.
+     *
+     * @param $field
+     * @param $value
+     * @return $this|Entity
+     */
     public function set($field, $value) {
         $this->record[$field] = $value;
         return $this;
     }
+
+    public function _set($field, $value) {
+        $this->record[$field] = $value;
+        return $this;
+    }
+
 
     public function get($field) {
         return $this->record[$field];
     }
 
 
+    /**
+     * Returns a new object of the Entity.
+     * @note it actually loads record into $this and return the clone.
+     * @param $id
+     * @return Entity
+     */
     public function load($id) {
         $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE id=$id");
-        $rows = $query->result_array();
-        $this->record = $rows[0];
-        return $this;
+        $this->record = $query->row_array();
+        return clone $this;
     }
 
+
     /**
-     * Returns objects of all records.
+     * Returns objects of all records of the table.
      *
      * @return array
      *
@@ -132,5 +150,15 @@ class Entity extends CI_Model {
             $these[] = clone $this;
         }
         return $these;
+    }
+
+    /**
+     * Returns the number of rows.
+     *
+     *      - It is only an alias of $this->db->count_all()
+     * @return mixed
+     */
+    public function countAll() {
+        return $this->db->count_all($this->getTable());
     }
 }

@@ -25,9 +25,17 @@ class Config extends Meta {
         $config = meta('config')->uninit();
     }
 
-    public function unitTest() {
-        echo "config  Unit Test<hr>";
+    public function set($code, $value) {
+        parent::create();
+        parent::set('code', $code);
+        parent::set('value', $value);
+        parent::save();
+        return $this;
     }
 
+    public function get($code) {
+        $this->load($code);
+        return parent::get('value');
+    }
 
 }

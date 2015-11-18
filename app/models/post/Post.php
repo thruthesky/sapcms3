@@ -84,11 +84,6 @@ class Post extends Entity {
     }
 
 
-    public function unitTest() {
-        echo "Post Unit Test<hr>";
-    }
-
-
     private function testInput() {
 
         post_config()

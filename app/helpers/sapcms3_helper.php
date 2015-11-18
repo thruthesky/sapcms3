@@ -16,6 +16,7 @@ function entity($table) {
     return $entity;
 }
 
+
 /**
  * Returns a new 'Meta' object.
  * @param $table
@@ -33,12 +34,23 @@ function meta($table) {
 
 function config() {
     static $count_config = 0;
-    $temp = TABLE_CONFIG . ($count_config ++);
+    $temp = TABLE_CONFIG . '_' . ($count_config ++);
     $ci = & get_instance();
     $ci->load->model('config/config', $temp);
-    $config = $ci->$temp;
-    return $config;
+    return $ci->$temp;
 }
+
+
+function user() {
+    static $count_user = 0;
+    $temp = TABLE_USER . '_' . ($count_user ++);
+    $ci = & get_instance();
+    $ci->load->model('user/user', $temp);
+    return $ci->$temp;
+}
+
+
+
 
 /**
  * @return mixed

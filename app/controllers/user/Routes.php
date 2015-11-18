@@ -1,2 +1,2 @@
 <?php
-$route['user/register'] = 'user/Register/form';
+$route['user/register'] = 'user/user_controller/register';

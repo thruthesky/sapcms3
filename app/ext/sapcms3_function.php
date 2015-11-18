@@ -2,6 +2,7 @@
 define('TABLE_POST_CONFIG', 'post_config');
 define('TABLE_POST_DATA', 'post_data');
 define('TABLE_CONFIG', 'config');
+define('TABLE_USER', 'user');
 
 
 

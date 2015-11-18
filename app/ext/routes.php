@@ -24,5 +24,12 @@ foreach ( getThemes() as $filename) {
 
 
 /**
+ * Loads theme page.
+ * #loading theme page directly
+ */
+$route['(:any)'] = 'route/route_controller/load/$1';
+
+
+/**
  * Input extra routes here if any.
  */

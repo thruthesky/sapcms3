@@ -1,16 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Register extends MY_Controller {
-    public function form()
+class User_controller extends MY_Controller {
+    public function register()
     {
+        $this->load->library('form_validation');
         $data = [
             'page' => 'user.register',
-            'title' => 'This is title',
-            'no' => [
-                'No 1. Get the car',
-                'No 2. Ride and Test the car',
-            ]
         ];
+
+        if ($this->form_validation->run() == FALSE)
+        {
+        }
+        else
+        {
+            $data['page'] = 'user.register_success';
+        }
         $this->render( $data );
     }
     public function show() {

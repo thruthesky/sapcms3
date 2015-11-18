@@ -7,10 +7,20 @@ class Test_controller extends MY_Controller
         static $co = 0;
         foreach ( getModels() as $model ) {
             $name = pathinfo($model, PATHINFO_BASENAME);
-            $path = "$name/" . ucfirst($name);
-            $obj = $name . $co ++;
-            $this->load->model($path, $obj);
-            if ( method_exists( $this->$obj, 'unitTest') ) $this->$obj->unitTest();
+            $files = glob( $model . '/*_test.php' );
+            foreach( $files as $file ) {
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+
+                $path = "$name/$filename";
+                $obj = $name . $co ++;
+                $this->load->model($path, $obj);
+                if ( method_exists( $this->$obj, 'unitTest') ) $this->$obj->unitTest();
+            }
+        }
+
+        foreach( $this->unit->result() as $row ) {
+            if ( $row['Result'] == 'Passed' ) echo 'O';
+            else echo "<b style='color:red;'>X</b>";
         }
 
         echo $this->unit->report();
