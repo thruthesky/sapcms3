@@ -40,13 +40,20 @@ class Entity extends CI_Model {
     /**
      *
      * Return TRUE if  the table of the Entity exists.
-     * @note It is an aliash of $this->db->table_exists()
+     *
+     * @note It is an alias of $this->db->table_exists()
      *
      * @return mixed
      */
     public function tableExists() {
         return $this->db->table_exists($this->getTable());
     }
+
+
+
+    /**
+     *
+     */
     public function uninit() {
         $this->load->dbforge();
         $this->dbforge->drop_table( $this->getTable() );
@@ -99,11 +106,6 @@ class Entity extends CI_Model {
      * @return $this|Entity
      */
     public function set($field, $value) {
-        $this->record[$field] = $value;
-        return $this;
-    }
-
-    public function _set($field, $value) {
         $this->record[$field] = $value;
         return $this;
     }

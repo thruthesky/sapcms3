@@ -78,9 +78,10 @@ class Post extends Entity {
 
         return $this;
     }
+
     public function uninstall() {
-        entity('post_config')->uninit();
-        entity('post_data')->uninit();
+        if ( entity('post_config')->tableExists() ) entity('post_config')->uninit();
+        if ( entity('post_data')->tableExists() ) entity('post_data')->uninit();
     }
 
 

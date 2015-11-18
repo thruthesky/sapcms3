@@ -8,21 +8,13 @@ class Config extends Meta {
     }
 
     public function install() {
-        $config = $this->init();
-        $config
-            ->create()
-            ->set('code', 'install.stamp')
-            ->set('value', time())
-            ->save();
-
-        config()
-            ->create()
-            ->set('code', 'version')
-            ->set('value', '0.0.1')
-            ->save();
+        $this->init();
+        $this->set('install.stamp', time());
+        $this->set('version', '0.0.1');
     }
+
     public function uninstall() {
-        $config = meta('config')->uninit();
+        if ( meta('config')->tableExists() ) meta('config')->uninit();
     }
 
     public function set($code, $value) {
