@@ -18,11 +18,16 @@ class Config_test extends Config {
             $item->delete();
         }
 
+
+
         $config->set('name4', 'jaeho');
+        return;
+
         $value = $config->get('name4');
 
         $config->delete();
 
         $this->unit->run( $value, 'jaeho', "Config get/set test");
+
     }
 }

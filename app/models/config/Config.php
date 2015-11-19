@@ -7,24 +7,25 @@ class Config extends Meta {
         $this->setTable(TABLE_CONFIG);
     }
 
-    public function install() {
-        $this->init();
-        $this->set('install.stamp', time());
-        $this->set('version', '0.0.1');
-    }
 
-    public function uninstall() {
-        if ( meta('config')->tableExists() ) meta('config')->uninit();
-    }
-
+    /**
+     * @param $code
+     * @param $value
+     * @return Config
+     */
     public function set($code, $value) {
-        parent::create();
+        $this->create();
         parent::set('code', $code);
         parent::set('value', $value);
-        parent::save();
+        $this->save();
+
         return $this;
     }
 
+    /**
+     * @param $code
+     * @return string
+     */
     public function get($code) {
         $this->load($code);
         return parent::get('value');

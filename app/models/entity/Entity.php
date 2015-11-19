@@ -1,7 +1,7 @@
 <?php
 class Entity extends CI_Model {
     private $table;
-    public $record = [];//old protected $record
+    protected $record = [];
     public function __construct() {
         parent::__construct();
         $this->load->database();
@@ -81,9 +81,30 @@ class Entity extends CI_Model {
         return $this;
     }
 
+
+    /**
+     *
+     * Saves or Updates an item.
+     *
+     * @note if it has value in $this->get('id'), then it updates.
+     *
+     * @return Entity|boolean
+     *
+     *      - FALSE if $this->record is empty.
+     *
+     */
     public function save() {
-        $this->db->insert($this->getTable(), $this->record);
-        $this->record['id'] = $this->db->insert_id();
+
+        if ( empty($this->record) ) return FALSE;
+
+        if ( $id = self::get('id') ) {
+            $this->db->where('id', $id);
+            $this->db->update($this->getTable(), $this->record, ['id'=>$id]);
+        }
+        else {
+            $this->db->insert($this->getTable(), $this->record);
+            $this->record['id'] = $this->db->insert_id();
+        }
         return $this;
     }
 
@@ -111,8 +132,22 @@ class Entity extends CI_Model {
     }
 
 
+
+    /**
+     * Returns the value of the field in the item record.
+     *
+     *
+     * @param $field
+     * @return mixed|bool
+     *      - returns FALSE if the field is not set.
+     */
     public function get($field) {
-        return $this->record[$field];
+        if ( isset($this->record[$field]) ) {
+            return $this->record[$field];
+        }
+        else {
+            return FALSE;
+        }
     }
 
 

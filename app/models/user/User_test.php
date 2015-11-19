@@ -57,6 +57,19 @@ class User_test extends User {
         user()->loginByEmail('jaeho@gmail.com');
         $this->unit->run( user()->getCurrent()->get('username'), 'jaeho', "Login test - jaeho");
         $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Login test - jaeho@gmail.com");
+
+        $user->set('username', 'song')->save();
+        user()->login('song');
+        $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Username update test.");
+
+
+        user()->loadByUsername('song')->set('username', 'Jae')->save();
+
+        $email = user()->loadByUsername('Jae')->get('email');
+
+        $this->unit->run($email, 'jaeho@gmail.com', 'User information update. jaeho@gmail.com');
+
+
         $user->delete();
 
     }

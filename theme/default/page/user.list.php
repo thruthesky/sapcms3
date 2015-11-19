@@ -14,13 +14,14 @@ $users = $data['users'];
 </tr>
 <?php
 foreach( $users as $user ){
+
 ?>
 	<tr>
-		<td><?php echo $user->record['id']; ?></td>
-		<td><?php echo $user->record['username']; ?></td>
-		<td><?php echo $user->record['first_name']; ?></td>
-		<td><a href='/user/edit/<?php echo $user->record['id']; ?>'>Edit</a></td>
-		<td><a href='/user/delete/<?php echo $user->record['id']; ?>'>Delete</a></td>
+		<td><?php echo $user->get('id'); ?></td>
+		<td><?php echo $user->get('username'); ?></td>
+		<td><?php echo $user->get('first_name'); ?></td>
+		<td><a href='/user/edit/<?php echo $user->get('id'); ?>'>Edit</a></td>
+		<td><a href='/user/delete/<?php echo $user->get('id'); ?>'>Delete</a></td>
 	</tr>
 <?php
 }

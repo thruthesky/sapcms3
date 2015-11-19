@@ -55,8 +55,11 @@ class User_controller extends MY_Controller {
 				->set( 'address',  $request['address'] )
 				->save();
     }
-	
-	public function collection(){
+
+    /**
+     *
+     */
+	public function collection() {
 		$users = user()->loadAll();
 		$data = [
             'page' => 'user.list',
