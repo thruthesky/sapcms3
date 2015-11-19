@@ -50,7 +50,6 @@ class User_test extends User {
             ->set('email', 'jaeho@gmail.com')
             ->save();
 
-
         $user = user()->login('jaeho');
         $this->unit->run( user()->getCurrent()->get('username'), 'jaeho', "Login test - jaeho");
         $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Login test - jaeho@gmail.com");
