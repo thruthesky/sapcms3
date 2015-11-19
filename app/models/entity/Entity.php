@@ -1,7 +1,7 @@
 <?php
 class Entity extends CI_Model {
     private $table;
-    protected $record = [];
+    public $record = [];//old protected $record
     public function __construct() {
         parent::__construct();
         $this->load->database();
