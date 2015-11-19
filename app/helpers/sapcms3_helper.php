@@ -43,7 +43,7 @@ function config() {
 
 function user() {
     static $count_user = 0;
-    $temp = TABLE_USER . '_' . ($count_user ++);
+    $temp = USER_TABLE . '_' . ($count_user ++);
     $ci = & get_instance();
     $ci->load->model('user/user', $temp);
     return $ci->$temp;

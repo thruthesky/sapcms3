@@ -1,5 +1,5 @@
 <?php
-class Config_test extends CI_Model {
+class Config_test extends Config {
     public function unitTest() {
 
         $this->load->library('unit_test');

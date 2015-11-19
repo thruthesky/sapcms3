@@ -1,5 +1,5 @@
 <?php
-class Meta_test extends CI_Model {
+class Meta_test extends Meta {
     public function unitTest() {
 
         $this->load->library('unit_test');

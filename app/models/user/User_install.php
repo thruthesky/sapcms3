@@ -1,13 +1,9 @@
 <?php
-class User extends Entity
+class User_install extends Entity
 {
     public function __construct() {
         parent::__construct();
-        $this->setTable(USER_TABLE);
     }
-
-
-
 
     public function install() {
         $user = entity(USER_TABLE)->init();

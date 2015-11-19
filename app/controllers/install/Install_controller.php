@@ -32,14 +32,18 @@ class Install_controller extends MY_Controller {
         static $co = 0;
         foreach ( getModels() as $model ) {
             $name = pathinfo($model, PATHINFO_BASENAME);
-            $path = "$name/" . ucfirst($name);
-            $obj = $name . $co ++;
-            $this->load->model($path, $obj);
-            if ( $mode == 'install' ) {
-                if ( method_exists( $this->$obj, 'install') ) $this->$obj->install();
-            }
-            else if ( $mode == 'uninstall' ) {
-                if ( method_exists( $this->$obj, 'uninstall') ) $this->$obj->uninstall();
+            $files = glob( $model . '/*_install.php' );
+            foreach( $files as $file ) {
+                $filename = pathinfo($file, PATHINFO_FILENAME);
+                $path = "$name/$filename";
+                $obj = $name . $co ++;
+                $this->load->model($path, $obj);
+                if ( $mode == 'install' ) {
+                    if ( method_exists( $this->$obj, 'install') ) $this->$obj->install();
+                }
+                else if ( $mode == 'uninstall' ) {
+                    if ( method_exists( $this->$obj, 'uninstall') ) $this->$obj->uninstall();
+                }
             }
         }
     }
