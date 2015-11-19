@@ -57,3 +57,12 @@ function di($data) {
     print_r($data);
     echo "</pre>";
 }
+
+
+/**
+ * @param $plain_text_password
+ * @return string
+ */
+function encrypt_password($plain_text_password) {
+    return md5($plain_text_password);
+}

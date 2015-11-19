@@ -117,15 +117,51 @@ class Entity extends CI_Model {
 
 
     /**
-     * Returns a new object of the Entity.
-     * @note it actually loads record into $this and return the clone.
+     * Returns a new object of the Entity based on $id
+     *
+     * @note it actually loads a record into $this->record and return the clone.
+     *
      * @param $id
-     * @return Entity
+     * @return Entity|FALSE - if there is no record, then it returns FALSE
+     * - if there is no record, then it returns FALSE
+     * @code
+     *      $this->load(1)                                 // load by id
+     * @endcode
      */
     public function load($id) {
         $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE id=$id");
         $this->record = $query->row_array();
-        return clone $this;
+        if ( $this->record ) return clone $this;
+        else return FALSE;
+    }
+
+
+    /**
+     * Returns a new object of the Entity based on $field and $value
+     *
+     * @note it actually loads a record into $this->record and return the clone.
+     * @note The input can be vary.
+     *
+     * @param $field
+     * @param null $value
+     * @return Entity|FALSE
+     *      - if there is no record, then it returns FALSE
+     *
+     * @code
+     *      $this->load(1)                                 // load by id
+     *      $this->load('username', 'abc')                 // load by username
+     *      $this->load('email', 'abc@gmail.com')        // load by email
+     * @endcode
+     */
+    final public function loadBy($field, $value=null) {
+        if ( $value === null ) {
+            $value = $field;
+            $field = 'id';
+        }
+        $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE $field='$value'");
+        $this->record = $query->row_array();
+        if ( $this->record ) return clone $this;
+        else return FALSE;
     }
 
 

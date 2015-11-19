@@ -4,7 +4,7 @@
  * Returns a new 'Entity' object.
  *  - Meaning it creates a new object whenever it is called.
  * @param string $table
- * @return mixed
+ * @return Entity
  */
 function entity($table) {
     static $count_entity = 0;
@@ -20,7 +20,7 @@ function entity($table) {
 /**
  * Returns a new 'Meta' object.
  * @param $table
- * @return mixed
+ * @return Meta
  */
 function meta($table) {
     static $count_meta = 0;
@@ -32,6 +32,9 @@ function meta($table) {
     return $meta;
 }
 
+/**
+ * @return Config
+ */
 function config() {
     static $count_config = 0;
     $temp = TABLE_CONFIG . '_' . ($count_config ++);
@@ -41,6 +44,9 @@ function config() {
 }
 
 
+/**
+ * @return User
+ */
 function user() {
     static $count_user = 0;
     $temp = USER_TABLE . '_' . ($count_user ++);
@@ -53,7 +59,7 @@ function user() {
 
 
 /**
- * @return mixed
+ * @return Post
  * @internal param null $id
  */
 function post() {
@@ -68,7 +74,7 @@ function post() {
  * @note
  *      - It creates a new object on each call.
  *
- * @return mixed
+ * @return PostConfig
  *
  *
  */
