@@ -7,7 +7,6 @@ class User_controller extends MY_Controller {
         $data = [
             'page' => 'user.register',
         ];
-
         $this->form_validation->set_rules(
             'email', 'Email',
             'trim|required|min_length[10]|max_length[64]|valid_email|is_unique[user.email]',
@@ -16,21 +15,19 @@ class User_controller extends MY_Controller {
                 'is_unique'     => 'Email %s already exists.'
             )
         );
-
-
         $this->form_validation->set_rules('password', 'Password', 'required',
             array('required' => 'You must provide a %s.')
         );
         $this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
-
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-
         if ($this->form_validation->run() == FALSE)
         {
+
         }
         else
         {
+
             $data['page'] = 'user.register_success';
         }
         $this->render( $data );
