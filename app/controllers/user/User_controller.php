@@ -28,8 +28,10 @@ class User_controller extends MY_Controller {
         }
         else
         {
-			self::create();
-            $data['page'] = 'user.register_success';
+			$data['user'] = self::create();			
+			$data['message'] = 'Register Successful!';
+			echo self::createNotice( $data['message'], true );
+            //$data['page'] = 'user.register_success';
         }
         $this->render( $data );
     }
@@ -53,7 +55,11 @@ class User_controller extends MY_Controller {
 				->set( 'middle_name',  $request['middle_name'] )
 				->set( 'last_name',  $request['last_name'] )
 				->set( 'address',  $request['address'] )
+				->set( 'mobile',  $request['mobile'] )
 				->save();
+		
+		//returns the user entity after create...
+		return $user;
     }
 
     /**
@@ -75,7 +81,7 @@ class User_controller extends MY_Controller {
 	
 	public function edit( $id ){
 		$user = user()->load( $id );
-		$user = $user->record;
+		$user = $user;
 		$data = [
             'page' => 'user.register',
             'user' => $user,
@@ -85,35 +91,67 @@ class User_controller extends MY_Controller {
 	
 	 public function editSubmit()
     {
+		$request = $this->input->post();
+		
+		//if empty request['id'] return
+		$user = user()->load( $request['id'] );
+	
         $this->load->library('form_validation');
         $data = [
             'page' => 'user.register',
-        ];
+			'user' => $user
+        ];				
 		
-		
-		$request = $this->input->post();			
-		$this->form_validation->set_rules(
-			'email', 'Email',
-			'trim|required|min_length[10]|max_length[64]|valid_email|is_unique[user.email]',
-			array(
-				'required'      => 'Please input your email address.',
-				//'is_unique'     => 'Email %s already exists.'
-			)
-		);
-		
+		if( $user->get('email') == $request['email'] ){
+			//if email is the same don't validate email unique
+			$this->form_validation->set_rules(
+				'email', 'Email',
+				'trim|required|min_length[10]|max_length[64]|valid_email',
+				array(
+					'required'      => 'Please input your email address.',
+				)
+			);
+		}
+		else{
+			$this->form_validation->set_rules(
+				'email', 'Email',
+				'trim|required|min_length[10]|max_length[64]|valid_email|is_unique[user.email]',
+				array(
+					'required'      => 'Please input your email address.',
+					'is_unique'     => 'Email %s already exists.'
+				)
+			);
+		}
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-
         if ($this->form_validation->run() == FALSE)
         {
+
         }
         else
         {
 			self::create();
-            $data['page'] = 'user.register_success';
+            $data['message'] = 'Edit Successful!';
+			echo self::createNotice( $data['message'], true );
         }
         $this->render( $data );
     }
-
+	
+	
+	public static function createNotice( $message, $successful = false ){
+		if( $successful ){
+			$class = ' success';
+			$color = 'green';
+		}
+		else{
+			$color = 'red';
+		}
+		
+		return	"
+				<div class='notice$successful' style='padding:10px;;border:1px solid $color;background-color:#f7f7f7;color:$color;text-align:center;'>
+					$message
+				</div>
+				";
+	}
 }
 

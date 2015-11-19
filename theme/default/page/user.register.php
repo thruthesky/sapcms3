@@ -3,14 +3,16 @@ $data = $this->data;
 
 if( !empty( $data['user'] ) ){
 	$user = $data['user'];
-	$id = $user['id'];
-	$username = $user['username'];
-	$email = $user['email'];	
-	$first_name = $user['first_name'];
-	$middle_name = $user['middle_name'];
-	$last_name = $user['last_name'];	
-	$address = $user['address'];
-	$route = '/user/editSubmit';	
+	$id = $user->get('id');
+	$username = $user->get('username');
+	$email = $user->get('email');	
+	$first_name = $user->get('first_name');
+	$middle_name = $user->get('middle_name');
+	$last_name = $user->get('last_name');	
+	$address = $user->get('address');
+	$mobile = $user->get('mobile');
+	$route = '/user/editSubmit';
+	$title = "Edit Profile";
 }
 else{
 	$username = null;
@@ -19,11 +21,13 @@ else{
 	$middle_name = null;
 	$last_name = null;
 	$address = null;
+	$mobile = null;
 	$route = '/user/register';
+	$title = "User Registration";
 }
 ?>
 
-<h1>User Registration</h1>
+<h1><?php echo $title; ?></h1>
 <?php echo validation_errors(); ?>
 <?php echo form_open($route); ?>
 
@@ -54,6 +58,9 @@ else{
 
 <h5>Address</h5>
 <input type="text" name="address" value="<?php echo set_value('address',$address)?>" size="50" />
+
+<h5>Mobile</h5>
+<input type="text" name="mobile" value="<?php echo set_value('mobile',$mobile)?>" size="50" />
 
 
 
