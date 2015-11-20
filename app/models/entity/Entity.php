@@ -14,6 +14,8 @@ class Entity extends CI_Model {
         return $this->table;
     }
 
+
+
     /**
      * @return $this|void
      */
@@ -131,8 +133,6 @@ class Entity extends CI_Model {
         return $this;
     }
 
-
-
     /**
      * Returns the value of the field in the item record.
      *
@@ -142,13 +142,21 @@ class Entity extends CI_Model {
      *      - returns FALSE if the field is not set.
      */
     public function get($field) {
+        /**
         if ( isset($this->record[$field]) ) {
+            return $this->record[$field];
+        }
+        */
+
+        if (array_key_exists($field, $this->record)) {
             return $this->record[$field];
         }
         else {
             return FALSE;
         }
     }
+
+
 
 
     /**
@@ -233,5 +241,22 @@ class Entity extends CI_Model {
      */
     public function countAll() {
         return $this->db->count_all($this->getTable());
+    }
+
+
+    /**
+     *
+     * @param array $o
+     *
+     *  $o['from'] is the database. if it is not set, then it uses current Entity's database
+     *
+     * @return mixed
+     */
+    public function search($o=[]) {
+        if ( isset( $o['from'] ) ) $this->db->from($o['from']);
+        else $this->db->from($this->getTable());
+
+        if ( isset($o['where']) ) $this->db->where($o['where']);
+        return $this->db->get();
     }
 }

@@ -39,7 +39,8 @@ class Meta extends Entity {
     /**
      * Load an item by 'code' or 'id'
      * @param $id
-     * @return $this
+     * @return $this|bool
+     *  - returns FALSE If there is no record matching.
      */
     public function load($id) {
         if ( is_numeric($id) ) {
@@ -50,7 +51,8 @@ class Meta extends Entity {
             $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE code='$id'");
             $this->record = $query->row_array();
         }
-        return clone $this;
+        if ( $this->record ) return clone $this;
+        else return FALSE;
     }
 
 }

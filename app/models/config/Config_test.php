@@ -21,8 +21,8 @@ class Config_test extends Config {
 
 
         $config->set('name4', 'jaeho');
-        return;
-
+        // @todo update
+        // $config->set('name4', 'you');
         $value = $config->get('name4');
 
         $config->delete();

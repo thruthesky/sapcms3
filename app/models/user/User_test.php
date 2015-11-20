@@ -4,13 +4,27 @@ class User_test extends User {
 
         $this->load->library('unit_test');
 
-        /**
-         * Entity check
-         */
+        $this->testEntity();
+        $this->testUserCreation();
+        $this->testPassword();
+        $this->testUserSearch();
+
+
+    }
+
+    private function testEntity()
+    {/**
+     * Entity check
+     */
         $user = user();
         $this->unit->run( $user instanceof User, TRUE, 'user instance of User');
         $this->unit->run( $user instanceof Entity, TRUE, 'user instance of Entity');
         $this->unit->run( $user->tableExists(), TRUE, 'user table exists' );
+
+    }
+
+    private function testUserCreation()
+    {
 
 
         /** User Creation Check by username */
@@ -42,6 +56,10 @@ class User_test extends User {
         $user->delete();
         $this->unit->run( $this->countAll(), 0, "count 0 after delete 1");
 
+    }
+
+    private function testPassword()
+    {
         /** User password check */
         user()->deleteByUsername('jaeho');
         user()->create()
@@ -68,9 +86,11 @@ class User_test extends User {
         $email = user()->loadByUsername('Jae')->get('email');
 
         $this->unit->run($email, 'jaeho@gmail.com', 'User information update. jaeho@gmail.com');
-
-
         $user->delete();
 
+    }
+
+    private function testUserSearch()
+    {
     }
 }
