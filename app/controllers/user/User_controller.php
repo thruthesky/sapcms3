@@ -95,8 +95,17 @@ class User_controller extends MY_Controller {
 		$total_rows = user()->searchCount($o);
 
 		$this->load->library('pagination');
-		$config['base_url'] = 'http://sapcms3.org/user/list';		
-		if( !empty( $k ) ) $config['suffix'] = "?keyword=$k";
+		$config['base_url'] = 'http://sapcms3.org/user/list';
+		if( !empty( $k ) ) {
+			if( empty( $config['suffix'] ) ) $config['suffix'] = "?";
+			else $config['suffix'] .= "&";
+			$config['suffix'] .= "keyword=$k";
+		}
+		if( !empty( $filter_by ) ) {
+			if( empty( $config['suffix'] ) ) $config['suffix'] = "?";
+			else $config['suffix'] .= "&";
+			$config['suffix'] .= "filter_by=$filter_by";
+		}
 		//$config['base_url'] .= "?keyword=$k";
 		$config['first_link'] = "<<";
 		$config['last_link'] = ">>";
