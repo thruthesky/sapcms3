@@ -100,6 +100,12 @@ class User extends Entity
         self::$currentUser = $user;
     }
 
+
+
+    /**
+     * Returns the login user's User Entity
+     * @return User
+     */
     final protected function getCurrent() {
         return self::$currentUser;
     }
@@ -107,4 +113,8 @@ class User extends Entity
 
 
 
+
+    final public function serach($o) {
+
+    }
 }

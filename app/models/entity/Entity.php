@@ -142,15 +142,15 @@ class Entity extends CI_Model {
      *      - returns FALSE if the field is not set.
      */
     public function get($field) {
-        /**
+
         if ( isset($this->record[$field]) ) {
             return $this->record[$field];
         }
-        */
-
+        /*
         if (array_key_exists($field, $this->record)) {
             return $this->record[$field];
         }
+        */
         else {
             return FALSE;
         }
@@ -233,6 +233,7 @@ class Entity extends CI_Model {
         return $these;
     }
 
+
     /**
      * Returns the number of rows.
      *
@@ -248,15 +249,56 @@ class Entity extends CI_Model {
      *
      * @param array $o
      *
-     *  $o['from'] is the database. if it is not set, then it uses current Entity's database
+     * $o['from'] is the database. if it is not set, then it uses current Entity's database
+     * $o['offset'] is the offset to retrieve records.
+     * $o['page'] is the page number to retrieve the block of record.
+     * $o['limit'] is the number of records to retrieve.
+     *      - @note you cannot use 'offset' and 'page' at the same time.
+     *
+     * $o['fields'] is the fields to retrieve. for instance, 'id, created'
      *
      * @return mixed
+     *
+     *
+     * @code
+     * $users = user()->search([
+     *    'page' => 1,
+     *    'limit' =>  10,
+     *    ]);
+     * @endcode
      */
     public function search($o=[]) {
         if ( isset( $o['from'] ) ) $this->db->from($o['from']);
         else $this->db->from($this->getTable());
-
+        $this->db->select('id');
         if ( isset($o['where']) ) $this->db->where($o['where']);
-        return $this->db->get();
+
+        if ( isset($o['limit']) ) {
+            if ( isset($o['offset']) ) {
+                $this->db->limit($o['limit'], $o['offset']);
+            }
+            else if ( isset($o['page'] ) ) {
+                $this->db->limit($o['limit'], $o['limit'] * page_no($o['page']) ) ;
+            }
+            else $this->db->limit($o['limit']);
+        }
+
+
+        $these = [];
+        $query = $this->db->get();
+        foreach ( $query->result() as $row ) {
+            $this->load($row->id);
+            $these[] = clone $this;
+        }
+        return $these;
+    }
+
+    public function searchCount($o)
+    {
+        if ( isset( $o['from'] ) ) $this->db->from($o['from']);
+        else $this->db->from($this->getTable());
+        $this->db->select('id');
+        if ( isset($o['where']) ) $this->db->where($o['where']);
+        return $this->db->count_all_results();
     }
 }
