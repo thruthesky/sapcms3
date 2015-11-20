@@ -14,7 +14,13 @@ class Config extends Meta {
      * @return Config
      */
     public function set($code, $value) {
-        $this->create();
+
+        if ( parent::get('id') ) {
+        }
+        else {
+            $this->create();
+        }
+
         parent::set('code', $code);
         parent::set('value', $value);
         $this->save();

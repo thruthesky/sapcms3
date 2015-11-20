@@ -142,15 +142,15 @@ class Entity extends CI_Model {
      *      - returns FALSE if the field is not set.
      */
     public function get($field) {
-        /**
+
         if ( isset($this->record[$field]) ) {
             return $this->record[$field];
         }
-        */
-
+        /*
         if (array_key_exists($field, $this->record)) {
             return $this->record[$field];
         }
+        */
         else {
             return FALSE;
         }
