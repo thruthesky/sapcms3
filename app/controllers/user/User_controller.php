@@ -30,7 +30,7 @@ class User_controller extends MY_Controller {
         {
 			$data['user'] = self::create();			
 			$data['message'] = 'Register Successful!';
-			echo self::createNotice( $data['message'], true );
+			echo self::createNotice( $data['message'], true );//just for notice... needs better code
             //$data['page'] = 'user.register_success';
         }
         $this->render( $data );
@@ -80,8 +80,7 @@ class User_controller extends MY_Controller {
 	}
 	
 	public function edit( $id ){
-		$user = user()->load( $id );
-		$user = $user;
+		$user = user()->load( $id );		
 		$data = [
             'page' => 'user.register',
             'user' => $user,
@@ -132,13 +131,13 @@ class User_controller extends MY_Controller {
         {
 			self::create();
             $data['message'] = 'Edit Successful!';
-			echo self::createNotice( $data['message'], true );
+			echo self::createNotice( $data['message'], true );//just for notice... needs better code
         }
         $this->render( $data );
     }
 	
 	
-	public static function createNotice( $message, $successful = false ){
+	public function createNotice( $message, $successful = false ){
 		if( $successful ){
 			$class = ' success';
 			$color = 'green';
@@ -152,6 +151,6 @@ class User_controller extends MY_Controller {
 					$message
 				</div>
 				";
-	}
+	}		
 }
 
