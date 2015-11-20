@@ -66,3 +66,15 @@ function di($data) {
 function encrypt_password($plain_text_password) {
     return md5($plain_text_password);
 }
+
+/**
+ * Returns page no.
+ *  if the input is not a number or less than 0, then it returns 0.
+ * @param $no
+ * @return int|string
+ */
+function page_no($no) {
+    if ( ! is_numeric($no) ) return 0;
+    else if ( $no < 0 ) return 0;
+    else return -- $no;
+}

@@ -113,4 +113,8 @@ class User extends Entity
 
 
 
+
+    final public function serach($o) {
+
+    }
 }

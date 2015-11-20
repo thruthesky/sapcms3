@@ -4,6 +4,20 @@ $users = $data['users'];
 ?>
 
 <h1>User List</h1>
+
+
+
+<?php echo form_open('/user/list')?>
+
+<input name="keyword" value="<?php echo set_value('keyword')?>">
+<input type="submit">
+
+</form>
+
+
+No of Users.: <?php echo $this->data['total_row']?>
+
+
 <table cellpadding=0 cellspacing=0 width='100%'>
 <tr>
 	<td>ID</td>
@@ -27,3 +41,5 @@ foreach( $users as $user ){
 }
 ?>
 </table>
+
+<?php echo $this->data['page_navigator']; ?>
