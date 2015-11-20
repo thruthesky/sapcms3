@@ -46,7 +46,13 @@ else{
 
 <h5>Password Confirm</h5>
 <input type="text" name="password_confirm" value="<?php echo set_value('password_confirm')?>" size="50" />
-<?php } ?>
+<?php } 
+else { ?>
+<h5>Password</h5>
+<div class='change-password'><i>Change Password?</i> <span style='font-size:.8em;'>( not working yet needs jQuery )</span></div>
+<?php
+}
+?>
 <h5>First Name</h5>
 <input type="text" name="first_name" value="<?php echo set_value('first_name',$first_name)?>" size="50" />
 
@@ -61,9 +67,6 @@ else{
 
 <h5>Mobile</h5>
 <input type="text" name="mobile" value="<?php echo set_value('mobile',$mobile)?>" size="50" />
-
-
-
 
 <div><input type="submit" value="Submit" /></div>
 
