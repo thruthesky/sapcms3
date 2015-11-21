@@ -4,7 +4,7 @@ class Config extends Meta {
 
     public function __construct() {
         parent::__construct();
-        $this->setTable(TABLE_CONFIG);
+        $this->setTable(CONFIG_TABLE);
     }
 
 

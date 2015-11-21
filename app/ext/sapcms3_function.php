@@ -1,7 +1,7 @@
 <?php
-define('TABLE_POST_CONFIG', 'post_config');
-define('TABLE_POST_DATA', 'post_data');
-define('TABLE_CONFIG', 'config');
+define('POST_CONFIG_TABLE', 'post_config');
+define('POST_DATA_TABLE', 'post_data');
+define('CONFIG_TABLE', 'config');
 define('USER_TABLE', 'user');
 
 

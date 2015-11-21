@@ -104,15 +104,16 @@ class Meta_test extends Meta {
 
 
 
-        $query = $meta->search();
-        $this->unit->run($query->num_rows(), 7, "testSearch: counting = 7");
+        $items = $meta->search();
+        $this->unit->run(count($items), 7, "testSearch: counting = 7");
 
-        $query = $meta->search([
+        $items = $meta->search([
             'from' => $meta->getTable(),
             'where' => "code like 'b%'",
         ]);
-        $this->unit->run($query->num_rows(), 2, "testSearch: counting = 7");
+        $this->unit->run(count($items), 2, "testSearch: counting = 2");
 
+        $meta->uninit();
 
     }
 

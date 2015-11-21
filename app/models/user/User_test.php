@@ -29,32 +29,36 @@ class User_test extends User {
 
         /** User Creation Check by username */
 
+        $name = "testUser-abc";
+        user()->deleteByUsername($name);
         user()
             ->create()
-            ->set('username', 'abc')
+            ->set('username', $name)
             ->save();
-        $this->unit->run( $this->countAll(), 1, "count 1");
-        user()->deleteByUsername('abc');
-        $this->unit->run( $this->countAll(), 0, "count 0");
+        $this->unit->run( $this->searchCount(['where'=>"username='$name'"]), 1, "testUserCreation ($name) count 1");
+        user()->deleteByUsername($name);
+        $this->unit->run( $this->searchCount(['where'=>"username='$name'"]), 0, "testUserCreation ($name) count 0");
 
 
         /** User Creation Check by Email */
+        $email = "testUser-def@gmail.com";
+        user()->deleteByEmail($email);
         user()->create()
-            ->set('email', 'test@gmail.com')
+            ->set('email', $email)
             ->save();
-        $this->unit->run( $this->countAll(), 1, "count 1");
+        $this->unit->run( $this->searchCount(['where'=>"email='$email'"]), 1, "testUserCreation ($email) count 1");
 
         $user = $this->create()
-            ->set('email', 'thruthesky@gmail.com')
+            ->set('email', $email . ".kr")
             ->save();
 
-        $this->unit->run( $this->countAll(), 2, "count 2");
+        $this->unit->run( $this->searchCount(['where'=>"email LIKE '$email%'"]), 2, "testUserCreation count 2");
 
-        user()->deleteByEmail('test@gmail.com');
-        $this->unit->run( $this->countAll(), 1, "count 1 after delete 1");
+        user()->deleteByEmail($email);
+        $this->unit->run( $this->searchCount(['where'=>"email LIKE '$email%'"]), 1, "testUserCreation count 1 after delete 1");
 
         $user->delete();
-        $this->unit->run( $this->countAll(), 0, "count 0 after delete 1");
+        $this->unit->run( $this->searchCount(['where'=>"email LIKE '$email%'"]), 0, "testUserCreation count 0 after delete 1");
 
     }
 

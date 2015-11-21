@@ -9,7 +9,7 @@ class PostData_install extends Entity
 
     public function install()
     {
-        $data = entity(TABLE_POST_DATA)->init();
+        $data = entity(POST_DATA_TABLE)->init();
         $fields = array(
             'id_user' => array(
                 'type' => 'CHAR',

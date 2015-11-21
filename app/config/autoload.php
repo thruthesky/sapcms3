@@ -126,5 +126,11 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('entity/entity'=>'entity', 'post/post' => 'post', 'meta/meta' => 'meta', 'config/config' => 'config_temp', 'user/user' => 'user');
+$autoload['model'] = array('entity/entity'=>'entity',
+    'post/post' => 'post',
+    'post/postconfig' =>'postconfig',
+    'post/postdata' => 'postdata',
+    'meta/meta' => 'meta',
+    'config/config' => 'config_temp',
+    'user/user' => 'user');
 

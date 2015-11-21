@@ -4,7 +4,6 @@ class Config_install extends Config {
 
     public function __construct() {
         parent::__construct();
-        $this->setTable(TABLE_CONFIG);
     }
 
     public function install() {

@@ -37,7 +37,7 @@ function meta($table) {
  */
 function config() {
     static $count_config = 0;
-    $temp = TABLE_CONFIG . '_' . ($count_config ++);
+    $temp = CONFIG_TABLE . '_' . ($count_config ++);
     $ci = & get_instance();
     $ci->load->model('config/config', $temp);
     return $ci->$temp;
@@ -147,6 +147,29 @@ function getDirNames(&$list) {
 
 
 
+
+function get_default_theme() {
+    return 'default';
+}
+
+function get_theme_name() {
+    return get_default_theme();
+}
+
+/**
+ * Returns the path of theme script.
+ *  - Returns the path of the current theme.
+ *  - If there is not theme script in the current theme folder, then it returns the theme script in default theme folder.
+ * @param $page
+ * @param null $theme
+ * @return string
+ */
+function get_theme_script($page) {
+    $path = 'theme/' . get_theme_name() . "/page/$page.php";
+    if ( ! file_exists($path) ) $path = 'theme/' . get_default_theme() . "/page/$page.php";
+    return $path;
+}
+
 function layout() {
-    return 'default/layout';
+    return get_theme_name() . '/layout';
 }

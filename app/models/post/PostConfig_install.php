@@ -9,13 +9,18 @@ class PostConfig_install extends Entity
 
     public function install()
     {
-        $config = entity(TABLE_POST_CONFIG)->init();
+        $config = entity(POST_CONFIG_TABLE)->init();
         $fields = array(
             'id_user' => array(
                 'type' => 'CHAR',
                 'constraint' => 15,
             ),
             'name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'unique' => TRUE,
+            ),
+            'subject' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ),
@@ -35,6 +40,12 @@ class PostConfig_install extends Entity
             'footer_list' => array(
                 'type' => 'LONGTEXT',
             ),
+            'header_comment' => array(
+                'type' => 'LONGTEXT',
+            ),
+            'footer_comment' => array(
+                'type' => 'LONGTEXT',
+            ),
             'header_view' => array(
                 'type' => 'LONGTEXT',
             ),
@@ -47,6 +58,19 @@ class PostConfig_install extends Entity
             'footer_edit' => array(
                 'type' => 'LONGTEXT',
             ),
+            'widget_list' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+            ),
+            'widget_view' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+            ),
+            'widget_edit' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+            ),
+
         );
 
         $this->dbforge->add_column($config->getTable(), $fields);

@@ -8,6 +8,6 @@
 	<script type="text/javascript" src="<?php echo base_url();?>default.js" ></script>
 </head>
 <body>
-<?php include "page/{$this->data['page']}.php"?>
+<?php include $this->path_theme_script ?>
 </body>
 </html>

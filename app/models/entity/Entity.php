@@ -111,12 +111,25 @@ class Entity extends CI_Model {
     }
 
     /**
-     *
+     * Deletes the current Entity
      */
     public function delete() {
         $this->db->delete($this->getTable(), ['id'=>self::get('id')]);
         $this->record = [];
     }
+
+
+    /**
+     * Deletes Entities
+     */
+    public function deleteEntities($entities) {
+        if ( empty($entities) ) return;
+        foreach( $entities as $entity ) {
+            $entity->delete();
+        }
+    }
+
+
 
     /**
      *
@@ -172,6 +185,7 @@ class Entity extends CI_Model {
      * @endcode
      */
     public function load($id) {
+        if ( empty($id) ) return FALSE;
         $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE id=$id");
         $this->record = $query->row_array();
         if ( $this->record ) return clone $this;
@@ -187,7 +201,7 @@ class Entity extends CI_Model {
      *
      * @param $field
      * @param null $value
-     * @return Entity|FALSE
+     * @return $this|bool
      *      - if there is no record, then it returns FALSE
      *
      * @code
