@@ -67,11 +67,20 @@ class User extends Entity
      *
      * @param $username
      * @return User|FALSE
+     *
+     * @example See User_test.php
      */
-    final public function login($username) {
-        $user = $this->loadByUsername($username);
-        $this->setCurrent($user);
-        return $user;
+    final public function login($username=null) {
+        if ($username) {
+            $user = $this->loadByUsername($username);
+            $this->setCurrent($user);
+            return $user;
+        }
+        else {
+            $this->setCurrent($this);
+            return $this;
+        }
+
     }
     /**
      * Returns a user object after logged in with email

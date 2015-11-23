@@ -73,22 +73,52 @@ function config($code=null) {
 
 
 /**
+ *
+ * Returns a user object depending on the input $id.
+ *
+ * @param null $id
+ *  - If the $id is a number, then it loads user by user id.
+ *  - If the $id is an email, then it loads user by email address.
+ *  - If else, it loads user by username.
  * @return User
+ *
+ * @example See User_test.php
  */
-function user() {
+function user($id=null) {
+    $ci = & get_instance();
+    $user = clone $ci->user;
+
+    if ( $id ) {
+        if ( is_numeric($id) ) $user->load($id);
+        else if ( is_email($id) ) $user->loadByEmail($id);
+        else return $user->loadByUsername($id);
+    }
+    return $user;
+
+    /*
     static $count_user = 0;
     $temp = USER_TABLE . '_' . ($count_user ++);
     $ci = & get_instance();
     $ci->load->model('user/user', $temp);
     return $ci->$temp;
+    */
 }
 
 
 
 
 /**
+ *
+ * Returns a Post() object.
+ *
+ *
  * @return Post
- * @internal param null $id
+ *
+ * @warning Since post() returns only returns 'loaded Post object' by system,
+ *      - it does not clone nor create a new object.
+ *      - So, it should not use any state information. ( meaning all the method must return stateless information )
+ *
+ *
  */
 function post() {
     $ci = & get_instance();
@@ -110,6 +140,16 @@ function post() {
  *      post_config('abc')      // returns PostConfig object that holds 'abc' post config data.
  */
 function post_config($name=null) {
+
+    $ci = & get_instance();
+    $config = clone $ci->postconfig;
+    if ( $name ) {
+        $config->loadBy('name', $name);
+    }
+    return $config;
+
+
+    /*
     static $count_post_config = 0;
     $temp = POST_CONFIG_TABLE . ($count_post_config ++);
     $ci = & get_instance();
@@ -119,6 +159,7 @@ function post_config($name=null) {
         $config->loadBy('name', $name);
     }
     return $config;
+    */
 }
 
 /**

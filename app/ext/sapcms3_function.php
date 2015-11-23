@@ -89,3 +89,7 @@ function getError() {
     global $_list_error;
     return $_list_error;
 }
+
+function is_email($str) {
+    return filter_var($str, FILTER_VALIDATE_EMAIL);
+}

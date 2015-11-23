@@ -7,6 +7,7 @@ class User_test extends User {
         $this->testEntity();
         $this->testUserCreation();
         $this->testPassword();
+        $this->testUserLoad();
         $this->testUserSearch();
 
 
@@ -92,6 +93,22 @@ class User_test extends User {
         $this->unit->run($email, 'jaeho@gmail.com', 'User information update. jaeho@gmail.com');
         $user->delete();
 
+    }
+
+    private function testUserLoad()
+    {
+        user()->deleteByUsername('naver');
+        user()->deleteByUsername('daum');
+        user()->create()->set('username','naver')->set('email', 'naver@naver.com')->save();
+        user()->create()->set('username', 'daum')->set('email', 'daum@hanmail.net')->save();
+
+        $naver = user('naver')->login();
+        $this->unit->run( $naver->get('id'), user('naver@naver.com')->get('id'), "User load test");
+        $this->unit->run( user('daum@hanmail.net')->get('id'), user('daum')->get('id'), "User load test by username and email");
+
+
+        user()->deleteByUsername('naver');
+        user()->deleteByUsername('daum');
     }
 
     private function testUserSearch()
