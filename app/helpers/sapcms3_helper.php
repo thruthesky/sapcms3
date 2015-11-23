@@ -282,3 +282,16 @@ function url_post_edit($data) {
         return '';
     }
 }
+
+
+
+
+
+
+
+/*added by benjamin*/
+function message() {
+    $ci = & get_instance();
+    $ci->load->model('message');
+    return $ci->message;
+}

@@ -24,7 +24,31 @@ class TestData_controller extends MY_Controller
                 ->set('last_name', "Lname $i")
                 ->save();
         }
+		
+		
+		
+		for( $i = 0; $i<111; $i++) {
+			if( $i % 2 == 0 ) {
+				$idx_from = 3;
+				$idx_to = 4;
+			}
+			else{
+				$idx_from = 4;
+				$idx_to = 3;
+			}
+		
+            message()->create()
+                ->set('id_from', $idx_from)
+                ->set('id_to',  $idx_to)
+                ->set('title', "Title $i")
+                ->set('content', "Content $i")
+                ->save();
+        }
 
+		
+		
+		
+		
         echo "Done!";
     }
 }

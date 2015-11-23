@@ -133,6 +133,7 @@ $autoload['model'] = array(
     'post/postdata' => 'postdata',
     'meta/meta' => 'meta',
     'config/config' => 'my_config', /** @WARNING MUST USE MY CONFIG */
-    'user/user' => 'user'
+    'user/user' => 'user',
+    'message/message' => 'message'
 );
 
