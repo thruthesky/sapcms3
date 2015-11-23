@@ -50,7 +50,7 @@ else {
 
 
 <div class='search-label'>
-	Showing <?php echo ( $data['offset'] + 1 ); ?> - <?php echo ( $data['offset'] + 1 + 10 ); ?> of <?php echo $this->data['total_row']?>
+	Showing <?php echo ( $data['offset'] + 1 ); ?> - <?php echo ( $data['offset'] + 10 ); ?> of <?php echo $this->data['total_row']?>
 </div>
 
 

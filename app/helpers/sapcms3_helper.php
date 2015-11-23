@@ -298,6 +298,17 @@ function url_post_edit($data) {
     }
 }
 
+
+
+
+
+/*added by benjamin*/
+function message() {
+    $ci = & get_instance();
+    $ci->load->model('message');
+    return $ci->message;
+}
+
 function url_post_list($name = null) {
     if ( $name === null ) {
         return '/' . post_config()->getCurrent()->get('name') . '/list';
@@ -309,4 +320,5 @@ function url_post_list($name = null) {
         return '/' . $name->get('name') . '/list';
     }
     else return "WRONG-VALUE";
+
 }

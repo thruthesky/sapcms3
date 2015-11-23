@@ -4,6 +4,8 @@ define('POST_DATA_TABLE', 'post_data');
 define('CONFIG_TABLE', 'config');
 define('USER_TABLE', 'user');
 
+define('MESSAGE_TABLE', 'message');//added by benjamin
+
 
 define('ROOT_ID', 1);
 define('ROOT_USERNAME', 'root');
