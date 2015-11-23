@@ -19,4 +19,12 @@ class Post extends Entity {
     public function getUser() {
         return user()->load($this->get('id_user'));
     }
+
+
+    /**
+     * Returns PostConfig object
+     */
+    public function getCurrentConfig() {
+
+    }
 }

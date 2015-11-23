@@ -115,7 +115,7 @@ class User extends Entity
      * Returns the login user's User Entity
      * @return User
      */
-    final protected function getCurrent() {
+    final public function getCurrent() {
         return self::$currentUser;
     }
 

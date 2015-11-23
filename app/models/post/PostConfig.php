@@ -1,6 +1,8 @@
 <?php
 class PostConfig extends Post {
 
+    private static $current = null;
+
     public function __construct() {
         parent::__construct();
         $this->setTable(POST_CONFIG_TABLE);
@@ -28,4 +30,40 @@ class PostConfig extends Post {
     }
 
 
+    /**
+     * Sets the PostConfig of current forum.
+     * @param null $id
+     */
+    public function setCurrent($id=null) {
+        if ( is_numeric($id) ) PostConfig::$current = $this->load($id);
+        else if ( is_string($id) ) PostConfig::$current = $this->loadByName($id);
+        else if ( $id instanceof PostConfig ) PostConfig::$current = $id;
+        else PostConfig::$current = null;
+    }
+
+    /**
+     * Returns the PostConfig object of current forum.
+     * @note $this->setCurrent() must be called before using this method.
+     * @return PostConfig|null
+     */
+    public function getCurrent() {
+        if ( self::$current ) return self::$current;
+
+        $mode = $this->uri->segment(1);
+        if ( $mode == 'list' || $mode == 'edit' || $mode == 'view' ) {
+            $name = $this->uri->segment(0);
+            $this->setCurrent($name);
+        }
+        else if ( in('id_config') ) {
+            $this->setCurrent( in('id_config') );
+        }
+        else if ( in('name') ) {
+            $this->setCurrent( in('name') );
+        }
+        else if ( $post_data = post_data()->getCurrent() ) {
+            $this->setCurrent( $post_data->get('id') );
+        }
+
+        return self::$current;
+    }
 }

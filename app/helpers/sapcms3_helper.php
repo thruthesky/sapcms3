@@ -87,7 +87,6 @@ function config($code=null) {
 function user($id=null) {
     $ci = & get_instance();
     $user = clone $ci->user;
-
     if ( $id ) {
         if ( is_numeric($id) ) $user->load($id);
         else if ( is_email($id) ) $user->loadByEmail($id);
@@ -165,7 +164,7 @@ function post_config($name=null) {
 /**
  * Returns a new PostData object.
  * @param int $id
- * @return mixed
+ * @return PostData
  */
 function post_data($id=0) {
     $ci = & get_instance();

@@ -27,6 +27,8 @@ class PostData_controller extends MY_Controller
 
     public function editSubmit() {
 
+        post_data()->createPostFromInput();
+
     }
 
 }

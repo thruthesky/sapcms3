@@ -93,3 +93,16 @@ function getError() {
 function is_email($str) {
     return filter_var($str, FILTER_VALIDATE_EMAIL);
 }
+
+function getBrowserID() {
+    return '';
+}
+function getIP() {
+    return '';
+}
+function getDomain() {
+    return '';
+}
+function getUserAgent() {
+    return '';
+}
