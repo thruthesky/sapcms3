@@ -272,6 +272,21 @@ function widget($name) {
 }
 
 
+function url_post_view($post) {
+    if ( is_numeric($post) ) {
+        $name = post_config()->getCurrent()->get('name');
+        return "/$name/view/$post";
+    }
+    else if ( $post instanceof PostData ) {
+        $name = post_config( $post->get('id_config') )->get('name');
+        return "/$name/view/" . $post->get('id');
+    }
+    else {
+        setError("url_post_list : Wrong input");
+        return 'WRONG INPUT';
+    }
+}
+
 function url_post_edit($data) {
     if ( is_string($data) ) return "/$data/edit";
     else if ( $data instanceof PostConfig ) {
@@ -287,11 +302,23 @@ function url_post_edit($data) {
 
 
 
-
-
 /*added by benjamin*/
 function message() {
     $ci = & get_instance();
     $ci->load->model('message');
     return $ci->message;
+}
+
+function url_post_list($name = null) {
+    if ( $name === null ) {
+        return '/' . post_config()->getCurrent()->get('name') . '/list';
+    }
+    else if ( is_string($name) ) {
+        return "/$name/list";
+    }
+    else if ( $name instanceof PostConfig ) {
+        return '/' . $name->get('name') . '/list';
+    }
+    else return "WRONG-VALUE";
+
 }

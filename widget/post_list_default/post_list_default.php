@@ -4,3 +4,8 @@
 
 
 
+<?php foreach($this->data['list'] as $post) { ?>
+
+    <div><a href="<?php echo url_post_view($post)?>"><?php echo $post->get('subject')?></a></div>
+
+<?php } ?>
