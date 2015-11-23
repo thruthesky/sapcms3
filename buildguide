@@ -1,25 +1,23 @@
 
 
+컨트롤러에 page 나 js, css 를 저장하지 않는다. 이것은 모델도 마찬가지 이다.
 
-- $this->input->post_get() 은 post 에 없으면 get 의 값을 확인한다. 반대는 get_post() 이다.
-post_get() 을 in() 함수로 대체하도록 한다.
+기존의 드루팔은 모듈에 필요한 HTML/JS/CSS 를 모듈에 저장했는데, sapcms3 에서는 위젯에 저장한다.
 
-- $this->input->cookie() 쿠키 아이템을 가져온다.
-- $this->input->server() $_SERVER 아이템을 가져온다.
-
-in('post_get');
-in()->get()
-in()->post()
-in()->cookie()
-in()->server()
+즉, 모든 컨트롤러에서 위젯을 선택 할 수 있도록 하는 것이다.
 
 
-- 모델 객체를 생성 할 때, 아래와 같이 변수를 주어야 새로운 객체를 생성한다.
+* 테마 폴더에 해당 테마 페이지 스크립트가 없으면 default 의 것을 사용한다.
+    - 즉, default 테마에는 모든 기본 페이지 스크립트가 존재 해야 한다.
 
-    $ci->load->model('entity', $table);
-    $entity = $ci->entity->$table;
+* 가능한 페이지 스크립트에서는 디자인을 하지 말고, widget 을 불러서 사용한다.
+    - post.list.php 가 하나의 좋은 예제이다.
+-------------------------------------------------------------------
 
-아래와 같이 변수를 주지 않으면 모델을 여러번 로드해도 하나의 객체만 사용한다. 즉, 처음 한번 로드한 객체를 계속 사용하는 것이다.
+unique 가 아닌 그냥 index 를 추가하기.
 
-    $ci->load->model('entity', 'temp');
-    $entity = $ci->entity->temp;
+테이블을 생성하기 직전에 아래와 같이 하면 된다.
+        $this->dbforge->add_key('created');
+
+하지만 테이블을 이미 생성한 후라면, 그냥 SQL 로 아래와 같이 하면 된다.
+        $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_config` (`id_config`);');

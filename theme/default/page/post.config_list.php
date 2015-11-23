@@ -9,11 +9,13 @@
 
 
 <table>
-    <tr><th>No.</th><th>Name</th></tr>
+    <tr><th>No.</th><th>Name</th><th>Description</th></tr>
     <?php
     foreach ( post_config()->loadAll() as $config ) {
+        $name = $config->get('name');
         echo "<tr>";
-        echo "<td>" . $config->get('name') . "</td>";
+        echo "<td><a href='/$name/list'>" . $config->get('id') . "</a></td>";
+        echo "<td>$name</td>";
         echo "<td>" . $config->get('description') . "</td>";
         echo "</tr>";
     }

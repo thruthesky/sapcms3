@@ -20,6 +20,7 @@ define('USER_TABLE', 'user');
 $_list_controller = [];
 $_list_theme = [];
 $_list_model = [];
+$_list_error = [];
 function setControllers( $list ) {
     global $_list_controller;
     $_list_controller = $list;
@@ -77,4 +78,14 @@ function page_no($no) {
     if ( ! is_numeric($no) ) return 0;
     else if ( $no < 0 ) return 0;
     else return -- $no;
+}
+
+
+function setError($message) {
+    global $_list_error;
+    $_list_error[] = $message;
+}
+function getError() {
+    global $_list_error;
+    return $_list_error;
 }

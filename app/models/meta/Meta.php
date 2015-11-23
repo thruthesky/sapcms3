@@ -41,6 +41,8 @@ class Meta extends Entity {
      * @param $id
      * @return $this|bool
      *  - returns FALSE If there is no record matching.
+     *
+     * @warning If the key is numeric, then you must use loadBy('code', 123);
      */
     public function load($id) {
         if ( is_numeric($id) ) {

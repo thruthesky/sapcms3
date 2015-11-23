@@ -16,14 +16,18 @@ class PostConfig_controller extends MY_Controller
     public function createSubmit() {
         $name = in('name');
 
-        if ( $config = $this->loadByName($name) ) {
+        if ( $config = post_config()->loadByName($name) ) {
+            setError("Post config [ $name ] is already exists.");
+        }
+        else {
 
+            post_config()->create()
+                ->set('name', $name)
+                ->save();
         }
 
-        $this->create()
-            ->set('name', $name)
-            ->save();
-    }
+        $this->collection();
 
+    }
 
 }

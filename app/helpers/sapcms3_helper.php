@@ -7,6 +7,12 @@
  * @return Entity
  */
 function entity($table) {
+    $ci = & get_instance();
+    $entity = clone $ci->entity;
+    $entity->setTable($table);
+    return $entity;
+
+    /*
     static $count_entity = 0;
     $temp = $table . ($count_entity ++);
     $ci = & get_instance();
@@ -14,6 +20,7 @@ function entity($table) {
     $entity = $ci->$temp;
     $entity->setTable($table);
     return $entity;
+    */
 }
 
 
@@ -22,7 +29,14 @@ function entity($table) {
  * @param $table
  * @return Meta
  */
-function meta($table) {
+function meta($table = null) {
+
+    $ci = & get_instance();
+    $meta = clone $ci->meta;
+    if ( $table ) $meta->setTable($table);
+    return $meta;
+
+    /*
     static $count_meta = 0;
     $temp = $table . ($count_meta ++);
     $ci = & get_instance();
@@ -30,17 +44,31 @@ function meta($table) {
     $meta = $ci->$temp;
     $meta->setTable($table);
     return $meta;
+    */
 }
 
 /**
- * @return Config
+ *
+ * Returns a Config object or the value of the Config item.
+ *
+ * @note It will return the value of the code IF the input $code is specified.
+ *
+ * @param null $code
+ * @return Config|mixed
  */
-function config() {
+function config($code=null) {
+    $ci = & get_instance();
+    $config = clone $ci->my_config;
+    if ( $code ) return $config->get($code);
+    return $config;
+
+    /*
     static $count_config = 0;
     $temp = CONFIG_TABLE . '_' . ($count_config ++);
     $ci = & get_instance();
     $ci->load->model('config/config', $temp);
     return $ci->$temp;
+    */
 }
 
 
@@ -77,15 +105,35 @@ function post() {
  * @return PostConfig
  *
  *
+ * @code
+ *      post_config()           // returns PostConfig object
+ *      post_config('abc')      // returns PostConfig object that holds 'abc' post config data.
  */
-function post_config() {
+function post_config($name=null) {
     static $count_post_config = 0;
-    $temp = 'post_config'. ($count_post_config ++);
+    $temp = POST_CONFIG_TABLE . ($count_post_config ++);
     $ci = & get_instance();
     $ci->load->model('post/postconfig', $temp);
-    return $ci->$temp;
+    $config = $ci->$temp;
+    if ( $name ) {
+        $config->loadBy('name', $name);
+    }
+    return $config;
 }
 
+/**
+ * Returns a new PostData object.
+ * @param int $id
+ * @return mixed
+ */
+function post_data($id=0) {
+    $ci = & get_instance();
+    $data = clone $ci->postdata;
+    if ( $id ) {
+        $data->load($id);
+    }
+    return $data;
+}
 
 
 /**
@@ -172,4 +220,22 @@ function get_theme_script($page) {
 
 function layout() {
     return get_theme_name() . '/layout';
+}
+
+
+
+function widget($name) {
+    return "widget/$name/$name.php";
+}
+
+
+function url_post_edit($data) {
+    if ( is_string($data) ) return "/$data/edit";
+    else if ( $data instanceof PostConfig ) {
+        return '/' . $data->get('name') . '/edit';
+    }
+    else {
+        setError("url_post_data : Wrong input");
+        return '';
+    }
 }

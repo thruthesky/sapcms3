@@ -14,6 +14,18 @@ class PostConfig extends Post {
 
 
 
+    public function get($field) {
+        $value = parent::get($field);
+        if ( $value === FALSE ) {
+            switch ( $field ) {
+                case 'widget_list' : return 'post_list_default';
+                case 'widget_edit' : return 'post_edit_default';
+                case 'widget_view' : return 'post_view_default';
+                default: return 'no-config-value';
+            }
+        }
+        else return $value;
+    }
 
 
 }

@@ -34,6 +34,8 @@ class PostConfig_test extends PostConfig {
             ->set('description', 'This is test forum')
             ->save();
 
+        $this->unit->run( post_config( 'test2' )->get('name'), 'test2', "post_config() load test");
+
 
         $config = $this->loadBy('name', 'test');
 

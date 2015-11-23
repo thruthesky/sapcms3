@@ -6,11 +6,15 @@ class Config_test extends Config {
 
         $config = config();
 
+
+
         $this->unit->run( $config instanceof Config, TRUE, 'config instance of Config');
         $this->unit->run( $config instanceof Meta, TRUE, 'config instance of Meta');
         $this->unit->run( $config instanceof Entity, TRUE, 'config instance of Entity');
 
+
         $this->unit->run( $config->tableExists(), TRUE, 'config table exists' );
+
 
         $item = $config->load('name4');
 

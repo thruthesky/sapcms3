@@ -5,6 +5,7 @@ class Meta_test extends Meta {
         $this->load->library('unit_test');
 
         $this->testMetaCRUD();
+        $this->testMetaDuplication();
         $this->testSearch();
 
     }
@@ -112,6 +113,42 @@ class Meta_test extends Meta {
             'where' => "code like 'b%'",
         ]);
         $this->unit->run(count($items), 2, "testSearch: counting = 2");
+
+        $meta->uninit();
+
+    }
+
+    private function testMetaDuplication()
+    {
+
+        $table = 'temp_meta_duplication';
+        $meta = meta($table);
+        if ( $meta->tableExists() ) {
+            $meta->uninit();
+        }
+
+        $meta->init();
+
+        $meta->create();
+        $meta->set('code', 'A');
+        $meta->set('value', 'apple');
+        $meta->save();
+
+        $meta2 = meta($table)->load('A');
+
+        $this->unit->run($meta->get('code'), $meta2->get('code'), "Two same meta object");
+
+        $meta2->set('code', 'B')->save();
+
+        $this->unit->run($meta->get('code'), 'A', "Entity A");
+        $this->unit->run($meta2->get('code'), 'B', 'Entity B');
+
+        $meta3 = meta($table)->set('code', 'C')->set('value', '3')->save();
+
+        $this->unit->run( $meta3->get('code'), 'C', "Meta Entity C");
+
+        $this->unit->run( $meta->get('id') != $meta3->get('id'), TRUE, "Entity A and Entity B are not equal");
+
 
         $meta->uninit();
 

@@ -10,7 +10,6 @@ class Test_controller extends MY_Controller
             $files = glob( $model . '/*_test.php' );
             foreach( $files as $file ) {
                 $filename = pathinfo($file, PATHINFO_FILENAME);
-
                 $path = "$name/$filename";
                 $obj = $name . $co ++;
                 $this->load->model($path, $obj);
@@ -19,10 +18,12 @@ class Test_controller extends MY_Controller
         }
 
         $errors = [];
+        $count = 0;
         foreach( $this->unit->result() as $row ) {
-            if ( $row['Result'] == 'Passed' ) echo 'O ';
+            $count ++;
+            if ( $row['Result'] == 'Passed' ) echo $count . ' ';
             else {
-                echo "<b style='color:red;'>X</b> ";
+                echo "<b style='color:red; font-size:300%;'>X</b> ";
                 $errors[] = $row;
             }
         }

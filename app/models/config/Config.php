@@ -29,6 +29,12 @@ class Config extends Meta {
     }
 
     /**
+     *
+     * Returns value of the Config item.
+     *
+     * @note You cannot use 'get()' to get the value of code field.
+     *          - This will only return the value of 'value' field.
+     *
      * @param $code
      * @return string
      */

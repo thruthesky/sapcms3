@@ -2,10 +2,14 @@
 class Entity_test extends CI_Model {
 
     public function unitTest() {
-
         $this->load->library('unit_test');
-        $entity = entity('temp_entity');
+        $this->testCRUD();
 
+    }
+
+    private function testCRUD()
+    {
+        $entity = entity('temp_entity');
         if ( $entity->tableExists() ) {
             $entity->uninit();
         }
@@ -29,13 +33,10 @@ class Entity_test extends CI_Model {
         $item2->delete();
         $this->unit->run( $this->db->count_all($entity2->getTable()), 1, 'Entity Count All = 1');
 
-
-
-
-
         $entity->uninit();
         $entity2->uninit();
 
     }
+
 
 }

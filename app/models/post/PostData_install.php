@@ -11,9 +11,14 @@ class PostData_install extends Entity
     {
         $data = entity(POST_DATA_TABLE)->init();
         $fields = array(
+            'id_config' => array(
+                'type' => 'INT',
+                'unsigned' => TRUE,
+                'index' => TRUE,
+            ),
             'id_user' => array(
-                'type' => 'CHAR',
-                'constraint' => 15,
+                'type' => 'INT',
+                'unsigned' => TRUE,
             ),
             'subject' => array(
                 'type' => 'VARCHAR',
@@ -32,7 +37,7 @@ class PostData_install extends Entity
             ),
         );
         $this->dbforge->add_column($data->getTable(), $fields);
-
+        $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_config` (`id_config`);');
 
     }
 
