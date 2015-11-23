@@ -8,10 +8,16 @@ class PostData_controller extends MY_Controller
     {
 
         $config = post_config($name);
+        $list = post_data()->search([
+            'id_config' => $config->get('id'),
+        ]);
+
+
 
         $this->render([
             'page' => 'post.list',
             'config' => $config,
+            'list' => $list,
         ]);
 
     }
@@ -40,9 +46,9 @@ class PostData_controller extends MY_Controller
         $post_user = post_data()->getUser();
         $this->render([
             'page' => 'post.view',
-            'post_config' => $post_config,
-            'post_data' => $post_data,
-            'post_user' => $post_user,
+            'config' => $post_config,
+            'post' => $post_data,
+            'user' => $post_user,
         ]);
     }
 
