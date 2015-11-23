@@ -249,6 +249,14 @@ class Entity extends CI_Model {
 
 
     /**
+     * Returns TRUE if the entity item is exists. or FALSE.
+     * @return bool|mixed
+     */
+    public function exists() {
+        return $this->get('id') > 0;
+    }
+
+    /**
      * Returns the number of rows.
      *
      *      - It is only an alias of $this->db->count_all()

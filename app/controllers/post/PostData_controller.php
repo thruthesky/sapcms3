@@ -19,6 +19,7 @@ class PostData_controller extends MY_Controller
 
     public function edit($name, $id = 0 ) {
         $config = post_config($name);
+        if ( ! $config->exists() ) setError("PostConfig does not exists");
         $this->render([
             'page' => 'post.edit',
             'config' => $config,
@@ -27,8 +28,22 @@ class PostData_controller extends MY_Controller
 
     public function editSubmit() {
 
-        post_data()->createPostFromInput();
+        $post = post_data()->createPostFromInput();
+        $name = post_config()->getCurrent()->get('name');
+        $id = $post->get('id');
+        redirect("/$name/view/$id");
+    }
 
+    public function view() {
+        $post_data = post_data()->getCurrent();
+        $post_config = post_config()->getCurrent();
+        $post_user = post_data()->getUser();
+        $this->render([
+            'page' => 'post.view',
+            'post_config' => $post_config,
+            'post_data' => $post_data,
+            'post_user' => $post_user,
+        ]);
     }
 
 }

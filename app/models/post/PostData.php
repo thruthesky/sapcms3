@@ -20,9 +20,9 @@ class PostData extends Post {
 
         if ( self::$current ) return self::$current;
 
-        $mode = $this->uri->segment(1);
+        $mode = $this->uri->segment(2);
         if ( $mode == 'edit' || $mode == 'view' ) {
-            $id = $this->uri->segment(2);
+            $id = $this->uri->segment(3);
             $this->setCurrent($id);
         }
         else if ( in('id') ) {
@@ -38,8 +38,9 @@ class PostData extends Post {
     public function createPostFromInput() {
 
 
+
         $record = [
-            'id_config' => post()->getCurrentConfig()->get('id'),
+            'id_config' => post_config()->getCurrent()->get('id'),
             'id_user' => user()->getCurrent()->get('id'),
             'id_parent' => in('id_parent'),
             'subject' => in('subject'),
@@ -73,6 +74,12 @@ class PostData extends Post {
     }
 
 
+    /**
+     * Creates a post data from the input array.
+     *
+     * @param $record
+     * @return PostData
+     */
     public function createPost($record) {
 
         if ( $record['id_parent'] ) {
@@ -82,7 +89,7 @@ class PostData extends Post {
 
         $this->db->insert(POST_DATA_TABLE, $record);
         $id = $this->db->insert_id();
-        $post = post_data($id);
+        return post_data($id);
     }
 
 }

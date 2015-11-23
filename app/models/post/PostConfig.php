@@ -35,9 +35,9 @@ class PostConfig extends Post {
      * @param null $id
      */
     public function setCurrent($id=null) {
-        if ( is_numeric($id) ) PostConfig::$current = $this->load($id);
-        else if ( is_string($id) ) PostConfig::$current = $this->loadByName($id);
-        else if ( $id instanceof PostConfig ) PostConfig::$current = $id;
+        if ( is_numeric($id) ) self::$current = $this->load($id);
+        else if ( is_string($id) ) self::$current = $this->loadByName($id);
+        else if ( $id instanceof PostConfig ) self::$current = $id;
         else PostConfig::$current = null;
     }
 
@@ -49,9 +49,9 @@ class PostConfig extends Post {
     public function getCurrent() {
         if ( self::$current ) return self::$current;
 
-        $mode = $this->uri->segment(1);
+        $mode = $this->uri->segment(2);
         if ( $mode == 'list' || $mode == 'edit' || $mode == 'view' ) {
-            $name = $this->uri->segment(0);
+            $name = $this->uri->segment(1);
             $this->setCurrent($name);
         }
         else if ( in('id_config') ) {

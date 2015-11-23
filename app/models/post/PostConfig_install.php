@@ -1,5 +1,5 @@
 <?php
-class PostConfig_install extends Entity
+class PostConfig_install extends PostConfig
 {
 
     public function __construct()
@@ -74,6 +74,11 @@ class PostConfig_install extends Entity
         );
 
         $this->dbforge->add_column($config->getTable(), $fields);
+
+        $this->create()
+            ->set('name', 'test')
+            ->set('subject', 'Test Forum')
+            ->save();
 
     }
 

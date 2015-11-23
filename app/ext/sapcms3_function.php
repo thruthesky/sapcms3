@@ -5,6 +5,11 @@ define('CONFIG_TABLE', 'config');
 define('USER_TABLE', 'user');
 
 
+define('ROOT_ID', 1);
+define('ROOT_USERNAME', 'root');
+define('ANONYMOUS_ID', 0);
+define('ANONYMOUS_USERNAME', 'anonymous');
+
 
 /**
  * @file sapcms3_function.php

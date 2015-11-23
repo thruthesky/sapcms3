@@ -14,17 +14,17 @@ class Post extends Entity {
 
 
     /**
-     * @return $this|FALSE
+     *
+     * Returns the User object of PostConfig or PostData
+     *
+     * @note This methods can be used for both of PostConfig and PostData
+     *
+     * @return User
      */
     public function getUser() {
         return user()->load($this->get('id_user'));
     }
 
 
-    /**
-     * Returns PostConfig object
-     */
-    public function getCurrentConfig() {
 
-    }
 }

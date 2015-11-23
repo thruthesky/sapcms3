@@ -1,5 +1,5 @@
 <?php
-class User_install extends Entity
+class User_install extends User
 {
     public function __construct() {
         parent::__construct();
@@ -44,6 +44,19 @@ class User_install extends Entity
             ),
         );
         $this->dbforge->add_column($user->getTable(), $fields);
+
+        $this->create()
+            ->set('username', ROOT_USERNAME)
+            ->setPassword('1234')
+            ->save();
+        $this->db->query("UPDATE user SET id=".ROOT_ID." WHERE username='".ROOT_USERNAME."'");
+
+        $this->create()
+            ->set('username', ANONYMOUS_USERNAME)
+            ->save();
+        $this->db->query("UPDATE user SET id=".ANONYMOUS_ID." WHERE username='".ANONYMOUS_USERNAME."'");
+
+
     }
     public function uninstall() {
         if ( entity(USER_TABLE)->tableExists() ) entity(USER_TABLE)->uninit();

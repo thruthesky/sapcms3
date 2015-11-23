@@ -136,14 +136,17 @@ function post() {
  *
  * @code
  *      post_config()           // returns PostConfig object
+ *      post_config(1)          // returns PostConfig object by id
  *      post_config('abc')      // returns PostConfig object that holds 'abc' post config data.
  */
-function post_config($name=null) {
+function post_config($id=null) {
 
     $ci = & get_instance();
     $config = clone $ci->postconfig;
-    if ( $name ) {
-        $config->loadBy('name', $name);
+    if ( $id ) {
+
+        if ( is_numeric($id) ) $config->load($id);
+        else $config->loadBy('name', $id);
     }
     return $config;
 

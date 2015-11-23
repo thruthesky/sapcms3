@@ -1,7 +1,7 @@
 <?php
 class User extends Entity
 {
-    private static $currentUser; // ID of current logged user.
+    private static $current = null; // ID of current logged user.
 
     public function __construct() {
         parent::__construct();
@@ -104,9 +104,13 @@ class User extends Entity
      * @param $user
      *
      */
-    final protected function setCurrent($user)
+    final protected function setCurrent($id)
     {
-        self::$currentUser = $user;
+        if ( is_numeric($id) ) self::$current = $this->load($id);
+        else if ( is_email($id) ) self::$current = $this->loadByEmail($id);
+        else if ( is_string($id) ) self::$current = $this->loadByUsername($id);
+        else if ( $id instanceof User ) self::$current = $id;
+        else self::$current = null;
     }
 
 
@@ -116,10 +120,9 @@ class User extends Entity
      * @return User
      */
     final public function getCurrent() {
-        return self::$currentUser;
+        if ( self::$current === null ) $this->setCurrent(ANONYMOUS_USERNAME);
+        return self::$current;
     }
-
-
 
 
 

@@ -1,4 +1,8 @@
-<?php echo form_open('/post/edit/submit') ?>
+<?php
+
+    $name = $config->get('name');
+?>
+<?php echo form_open("$name/edit/submit") ?>
 
 
 <input type="text" name="subject" value="<?php echo set_value('')?>"><br>
