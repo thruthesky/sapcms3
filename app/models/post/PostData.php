@@ -93,6 +93,8 @@ class PostData extends Post {
     }
 
 
-
+    public function __get($field) {
+        return $this->get($field);
+    }
 
 }
