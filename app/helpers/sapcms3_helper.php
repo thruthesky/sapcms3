@@ -261,6 +261,19 @@ function get_theme_script($page) {
     return $path;
 }
 
+/**
+ * Alias of get_theme_script()
+ */
+function theme_script($page) {
+    return get_theme_script($page);
+}
+
+
+function theme_css($file) {
+    $name = get_theme_name();
+    return "<link href='/theme/$name/css/$file.css' rel='stylesheet'>";
+}
+
 function layout() {
     return get_theme_name() . '/layout';
 }
@@ -300,15 +313,6 @@ function url_post_edit($data) {
 
 
 
-
-
-/*added by benjamin*/
-function message() {
-    $ci = & get_instance();
-    $ci->load->model('message');
-    return $ci->message;
-}
-
 function url_post_list($name = null) {
     if ( $name === null ) {
         return '/' . post_config()->getCurrent()->get('name') . '/list';
@@ -320,5 +324,51 @@ function url_post_list($name = null) {
         return '/' . $name->get('name') . '/list';
     }
     else return "WRONG-VALUE";
-
 }
+
+
+
+function url_post_setting($name = null) {
+    if ( $name === null ) {
+        return '/post/admin';
+    }
+    else if ( is_string($name) ) {
+        return "/post/config/$name";
+    }
+    else if ( $name instanceof PostConfig ) {
+        return '/post/config/' . $name->get('name');
+    }
+    else return "WRONG-VALUE";
+}
+
+
+
+
+/*added by benjamin*/
+function message() {
+    $ci = & get_instance();
+    $ci->load->model('message');
+    return $ci->message;
+}
+
+
+
+function bootstrap_css() {
+    return '<link href="/etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+}
+
+function bootstrap_js() {
+    return '<script src="/etc/bootstrap/js/bootstrap.min.js"></script>';
+}
+
+function jquery() {
+    return <<<EOH
+    <!--[if lt IE 9]>
+	<script type='text/javascript' src='/etc/js/jquery/jquery-1.11.3.min.js'></script>
+	<![endif]-->
+	<!--[if gte IE 9]><!-->
+	<script type='text/javascript' src='/etc/js/jquery/jquery-2.1.4.min.js'></script>
+	<!--<![endif]-->
+EOH;
+}
+
