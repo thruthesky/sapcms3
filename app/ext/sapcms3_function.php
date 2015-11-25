@@ -113,3 +113,40 @@ function getDomain() {
 function getUserAgent() {
     return '';
 }
+
+
+/**
+ * @param $name
+ * @param null $o
+ */
+function widget($name, $o=null) {
+    global $_last_widget_name;
+    $_last_widget_name = $name;
+    include "widget/$name/$name.php";
+}
+
+
+/**
+ *
+ * @warning Use this function ONLY at the very first line of the widget PHP script.
+ *      Or it will create error.
+ *
+ * @param $file
+ * @return string
+ */
+function widget_css($file=null) {
+    global $_last_widget_name;
+    if ( empty($file) ) $file = $_last_widget_name;
+    echo "<link href='/widget/$_last_widget_name/$file.css' rel='stylesheet'>";
+}
+
+function widget_js($file=null) {
+    global $name;
+    if ( empty($file) ) $file = $name;
+    echo "<script type='text/javascript' src='/widget/$name/$file.js'></script>";
+}
+
+
+function errorBox($message) {
+    widget('errorBox', $message);
+}

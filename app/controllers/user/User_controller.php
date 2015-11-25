@@ -61,6 +61,7 @@ class User_controller extends MY_Controller {
 				->set( 'mobile',  $request['mobile'] )
 				->save();
 
+
 		//returns the user entity after create...
 		return $user;
 	}
@@ -94,30 +95,6 @@ class User_controller extends MY_Controller {
 
 		$total_rows = user()->searchCount($o);
 
-		$this->load->library('pagination');
-		$config['base_url'] = 'http://sapcms3.org/user/list';
-		if( !empty( $k ) ) {
-			if( empty( $config['suffix'] ) ) $config['suffix'] = "?";
-			else $config['suffix'] .= "&";
-			$config['suffix'] .= "keyword=$k";
-		}
-		if( !empty( $filter_by ) ) {
-			if( empty( $config['suffix'] ) ) $config['suffix'] = "?";
-			else $config['suffix'] .= "&";
-			$config['suffix'] .= "filter_by=$filter_by";
-		}
-		//$config['base_url'] .= "?keyword=$k";
-		$config['first_link'] = "<<";
-		$config['last_link'] = ">>";
-		$config['total_rows'] = $total_rows;
-		$config['per_page'] = $per_page;
-		$this->pagination->initialize($config);		
-		$page_navigator = $this->pagination->create_links();		
-
-
-
-
-
 		$data = [
 				'page' => 'user.list',
 				'users' => $users,
@@ -126,7 +103,6 @@ class User_controller extends MY_Controller {
 				'offset' => $offset,
 				'keyword' => $k,
 				'filter_by' => $filter_by,
-				'page_navigator' => $page_navigator,
 		];
 
 		$this->render( $data );

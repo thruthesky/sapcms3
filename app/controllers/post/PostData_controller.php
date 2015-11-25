@@ -4,20 +4,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PostData_controller extends MY_Controller
 {
 
-    public function collection($name)
+    public function collection($name, $offset=0)
     {
 
         $config = post_config($name);
+        $per_page = $config->get('per_page');
+
         $list = post_data()->search([
             'id_config' => $config->get('id'),
+            'order_by' => 'id DESC',
+            'offset' => $offset,
+            'limit' =>  $per_page,
         ]);
 
-
+        $total_rows = post_data()->searchCount([
+            'id_config' => $config->get('id'),
+        ]);
 
         $this->render([
             'page' => 'post.list',
             'config' => $config,
             'list' => $list,
+            'total_rows' => $total_rows,
         ]);
 
     }

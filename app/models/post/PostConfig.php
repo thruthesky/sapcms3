@@ -23,6 +23,7 @@ class PostConfig extends Post {
                 case 'widget_list' : return 'post_list_default';
                 case 'widget_edit' : return 'post_edit_default';
                 case 'widget_view' : return 'post_view_default';
+                case 'per_page' : return 10;
                 default: return 'no-config-value';
             }
         }

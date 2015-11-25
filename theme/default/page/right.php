@@ -1,1 +1,1 @@
-<h2>Right</h2>
+<div>Right</div>

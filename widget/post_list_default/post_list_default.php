@@ -1,17 +1,23 @@
-<h1><?php echo $config->get('name')?></h1>
+<?php
+$forumName = post_config()->getCurrent()->get('name');
+?>
+<h1><?php echo $forumName?></h1>
 
+<?php widget('post_menu_default')?>
 
-
-<div class="btn-group" role="group" aria-label="...">
-    <a class="btn btn-default" href="<?php echo url_post_edit($config)?>">Write</a>
-    <a class="btn btn-default" href="<?php echo url_post_list($config)?>">1st Page</a>
-    <a class="btn btn-default" href="<?php echo url_post_setting($config)?>">Settings</a>
-</div>
 <ul class="list-group">
 
-<?php foreach($this->data['list'] as $post) { ?>
+<?php foreach($o['list'] as $post) { ?>
 
     <li class="list-group-item"><a href="<?php echo url_post_view($post)?>"><?php echo $post->get('subject')?></a></li>
 
 <?php } ?>
 </ul>
+
+
+<?php widget('navigator_default', [
+    'base_url' => "/$forumName/list",
+    'per_page'=> $o['config']->get('per_page'),
+    'total_rows' => $o['total_rows'],
+] )?>
+

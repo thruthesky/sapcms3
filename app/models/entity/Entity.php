@@ -278,6 +278,7 @@ class Entity extends CI_Model {
      *      - @note you cannot use 'offset' and 'page' at the same time.
      *
      * $o['fields'] is the fields to retrieve. for instance, 'id, created'
+     * $o['order_by'] is the same as CI3.
      *
      * @return mixed
      *
@@ -290,10 +291,13 @@ class Entity extends CI_Model {
      * @endcode
      */
     public function search($o=[]) {
+
         if ( isset( $o['from'] ) ) $this->db->from($o['from']);
         else $this->db->from($this->getTable());
         $this->db->select('id');
         if ( isset($o['where']) ) $this->db->where($o['where']);
+
+        if ( isset($o['order_by']) ) $this->db->order_by($o['order_by']);
 
         if ( isset($o['limit']) ) {
             if ( isset($o['offset']) ) {

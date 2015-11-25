@@ -79,9 +79,14 @@ foreach( $users as $user ){
 }
 ?>
 </table>
-<div class='page-navigator'>
-<?php echo $this->data['page_navigator']; ?>
-</div>
+
+
+<?php widget('navigator_default', [
+    'base_url' => '/user/admin/list',
+    'total_rows' => $total_row,
+    'per_page' => $per_page,
+]) ?>
+
 
 
 <style>
@@ -141,34 +146,6 @@ foreach( $users as $user ){
 		padding: 10px;
 	}
 	/*eo list-table*/
-	
-	/*page-navigator*/
-	.page-navigator{
-		padding: 5px 9px;	
-		font-size:.8em;		
-		text-align: center;
-	}
-	
-	.page-navigator > *{		
-		display: inline-block;
-		padding: 7px 10px;
-		margin: 0 10px 5px 0;
-		border: 1px solid #dddddd;
-		border-radius: 2px;
-		color:#000;		
-		line-height: 100%;
-		text-decoration:none;
-	}
-	
-	.page-navigator > *:hover{		
-		background-color: #7997ab;
-		color: #ffffff;		
-	}
-	
-	.page-navigator > strong{		
-		background-color: #7997ab;
-		color: #ffffff;
-		font-weight:normal;
-	}
-	/*eo page-navigator*/
+
+
 </style>

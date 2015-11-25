@@ -1,3 +1,5 @@
+<?php
+?>
 
 <h1>Post Config List</h1>
 

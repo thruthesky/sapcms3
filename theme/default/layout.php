@@ -8,22 +8,29 @@
     <?php echo theme_css('base')?>
     <?php echo theme_css('layout')?>
     <?php echo theme_css('component')?>
+    <?php echo theme_css('component.header')?>
     <?php echo theme_css('state')?>
     <?php echo theme_css('theme')?>
 </head>
 <body>
 <div class="layout">
-    <div class="header"><?php include theme_script('header')?></div>
+    <div class="header"><div class="header-inner"><?php include theme_script('header')?></div></div>
     <div class="content">
-        <div class="error"><?php include widget('error') ?></div>
-        <div class="left"><?php include theme_script('left')?></div>
-        <div class="page"><?php include $this->path_theme_script ?></div>
-        <div class="right"><?php include theme_script('right')?></div>
+        <div class="content-inner">
+            <div class="error"><?php widget('error') ?></div>
+            <table width='100%' cellpadding="0" cellspacing="0">
+                <tr valign="top">
+                    <td class='content-left-td' width="220"><div class="left"><?php include theme_script('left')?></div></td>
+                    <td><div class="page"><?php include $path_theme_script ?></div></td>
+                    <td class='content-right-td' width="160"><div class="right"><?php include theme_script('right')?></div></td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="footer"><?php include theme_script('footer')?></div>
+    <div class="footer"><div class="footer-inner"><?php include theme_script('footer')?></div></div>
 </div>
 <?php echo jquery()?>
 <?php echo bootstrap_js()?>
-<script type="text/javascript" src="/theme/default/js/default.js" ></script>
+<?php echo theme_js('default')?>
 </body>
 </html>

@@ -1,3 +1,44 @@
-.layout .content {
-    padding:0.6em;
+.header-inner, .content-inner, .footer-inner {
+    margin:0 auto;
+    max-width:1234px;
+}
+
+
+.layout > .header {
+    background-color:grey;
+    color:white;
+    padding:1em;
+}
+
+
+
+.layout > .content .left {
+    width:220px;
+    min-height:800px;
+    background-color:#efefef;
+}
+
+
+.layout > .content .page {
+}
+
+.layout > .content .right {
+    width:160px;
+    min-height:800px;
+    background-color:#efefef;
+}
+
+.layout > .content .page {
+    float:left;
+    padding:0 0.6em;
+}
+
+
+.content-left-td { display:none; }
+.content-right-td { display:none; }
+@media all and (min-width: 600px ) {
+    .content-left-td { display:table-cell; }
+}
+@media all and (min-width: 960px ) {
+    .content-right-td { display:table-cell; }
 }

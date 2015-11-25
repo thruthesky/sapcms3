@@ -92,6 +92,9 @@ function user($id=null) {
         else if ( is_email($id) ) $user->loadByEmail($id);
         else return $user->loadByUsername($id);
     }
+
+
+
     return $user;
 
     /*
@@ -274,15 +277,17 @@ function theme_css($file) {
     return "<link href='/theme/$name/css/$file.css' rel='stylesheet'>";
 }
 
+function theme_js($file) {
+    $name = get_theme_name();
+    return "<script type='text/javascript' src='/theme/$name/js/$file.js'></script>";
+}
+
+
 function layout() {
     return get_theme_name() . '/layout';
 }
 
 
-
-function widget($name) {
-    return "widget/$name/$name.php";
-}
 
 
 function url_post_view($post) {

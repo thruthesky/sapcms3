@@ -1,9 +1,7 @@
 <?php
-
-    $name = $config->get('name');
+$name = post_config()->getCurrent()->get('name');
 ?>
 <?php echo form_open("$name/edit/submit") ?>
-
 
 <input type="text" name="subject" value="<?php echo set_value('')?>"><br>
 <textarea name="content"></textarea><br>

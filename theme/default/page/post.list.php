@@ -1,3 +1,2 @@
 <?php
-$config = $this->data['config'];
-include widget( $config->get('widget_list') );
+widget( $config->get('widget_list'), $this->data);

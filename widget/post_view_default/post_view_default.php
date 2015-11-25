@@ -1,7 +1,8 @@
 <?php
-$config = $this->data['config'];
-$post = $this->data['post'];
-$user = $this->data['user'];
+$ci = & get_instance();
+$config = $ci->data['config'];
+$post = $ci->data['post'];
+$user = $ci->data['user'];
 $name = $config->get('name');
 ?>
 <h2><?php echo $name?></h2>
