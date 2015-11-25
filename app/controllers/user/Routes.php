@@ -2,6 +2,10 @@
 $route['user/register'] = 'user/user_controller/register';
 
 
+$route['user/login'] = 'user/user_controller/login';
+$route['user/login/submit'] = 'user/user_controller/loginsubmit';
+
+
 $route['user/admin/list'] = 'user/user_controller/collection';
 $route['user/admin/list/(:any)'] = 'user/user_controller/collection/$1';
 

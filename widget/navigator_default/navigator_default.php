@@ -14,7 +14,6 @@ if ( ! isset($o['per_page']) ) errorBox("No 'per_page' value");
 if ( ! isset($o['base_url']) ) errorBox("No 'base_url' value");
 
 $o['num_links'] = 4;
-//$o['use_page_numbers'] = TRUE;
 
 $o['full_tag_open'] = "<ul class='pagination'>";
 $o['full_tag_close'] ="</ul>";
@@ -22,22 +21,23 @@ $o['full_tag_close'] ="</ul>";
 $o['num_tag_open'] = '<li>';
 $o['num_tag_close'] = '</li>';
 
-$o['cur_tag_open'] = "<li class='disabled active'><a href='#'>";//you added extra li tag here
+$o['cur_tag_open'] = "<li class='disabled active'><a href='#'>";
 $o['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
 
 $o['next_tag_open'] = "<li>";
-$o['next_tag_close'] = "</li>";//tagl? should be tag
+$o['next_tag_close'] = "</li>";
 
 $o['prev_tag_open'] = "<li>";
-$o['prev_tag_close'] = "</li>";//tagl? should be tag
+$o['prev_tag_close'] = "</li>";
 
 $o['first_tag_open'] = "<li>";
-$o['first_tag_close'] = "</li>";//tagl? should be tag
+$o['first_tag_close'] = "</li>";
 
 $o['last_tag_open'] = "<li>";
-$o['last_tag_close'] = "</li>";//tagl? should be tag
+$o['last_tag_close'] = "</li>";
 
-
+$o['first_link'] = "&lt;&lt; First";
+$o['last_link'] = "Last &gt;&gt;";
 
 $ci = & get_instance();
 $ci->load->library('pagination');

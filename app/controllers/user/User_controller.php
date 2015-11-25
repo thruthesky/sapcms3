@@ -96,7 +96,7 @@ class User_controller extends MY_Controller {
 		$total_rows = user()->searchCount($o);
 
 		$data = [
-				'page' => 'user.list',
+				'page' => 'user.admin_list',
 				'users' => $users,
 				'total_row' => $total_rows,
 				'per_page' => $per_page,
@@ -108,7 +108,7 @@ class User_controller extends MY_Controller {
 		$this->render( $data );
 	}
 
-	public function delete( $id ){
+	public function delete( $id ) {
 		$user = user()->load( $id );
 		$user->delete();
 	}
@@ -182,7 +182,7 @@ class User_controller extends MY_Controller {
 			echo self::createNotice( $data['message'], true );
 		}
 		$this->load->helper('url');		
-		$redirect_url .= "/user/list/".in('offset')."?keyword=".in('keyword');
+		$redirect_url = "/user/list/".in('offset')."?keyword=".in('keyword');
 		
 		redirect( $redirect_url );		
 	}
@@ -202,6 +202,35 @@ class User_controller extends MY_Controller {
 					$message
 				</div>
 				";
-	}		
+	}
+
+
+    public function login() {
+        $this->render(['page'=>'user.login']);
+    }
+
+    public function loginSubmit() {
+        if ( $name = is_email(in('username')) ) {
+            $user = user()->loadByEmail($name);
+        }
+        else {
+            $name = in('username');
+            $user = user()->loadByUsername($name);
+        }
+
+        if ( empty($user) ) {
+            setError("User does not exists.");
+            return $this->login();
+        }
+
+        if ( ! $user->checkPassword(in('password')) ) {
+            setError("Password does not match");
+            return $this->login();
+        }
+
+        // @todo login
+
+    }
+
 }
 

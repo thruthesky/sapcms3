@@ -9,6 +9,7 @@
     <?php echo theme_css('layout')?>
     <?php echo theme_css('component')?>
     <?php echo theme_css('component.header')?>
+    <?php echo theme_css('component.footer')?>
     <?php echo theme_css('state')?>
     <?php echo theme_css('theme')?>
 </head>

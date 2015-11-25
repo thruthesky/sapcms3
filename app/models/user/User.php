@@ -41,6 +41,19 @@ class User extends Entity
         return $this->set('password', encrypt_password($plain_text_password));
     }
 
+
+    /**
+     * Returns TRUE if the input $password is the same password as the user
+     * @param $plain_text_password
+     * @return bool
+     */
+    final public function checkPassword($plain_text_password)
+    {
+        if ( empty($plain_text_password) ) return FALSE;
+        return $this->get('password') == encrypt_password($plain_text_password);
+    }
+
+
     /**
      * Returns a User object after login with email id.
      * @param $username
