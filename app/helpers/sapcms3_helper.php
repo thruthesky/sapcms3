@@ -377,3 +377,17 @@ function jquery() {
 EOH;
 }
 
+
+/**
+ *
+ * Returns the field of logged in user.
+ *
+ * @param string $field
+ * @return bool|mixed
+ * @code
+ *      echo login();
+ * @endcode
+ */
+function login($field='id') {
+    return user()->getCurrent()->get($field);
+}

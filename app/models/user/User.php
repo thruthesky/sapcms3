@@ -86,15 +86,31 @@ class User extends Entity
     final public function login($username=null) {
         if ($username) {
             $user = $this->loadByUsername($username);
-            $this->setCurrent($user);
-            return $user;
+            return $this->setLogin($user);
         }
         else {
-            $this->setCurrent($this);
-            return $this;
+            return $this->setLogin($this);
         }
 
     }
+
+    final public function setLogin(&$user) {
+        $this->setCurrent($user);
+
+        $cookie = array(
+            'name'   => 'id',
+            'value'  => $user->get('id'),
+            'expire' => 365 * 24 * 60 * 60,
+            'domain' => '.' . getBaseDomain(getDomain()),
+            'path'   => '/',
+        );
+
+        $this->input->set_cookie($cookie);
+
+        return $user;
+    }
+
+
     /**
      * Returns a user object after logged in with email
      *
@@ -114,8 +130,7 @@ class User extends Entity
      *
      * Sets the $user as the current logged user.
      *
-     * @param $user
-     *
+     * @param $id
      */
     final protected function setCurrent($id)
     {
@@ -128,12 +143,18 @@ class User extends Entity
 
 
 
+
     /**
      * Returns the login user's User Entity
      * @return User
      */
     final public function getCurrent() {
-        if ( self::$current === null ) $this->setCurrent(ANONYMOUS_USERNAME);
+        if ( self::$current === null ) {
+            if ( $id = $this->input->cookie('id') ) {
+                $this->setCurrent($id);
+            }
+            else $this->setCurrent(ANONYMOUS_USERNAME);
+        }
         return self::$current;
     }
 

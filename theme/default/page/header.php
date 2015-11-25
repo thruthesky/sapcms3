@@ -1,7 +1,18 @@
 <div class="main-menu">
     <img src="/tmp/logo.png">
     <a href="/">Home</a>
-    <a href="/user/login">Login</a>
+
+    <?php if ( login() ) { ?>
+        (
+        <?php echo login('username')?>
+        |
+        <a href="/user/logout">Logout</a>
+        )
+    <? } else { ?>
+        <a href="/user/login">Login</a>
+    <? } ?>
+
+
 </div>
 
 

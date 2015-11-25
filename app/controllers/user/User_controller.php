@@ -206,7 +206,7 @@ class User_controller extends MY_Controller {
 
 
     public function login() {
-        $this->render(['page'=>'user.login']);
+        return $this->render(['page'=>'user.login']);
     }
 
     public function loginSubmit() {
@@ -228,7 +228,8 @@ class User_controller extends MY_Controller {
             return $this->login();
         }
 
-        // @todo login
+
+        $user->login();
 
     }
 

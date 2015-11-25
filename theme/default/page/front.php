@@ -9,6 +9,11 @@
 <a href="/post/config/list">Post Config List</a><br>
 
 
+<?php
+
+
+?>
+
 
 <hr>
 In the long history of the world, only a few generation have been granted the roll of depending of the world in its our maximum danger.

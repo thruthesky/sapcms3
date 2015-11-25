@@ -107,9 +107,48 @@ function getBrowserID() {
 function getIP() {
     return '';
 }
+
 function getDomain() {
-    return '';
+    $domain = $_SERVER['HTTP_HOST'];
+    $domain = strtolower($domain);
+    return $domain;
 }
+
+/**
+ *
+ * Returns Base Domain from a domain
+ *
+ * @warning This is not perfect but works very good.
+ * @param $domain
+ * @return string
+ * @code
+ *              echo getBaseDomain(getDomain());
+echo getBaseDomain('www.english.co.kr') . '<hr>';
+echo getBaseDomain('www.dogs.co.kr') . '<hr>';
+echo getBaseDomain('abc.string.pe.kr') . '<hr>';
+echo getBaseDomain('www.abc.co.kr') . '<hr>';
+echo getBaseDomain('www.abc.com') . '<hr>';
+echo getBaseDomain('www.thefun.com.ph') . '<hr>';
+echo getBaseDomain('www.get.com') . '<hr>';
+echo getBaseDomain('get.some.com') . '<hr>';
+echo getBaseDomain('www.explode.net') . '<hr>';
+echo getBaseDomain('parts.domain.org') . '<hr>';
+ * @endcode
+ */
+function getBaseDomain($domain) {
+    $domain = strtolower($domain);
+    $domain = str_replace('www.', '', $domain);
+    $ex = explode('.', $domain);
+    $index = count($ex)-1;
+    $parts = [];
+    for( $i=$index; $i >=0 ; $i-- ) {
+        $parts[] = $ex[$i];
+        if ( strlen($ex[$i]) > 3 ) break;
+    }
+    $parts_re = array_reverse($parts);
+    return implode('.', $parts_re);
+}
+
 function getUserAgent() {
     return '';
 }
@@ -150,3 +189,5 @@ function widget_js($file=null) {
 function errorBox($message) {
     widget('errorBox', $message);
 }
+
+
