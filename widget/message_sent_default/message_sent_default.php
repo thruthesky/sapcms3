@@ -4,8 +4,7 @@ $data = $ci->data;
 widget_css();
 ?>
 
-
-<h1>Message List</h1>
+<h1>Sent Messages</h1>
 
 <?php widget('message_list_menu_default')?>
 
@@ -49,7 +48,7 @@ widget_css();
 
 
 <?php widget('navigator_default', [
-    'base_url' => "/message/list",
+    'base_url' => "/message/$data[type]",
     'per_page'=> $data['per_page'],
     'total_rows' => $data['total_rows'],
 ] )?>
