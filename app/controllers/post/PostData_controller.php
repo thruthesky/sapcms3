@@ -30,7 +30,6 @@ class PostData_controller extends MY_Controller
 
     }
 
-
     public function edit($name, $id = 0 ) {
         $config = post_config($name);
         if ( ! $config->exists() ) setError("PostConfig does not exists");
@@ -61,6 +60,10 @@ class PostData_controller extends MY_Controller
             'post' => $post_data,
             'user' => $post_user,
         ]);
+    }
+
+    public function commentSubmit() {
+
     }
 
 }

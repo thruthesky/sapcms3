@@ -16,6 +16,9 @@ define('COOKIE_ID', 'id_user');
 
 
 
+date_default_timezone_set( 'Asia/Seoul' );
+
+
 /**
  * @file sapcms3_function.php
  * @description

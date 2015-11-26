@@ -5,6 +5,12 @@
 <a href="/test/data">Test data input</a><br>
 <a href="/user/register">User Register</a><br>
 <a href="/user/login">User Login</a><br>
+
+<a href="/message/inbox">Message List(inbox)</a><br>
+<a href="/message/sent">Message Sent List(inbox)</a><br>
+
+
+
 <a href="/user/admin/list">User List</a><br>
 <a href="/post/config/list">Post Config List</a><br>
 

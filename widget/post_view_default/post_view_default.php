@@ -20,3 +20,7 @@ Subject: <?php echo $post->get('subject')?>
 <hr>
 Content: <?php echo $post->get('content')?>
 <hr>
+
+
+<?php widget('post_comment_form_default')?>
+

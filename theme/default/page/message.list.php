@@ -1,7 +1,6 @@
 <?php
 $data = $this->data;
 
-date_default_timezone_set( 'Asia/Singapore' );//temp
 ?>
 
 <h1>Message List</h1>

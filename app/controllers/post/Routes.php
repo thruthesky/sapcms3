@@ -17,3 +17,7 @@ $route['(:any)/edit'] = 'post/postdata_controller/edit/$1';
 $route['(:any)/edit/(:num)'] = 'post/postdata_controller/edit/$1/$2';
 
 $route['(:any)/edit/submit'] = 'post/postdata_controller/editSubmit/$1';
+
+
+
+$route['post/comment/submit'] = 'post/postdata_controller/commentSubmit';
