@@ -3,9 +3,9 @@
 $route['message/inbox'] = 'message/Message_controller/collection';
 $route['message/inbox/(:num)'] = 'message/Message_controller/collection/$1';
 
-$route['message/sent'] = 'message/Message_controller/collection';
-$route['message/sent/(:num)'] = 'message/Message_controller/collection/$1';
+$route['message/outbox'] = 'message/Message_controller/collection';
+$route['message/outbox/(:num)'] = 'message/Message_controller/collection/$1';
 
-$route['message/write'] = 'message/Message_controller/write';
-$route['message/write/(:num)'] = 'message/Message_controller/write/$1';
-$route['message/write/submit'] = 'message/Message_controller/writeSubmit';
+$route['message/send'] = 'message/Message_controller/send';
+$route['message/send/(:num)'] = 'message/Message_controller/send/$1';
+$route['message/send/submit'] = 'message/Message_controller/writeSubmit';
