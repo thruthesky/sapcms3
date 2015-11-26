@@ -177,6 +177,8 @@ class Entity extends CI_Model {
      *
      * @note it actually loads a record into $this->record and return the clone.
      *
+     * @note if the input $id is 0, then it loads the entity of id with 0.
+     *
      * @param $id
      * @return Entity|FALSE - if there is no record, then it returns FALSE
      * - if there is no record, then it returns FALSE
@@ -185,7 +187,6 @@ class Entity extends CI_Model {
      * @endcode
      */
     public function load($id) {
-        if ( empty($id) ) return FALSE;
         $query = $this->db->query('SELECT * FROM ' . $this->getTable() . " WHERE id=$id");
         $this->record = $query->row_array();
         if ( $this->record ) return clone $this;

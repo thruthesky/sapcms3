@@ -387,6 +387,11 @@ EOH;
  * @code
  *      echo login();
  * @endcode
+ *
+ * @note Must use "login()" to check if the user is logged or not.
+ *      - You cannot use "login('username')" because it will return a username even if it is not logged in.
+ *      - If the user did not logged in, Anonymous will be used instead.
+ *
  */
 function login($field='id') {
     return user()->getCurrent()->get($field);

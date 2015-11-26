@@ -4,6 +4,7 @@ $route['user/register'] = 'user/user_controller/register';
 
 $route['user/login'] = 'user/user_controller/login';
 $route['user/login/submit'] = 'user/user_controller/loginsubmit';
+$route['user/logout'] = 'user/user_controller/logout';
 
 
 $route['user/admin/list'] = 'user/user_controller/collection';

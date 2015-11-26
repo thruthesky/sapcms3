@@ -193,7 +193,7 @@ class User_controller extends MY_Controller {
 			$class = ' success';
 			$color = 'green';
 		}
-		else{
+		else {
 			$color = 'red';
 		}
 
@@ -204,11 +204,19 @@ class User_controller extends MY_Controller {
 				";
 	}
 
-
     public function login() {
         return $this->render(['page'=>'user.login']);
     }
 
+    public function logout()
+    {
+        user()->logout();
+        redirect(base_url());
+    }
+
+    /**
+     * @return null
+     */
     public function loginSubmit() {
         if ( $name = is_email(in('username')) ) {
             $user = user()->loadByEmail($name);
@@ -228,9 +236,8 @@ class User_controller extends MY_Controller {
             return $this->login();
         }
 
-
-        $user->login();
-
+		$user->login();
+		redirect(base_url());
     }
 
 }

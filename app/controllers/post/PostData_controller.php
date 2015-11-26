@@ -50,8 +50,11 @@ class PostData_controller extends MY_Controller
 
     public function view() {
         $post_data = post_data()->getCurrent();
+
         $post_config = post_config()->getCurrent();
-        $post_user = post_data()->getUser();
+
+        $post_user = $post_data->getUser();
+
         $this->render([
             'page' => 'post.view',
             'config' => $post_config,

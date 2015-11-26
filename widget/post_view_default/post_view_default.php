@@ -14,6 +14,8 @@ $name = $config->get('name');
 <a href="">Block</a>
 <hr>
 
+Writer: <?php echo $user->get('username')?>
+<hr>
 Subject: <?php echo $post->get('subject')?>
 <hr>
 Content: <?php echo $post->get('content')?>

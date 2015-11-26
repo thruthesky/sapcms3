@@ -66,7 +66,7 @@ class User extends Entity
     /**
      * Returns a User object after login with email address.
      * @param $email
-     * @return Entity|FALSE
+     * @return User|FALSE
      */
     final public function loadByEmail($email)
     {
@@ -76,7 +76,9 @@ class User extends Entity
     /**
      * Returns a user object after logged in.
      *
-     * @note it sets
+     *
+     *
+     * @note it does not actually set the user logged in. It uses $this->setLogin() method to do that.
      *
      * @param $username
      * @return User|FALSE
@@ -91,23 +93,42 @@ class User extends Entity
         else {
             return $this->setLogin($this);
         }
-
     }
 
-    final public function setLogin(&$user) {
-        $this->setCurrent($user);
+    /**
+     * Set the logged-in-user logged-out.
+     */
+    final public function logout() {
+        $this->setLogout();
+    }
 
+
+
+    /**
+     * This method actually sets the user logged in.
+     * @param $user
+     * @return User
+     */
+    final private function setLogin(&$user) {
+        $this->setCurrent($user);
         $cookie = array(
-            'name'   => 'id',
+            'name'   => COOKIE_ID,
             'value'  => $user->get('id'),
             'expire' => 365 * 24 * 60 * 60,
             'domain' => '.' . getBaseDomain(getDomain()),
             'path'   => '/',
         );
-
         $this->input->set_cookie($cookie);
-
         return $user;
+    }
+
+    /**
+     * Sets the logged-in-user logged-out.
+     */
+    final private function setLogout() {
+        $this->load->helper('cookie');
+        $this->setCurrent(null);
+        delete_cookie(COOKIE_ID, '.' . getBaseDomain(getDomain()));
     }
 
 
@@ -150,7 +171,7 @@ class User extends Entity
      */
     final public function getCurrent() {
         if ( self::$current === null ) {
-            if ( $id = $this->input->cookie('id') ) {
+            if ( $id = $this->input->cookie(COOKIE_ID) ) {
                 $this->setCurrent($id);
             }
             else $this->setCurrent(ANONYMOUS_USERNAME);

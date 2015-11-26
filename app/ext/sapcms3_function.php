@@ -12,6 +12,9 @@ define('ROOT_USERNAME', 'root');
 define('ANONYMOUS_ID', 0);
 define('ANONYMOUS_USERNAME', 'anonymous');
 
+define('COOKIE_ID', 'id_user');
+
+
 
 /**
  * @file sapcms3_function.php
