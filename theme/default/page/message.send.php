@@ -1,12 +1,12 @@
-
-
-<h1>Send a Message</h1>
-<?php echo form_open('/message/send/submit',['class'=>'message-form'])?>
-<h5>ID</h5>
-<input type='text' name='username'>
-<h5>Title</h5>
-<input type='text' name='title'>
-<h5>Content</h5>
-<textarea name='content'></textarea><br>
-<input type='submit'>
-</form>
+<?php
+if( !empty( $this->data['error'] ) ){
+	$error = $this->data['error'];
+	foreach( $error as $e ){
+		echo "<h1>$e[code] - $e[message]</h1>";
+	}
+}
+else{
+	if( !empty( $this->data['type'] ) ) $type = $this->data['type'];
+	else $type = 'inbox';
+	widget('message_send_default');
+}

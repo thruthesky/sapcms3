@@ -4,6 +4,7 @@ $data = $ci->data;
 widget_css();
 ?>
 
+
 <h1>Sent Messages</h1>
 
 <?php widget('message_list_menu_default')?>
@@ -21,6 +22,8 @@ widget_css();
         <td><span>TITLE</span></td>
         <td><span>CONTENT</span></td>
         <td><span>CHECKED</span></td>
+        <td><span>VIEW</span></td>
+        <td><span>DELETE</span></td>
     </tr>
     <?php
     $messages = $data['messages'];
@@ -32,14 +35,17 @@ widget_css();
         if( empty( $user_to_username ) ) $user_to_username = "Anonymous";
         else $user_to_username = $user_to_username->get('username');
 
-        $checked = date( 'M d, Y',$message->get('checked') );
+        $checked = date( 'M d, Y H:i',$message->get('checked') );
+		if( $checked == 0 ) $checked = "Not Viewed";
         ?>
-        <tr>
+        <tr valign='top'>
             <td><span><?php echo $user_from_username; ?></span></td>
             <td><span><?php echo $user_to_username; ?></span></td>
             <td><span><?php echo $message->get('title'); ?></span></td>
             <td><span><?php echo $message->get('content'); ?></span></td>
-            <td><span><?php $checked; ?></span></td>
+            <td><span><?php echo $checked; ?></span></td>
+            <td><a href='/message/viewItem/<?php echo $message->get('id') ?>'>View</a></td>
+            <td><a href='/message/deleteItem/inbox/<?php echo $data['offset']; ?>/<?php echo $message->get('id') ?>'>Delete</a></td>
         </tr>
         <?php
     }
