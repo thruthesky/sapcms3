@@ -1,4 +1,6 @@
 <?php
+widget('message_list_menu_default');
+
 $ci = & get_instance();
 $data = $ci->data;
 widget_css();
