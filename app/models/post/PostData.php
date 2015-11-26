@@ -36,9 +36,6 @@ class PostData extends Post {
      * Creates a post item from $this->input and returns the object.
      */
     public function createPostFromInput() {
-
-
-
         $record = [
             'id_config' => post_config()->getCurrent()->get('id'),
             'id_user' => user()->getCurrent()->get('id'),
@@ -55,6 +52,7 @@ class PostData extends Post {
             'province' => in('province'),
             'city' => in('city'),
         ];
+
         for( $i=1; $i<=3; $i++ ) {
             $record["link_$i"] = in("link_$i");
         }
@@ -81,18 +79,10 @@ class PostData extends Post {
      * @return PostData
      */
     public function createPost($record) {
-
-        if ( $record['id_parent'] ) {
-            $parent = post_data($record['id_parent']);
-            $record['id_root'] = $parent->get('idx_root');
-        }
-
         $this->db->insert(POST_DATA_TABLE, $record);
         $id = $this->db->insert_id();
         return post_data($id);
     }
-
-
 
 
 }

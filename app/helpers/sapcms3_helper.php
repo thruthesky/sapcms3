@@ -118,6 +118,7 @@ function user($id=null) {
  *
  * @warning Since post() returns only returns 'loaded Post object' by system,
  *      - it does not clone nor create a new object.
+ *      - Meaning, it reuses only one object.
  *      - So, it should not use any state information. ( meaning all the method must return stateless information )
  *
  *
@@ -147,7 +148,6 @@ function post_config($id=null) {
     $ci = & get_instance();
     $config = clone $ci->postconfig;
     if ( $id ) {
-
         if ( is_numeric($id) ) $config->load($id);
         else $config->loadBy('name', $id);
     }
@@ -292,8 +292,10 @@ function layout() {
 
 function url_post_view($post) {
     if ( is_numeric($post) ) {
-        $name = post_config()->getCurrent()->get('name');
-        return "/$name/view/$post";
+        $post_data = post_data($post);
+        $name = post_config($post_data->get('id_config'))->get('name');
+        $url = "/$name/view/$post";
+        return $url;
     }
     else if ( $post instanceof PostData ) {
         $name = post_config( $post->get('id_config') )->get('name');
@@ -303,6 +305,11 @@ function url_post_view($post) {
         setError("url_post_list : Wrong input");
         return 'WRONG INPUT';
     }
+}
+function url_post_view_comment($id_parent, $id_comment) {
+    $url = url_post_view($id_parent);
+    $url .= "#comment$id_comment";
+    return $url;
 }
 
 function url_post_edit($data) {

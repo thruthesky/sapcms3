@@ -63,7 +63,9 @@ class PostData_controller extends MY_Controller
     }
 
     public function commentSubmit() {
-
+        $comment = post()->createComment(in('id_parent'),in('content'));
+        redirect( url_post_view_comment( in('id_parent'), $comment->get('id'))  );
     }
+
 
 }
