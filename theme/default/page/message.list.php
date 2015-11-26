@@ -21,8 +21,13 @@ $data = $this->data;
 <?php
 $messages = $data['messages'];
 foreach( $messages as $message ){
-$user_from_username = user()->load( $message->get('id_from') )->get('username');
-$user_to_username = user()->load( $message->get('id_to') )->get('username');
+$user_from_username = user()->load( $message->get('id_from') );
+if( empty( $user_from_username ) ) $user_from_username = "Anonymous";
+else $user_from_username = $user_from_username->get('username');
+$user_to_username = user()->load( $message->get('id_to') );
+if( empty( $user_to_username ) ) $user_to_username = "Anonymous";
+else $user_to_username = $user_to_username->get('username');
+
 $checked = date( 'M d, Y',$message->get('checked') ); 
 ?>
 	<tr>

@@ -394,5 +394,9 @@ EOH;
  *
  */
 function login($field='id') {
-    return user()->getCurrent()->get($field);
+	//edited by benjamin... I get
+	//Fatal error: Call to a member function get() on a non-object in C:\work\sapcms3\app\helpers\sapcms3_helper.php on line 395
+	$user_current = user()->getCurrent();
+	if( !empty( $user_current ) ) return $user_current->get($field);
+	//return user()->getCurrent()->get($field);//original code here
 }
