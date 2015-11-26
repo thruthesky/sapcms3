@@ -38,6 +38,9 @@ class Message_install extends Message
 		);
 		
 		$this->dbforge->add_column($config->getTable(), $fields);
+        $this->db->query('ALTER TABLE `'.MESSAGE_TABLE.'` ADD INDEX `id_from` (`id_from`);');
+        $this->db->query('ALTER TABLE `'.MESSAGE_TABLE.'` ADD INDEX `id_to` (`id_to`);');
+        $this->db->query('ALTER TABLE `'.MESSAGE_TABLE.'` ADD INDEX `id_from_id_to` (`id_from`,`id_to`);');
 	}
 	
 	public function uninstall()

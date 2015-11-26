@@ -22,9 +22,7 @@ class PostTestData_controller extends MY_Controller
                 ->set('content', "Content $i<hr>How are you, JK$i")
                 ->save();
         }
-
         echo "testForum Posts created";
-
     }
 
 }
