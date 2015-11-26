@@ -29,12 +29,12 @@ class TestData_controller extends MY_Controller
 		
 		for( $i = 0; $i<111; $i++) {
 			if( $i % 2 == 0 ) {
-				$idx_from = 3;
-				$idx_to = 4;
+				$idx_from = 0;
+				$idx_to = 1;
 			}
 			else{
-				$idx_from = 4;
-				$idx_to = 3;
+				$idx_from = 1;
+				$idx_to = 0;
 			}
 		
             message()->create()

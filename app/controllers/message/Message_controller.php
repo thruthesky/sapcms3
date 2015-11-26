@@ -11,8 +11,19 @@ class Message_controller extends MY_Controller
 				'limit' =>  $per_page,
 				//'where' => $where,
 		];
-		$messages = message()->search($o);
-		$total_rows = message()->searchCount($o);
+		
+		$login_id = login();
+		if( !empty( $login_id ) ){
+			$o['where'] = "id_to = $login_id";
+			$messages = message()->search($o);
+			$total_rows = message()->searchCount($o);
+		}
+		else{
+			$messages = null;
+			$total_rows = 0;
+		}
+		
+		
 		$this->load->library('pagination');
 		$config['base_url'] = 'http://sapcms3.org/message/collection';
 		$config['first_link'] = "<<";
