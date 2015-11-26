@@ -65,8 +65,8 @@ class Message_controller extends MY_Controller
 			//get id
 		}
 		else {
-			$my_id = 3;
-			$other_id = 4;
+			$my_id = 1;
+			$other_id = 0;
 			
 		}
 		
