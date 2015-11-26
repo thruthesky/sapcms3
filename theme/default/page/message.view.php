@@ -6,6 +6,5 @@ if( !empty( $this->data['error'] ) ){
 	}
 }
 else{
-	widget('message_list_menu_default');
-	widget('message_send_default');
+	widget('message_view_default');
 }
