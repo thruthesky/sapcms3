@@ -6,7 +6,5 @@ if( !empty( $this->data['error'] ) ){
 	}
 }
 else{
-	if( !empty( $this->data['type'] ) ) $type = $this->data['type'];
-	else $type = 'inbox';
 	widget('message_send_default');
 }
