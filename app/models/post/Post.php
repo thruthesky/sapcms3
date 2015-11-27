@@ -64,4 +64,7 @@ class Post extends Entity {
         return post_data()->count("id_root=$id_root AND id_parent>0");
     }
 
+
+
+
 }
