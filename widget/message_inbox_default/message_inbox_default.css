@@ -1,6 +1,13 @@
-body{
-    font-family:arial;
+
+.message-list .row {
+    margin:0;
+    padding:0;
+    cursor:pointer;
 }
+
+
+
+
 
 /*search-form*/
 .search-form{

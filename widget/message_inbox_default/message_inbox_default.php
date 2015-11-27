@@ -16,10 +16,12 @@ widget_js();
 </div>
 
 
+
 <span>FROM</span>
 <span>TITLE</span>
 <span>DELETE</span>
 
+<div class="message-list">
 <?php
 $messages = $data['messages'];
 foreach( $messages as $message ){
@@ -38,6 +40,7 @@ foreach( $messages as $message ){
     <?php
 }
 ?>
+</div>
 
 
 
