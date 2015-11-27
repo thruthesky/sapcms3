@@ -12,6 +12,7 @@
     <?php echo theme_css('component.footer')?>
     <?php echo theme_css('state')?>
     <?php echo theme_css('theme')?>
+    <?php echo jquery()?>
 </head>
 <body>
 <div class="layout">
@@ -22,7 +23,7 @@
             <table width='100%' cellpadding="0" cellspacing="0">
                 <tr valign="top">
                     <td class='content-left-td' width="220"><div class="left"><?php include theme_script('left')?></div></td>
-                    <td><div class="page"><?php include $path_theme_script ?></div></td>
+                    <td><div class="page <?php echo $model?>"><?php include $path_theme_script ?></div></td>
                     <td class='content-right-td' width="160"><div class="right"><?php include theme_script('right')?></div></td>
                 </tr>
             </table>
@@ -30,7 +31,6 @@
     </div>
     <div class="footer"><div class="footer-inner"><?php include theme_script('footer')?></div></div>
 </div>
-<?php echo jquery()?>
 <?php echo bootstrap_js()?>
 <?php echo theme_js('default')?>
 </body>

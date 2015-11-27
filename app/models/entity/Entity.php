@@ -96,9 +96,7 @@ class Entity extends CI_Model {
      *
      */
     public function save() {
-
         if ( empty($this->record) ) return FALSE;
-
         if ( $id = self::get('id') ) {
             $this->db->where('id', $id);
             $this->db->update($this->getTable(), $this->record, ['id'=>$id]);
@@ -108,6 +106,29 @@ class Entity extends CI_Model {
             $this->record['id'] = $this->db->insert_id();
         }
         return $this;
+    }
+
+
+    /**
+     * Updates a field of the entity.
+     * @note Unlike $this->save(), this method only updates one(1) field.
+     * @usage Use this method when you need to update a field immediately.
+     * @note it updates $this->record after updating the database record field.
+     * @param $field
+     * @param $value
+     * @return $this|bool
+     * @TODO unittest
+     * @TODO make it accept 'array' as input.
+     */
+    public function update($field, $value) {
+        if ( $this->get('id') ) {
+            $this->db->set($field, $value);
+            $this->db->where('id', $this->get('id'));
+            $this->db->update( $this->getTable());
+            $this->set($field, $value);
+            return $this;
+        }
+        else return FALSE;
     }
 
     /**
@@ -195,6 +216,48 @@ class Entity extends CI_Model {
 
 
     /**
+     *
+     * Returns an array of Entity object.
+     *
+     * @param $ids
+     * @return array
+     */
+    public function loads($ids) {
+        $these = [];
+        foreach ($ids as $id) {
+            $this->load($id);
+            $these[] = clone $this;
+        }
+        return $these;
+    }
+
+    /**
+     * Returns an array of Entity object based on the Query.
+     *
+     * @note
+     *  - first, queries
+     *  - and get the 'id's of the item
+     *  - and loads it into array and return.
+     *
+     * @param $where
+     * @return array
+     *
+     * @code
+     *      return $this->query_loads("id_root=$id_root AND id_parent>0 ORDER BY order_list ASC");
+     * @endcode
+     */
+    public function query_loads($where) {
+        $query = $this->db->query("SELECT id FROM " . $this->getTable() . " WHERE $where");
+        $ids = [];
+        foreach ( $query->result() as $row ) {
+            $ids[] = $row->id;
+        }
+        return $this->loads($ids);
+    }
+
+
+
+    /**
      * Returns a new object of the Entity based on $field and $value
      *
      * @note it actually loads a record into $this->record and return the clone.
@@ -257,6 +320,65 @@ class Entity extends CI_Model {
         return $this->get('id') > 0;
     }
 
+
+    /**
+     * Returns the number of record found by the $where query.
+     * @param $where
+     * @return mixed
+     * @code
+     * return post_data()->count("id_root=$id_root AND id_parent>0");
+     * @endcode
+     * @todo UnitTest
+     */
+    public function count($where) {
+        return $this->result("COUNT(id)", $where);
+    }
+
+    /**
+     * @param $field
+     * @param $where
+     * @return null
+     * @todo UnitTest
+     */
+    public function result($field, $where) {
+        $row = $this->row($where, $field);
+        if ( $row ) {
+            foreach( $row as $k => $v ) {
+                return $v;
+            }
+        }
+        return NULL;
+    }
+
+    /**
+     * @param $where
+     * @param string $select
+     * @return null
+     *
+     * @todo UnitTest
+     */
+    public function row($where, $select='*') {
+        $rows = $this->rows($where, $select);
+        if ( $rows ) {
+            return $rows[0];
+        }
+        return NULL;
+    }
+
+    /**
+     * @param null $where
+     * @param string $select
+     * @return mixed
+     *
+     * @todo UnitTest
+     */
+    public function rows($where=null, $select='*') {
+        $table = $this->getTable();
+        $query = $this->db->query("SELECT $select FROM $table WHERE $where");
+        return $query->result_array();
+    }
+
+
     /**
      * Returns the number of rows.
      *
@@ -266,6 +388,7 @@ class Entity extends CI_Model {
     public function countAll() {
         return $this->db->count_all($this->getTable());
     }
+
 
 
     /**
@@ -311,6 +434,15 @@ class Entity extends CI_Model {
         }
 
 
+        $ids = [];
+        $query = $this->db->get();
+        foreach ( $query->result() as $row ) {
+            $ids[] = $row->id;
+        }
+        return $this->loads($ids);
+
+        /*
+
         $these = [];
         $query = $this->db->get();
         foreach ( $query->result() as $row ) {
@@ -318,6 +450,7 @@ class Entity extends CI_Model {
             $these[] = clone $this;
         }
         return $these;
+        */
     }
 
     public function searchCount($o)
@@ -328,4 +461,5 @@ class Entity extends CI_Model {
         if ( isset($o['where']) ) $this->db->where($o['where']);
         return $this->db->count_all_results();
     }
+
 }

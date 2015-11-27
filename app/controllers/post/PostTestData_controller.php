@@ -25,4 +25,10 @@ class PostTestData_controller extends MY_Controller
         echo "testForum Posts created";
     }
 
+    public function testData_remove() {
+        $post_config = post_config('testForum');
+        $this->db->delete(POST_DATA_TABLE, ['id_config'=>$post_config->get('id')]);
+        $post_config->delete();
+    }
+
 }

@@ -184,23 +184,28 @@ function post_data($id=0) {
 
 /**
  * @param null $index
+ * @param null $default - is the default value t return when the actual value is empty.
  * @return mixed
- *
  * @code
  *
  *      in('post_get');     - Get a variable of HTTP Request.
  *          examples)
  *                  echo in('mode');
  *
+ *      in('id_parent', 0)          - returns 0 when in('id_parent') is empty.
  *      in()->get('index')         - Short of $this->input->get()
  *      in()->post('index')        - Short of $this->input->post();
  *      in()->cookie('index')      - Short of $this->input->cookie();
  *      in()->server('index')      - Short of $this->input->server();
  * @endcode
  */
-function in($index=null) {
+function in($index=null, $default=NULL) {
     $ci = & get_instance();
-    if ( $index ) return $ci->input->post_get($index);
+    if ( $index ) {
+        $v = $ci->input->post_get($index, $default);
+        if ( empty($v) ) return $default;
+        else return $v;
+    }
     else return $ci->input;
 }
 
@@ -357,6 +362,9 @@ function url_post_setting($name = null) {
 
 
 /*added by benjamin*/
+/**
+ * @return Message
+ */
 function message() {
     $ci = & get_instance();
     $ci->load->model('message');

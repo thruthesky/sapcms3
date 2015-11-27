@@ -1,0 +1,40 @@
+.post-comment-list .row {
+    margin:0.4em 0;
+    padding:.8em;
+    background-color:#efefef;
+}
+
+.post-comment-list .row .content {
+
+}
+.post-comment-list .row .reply {
+    cursor:pointer;
+}
+
+.post-comment-list .row[depth='1'] {
+
+}
+.post-comment-list .row[depth='2'] {
+    margin-left:30px;
+}
+.post-comment-list .row[depth='3'] {
+    margin-left:55px;
+}
+.post-comment-list .row[depth='4'] {
+    margin-left:65px;
+}
+.post-comment-list .row[depth='5'] {
+    margin-left:73px;
+}
+.post-comment-list .row[depth='6'] {
+    margin-left:79px;
+}
+.post-comment-list .row[depth='7'] {
+    margin-left:84px;
+}
+.post-comment-list .row[depth='8'] {
+    margin-left:87px;
+}
+.post-comment-list .row[depth='9'] {
+    margin-left:90px;
+}

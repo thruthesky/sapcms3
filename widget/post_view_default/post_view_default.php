@@ -24,3 +24,5 @@ Content: <?php echo $post->get('content')?>
 
 <?php widget('post_comment_form_default')?>
 
+
+<?php widget('post_comment_list_default')?>

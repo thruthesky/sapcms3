@@ -1,6 +1,7 @@
 <?php
 
 $route['post/testdata'] = 'post/PostTestData_controller/testdata';
+$route['post/testdata/remove'] = 'post/PostTestData_controller/testdata_remove';
 
 $route['post/config/list'] = 'post/PostConfig_controller/collection';
 $route['post/config/create'] = 'post/PostConfig_controller/createSubmit';

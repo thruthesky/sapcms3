@@ -23,5 +23,6 @@ if( !empty( $data['message'] ) ){
 	<div class='content'>Content:<br><?php echo $content; ?></div>
 <?php
 }
+
 ?>
 

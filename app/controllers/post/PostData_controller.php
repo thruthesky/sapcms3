@@ -10,8 +10,10 @@ class PostData_controller extends MY_Controller
         $config = post_config($name);
         $per_page = $config->get('per_page');
 
+        $id_config = $config->get('id');
+        $where = "id_config=$id_config AND id_parent=0";
         $list = post_data()->search([
-            'id_config' => $config->get('id'),
+            'where' => $where,
             'order_by' => 'id DESC',
             'offset' => $offset,
             'limit' =>  $per_page,
@@ -49,22 +51,23 @@ class PostData_controller extends MY_Controller
 
     public function view() {
         $post_data = post_data()->getCurrent();
-
         $post_config = post_config()->getCurrent();
-
         $post_user = $post_data->getUser();
+        $comments = post_data()->getComments($post_data->get('id'));
+
 
         $this->render([
             'page' => 'post.view',
             'config' => $post_config,
             'post' => $post_data,
             'user' => $post_user,
+            'comments' => $comments,
         ]);
     }
 
     public function commentSubmit() {
         $comment = post()->createComment(in('id_parent'),in('content'));
-        redirect( url_post_view_comment( in('id_parent'), $comment->get('id'))  );
+        redirect( url_post_view_comment( $comment->get('id_root'), $comment->get('id'))  );
     }
 
 

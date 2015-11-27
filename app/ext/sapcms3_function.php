@@ -186,9 +186,9 @@ function widget_css($file=null) {
 }
 
 function widget_js($file=null) {
-    global $name;
-    if ( empty($file) ) $file = $name;
-    echo "<script type='text/javascript' src='/widget/$name/$file.js'></script>";
+    global $_last_widget_name;
+    if ( empty($file) ) $file = $_last_widget_name;
+    echo "<script type='text/javascript' src='/widget/$_last_widget_name/$file.js'></script>";
 }
 
 
@@ -197,3 +197,22 @@ function errorBox($message) {
 }
 
 
+
+
+/**
+ * HTML Decoration Functions
+ */
+
+function html_id($str) {
+    return "<span class='id'>$str</span>";
+}
+function html_username($str) {
+    return "<span class='username'>$str</span>";
+}
+function html_content($str) {
+    $str = nl2br($str);
+    return "<span class='content'>$str</span>";
+}
+function html_reply($str) {
+    return "<span class='reply'>$str</span>";
+}
