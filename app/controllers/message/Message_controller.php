@@ -141,4 +141,42 @@ class Message_controller extends MY_Controller
 		
 		self::$type( $offset );
 	}
+	
+	public function ajaxLoad(){
+		$data = [];
+		$error = [];
+		$id = in('id');
+		if( empty( $id ) ) $error[] = ['code'=>'-151','message'=>'ID is empty!'];
+		$message = message()->load( $id );
+		if( empty( $message ) ) $error[] = ['code'=>'-101','message'=>'Message id [ $id ] does not exist.'];
+		
+		if( !empty( $error ) ) $data['error'] = $error;
+		else{
+			$content = self::messageHTMLContent( $message );
+			$data['content'] = $content;
+		}
+		echo json_encode($data);
+	}
+	
+	public function ajaxDelete(){
+		$data = [];
+		$error = [];
+		$id = in('id');
+		if( empty( $id ) ) $error[] = ['code'=>'-151','message'=>'ID is empty!'];
+		$message = message()->load( $id );
+		if( empty( $message ) ) $error[] = ['code'=>'-101','message'=>'Message id [ $id ] does not exist.'];
+		
+		if( !empty( $error ) ) $data['error'] = $error;
+		else{			
+			$message->delete();
+			$data['id'] = $id;
+		}
+		echo json_encode($data);
+	}	
+	
+	public function messageHTMLContent( $message ){
+		$content = $message->get('content');
+		
+		return "<div class='content'>$content</div>";
+	}
 }

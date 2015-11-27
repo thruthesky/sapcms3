@@ -34,7 +34,7 @@ foreach( $messages as $message ){
     <div class="row" no="<?php echo $message->get('id')?>">
         <span><?php echo $username; ?></span>
         <span class="title"><?php echo $message->get('title'); ?></span>
-        <a href='/message/deleteItem/inbox/<?php echo $data['offset']; ?>/<?php echo $message->get('id') ?>'>Delete</a>
+        <a class='delete message'>Delete</a>
     </div>
 
     <?php

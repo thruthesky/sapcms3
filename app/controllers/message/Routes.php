@@ -16,3 +16,6 @@ $route['message/send/submit'] = 'message/Message_controller/sendSubmit';
 $route['message/viewItem/(:num)'] = 'message/Message_controller/viewItem/$1';
 //type,offset,id
 $route['message/deleteItem/(inbox|unread|sent)/(:num)/(:num)'] = 'message/Message_controller/deleteItem/$1/$2/$3';
+
+$route['message/ajax/load'] = 'message/Message_controller/ajaxLoad';
+$route['message/ajax/delete'] = 'message/Message_controller/ajaxDelete';
