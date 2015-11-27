@@ -75,6 +75,16 @@ class Entity extends CI_Model {
      *    $item1 = $entity2->create()->save();
      *    $item2 = $entity2->create()->save();
      * @endcode
+     *
+     * @warning This method creates item but it does not CLONE it.
+     *  So, if you use like below,
+     *
+            $item1 = $entity->create()->save();
+            $item2 = $entity->create()->save();
+            $item3 = $entity->create()->save();
+     *
+     * All the vars $item1, $item2, $item3 have same item.
+     *
      */
     public function create() {
         $this->record = [];
@@ -142,6 +152,13 @@ class Entity extends CI_Model {
 
     /**
      * Deletes Entities
+     *
+     *
+     * @code
+     *
+     *      $items = post_data()->query_loads("id_config=$id_config");
+            post_data()->deleteEntities($items);;
+     * @endcode
      */
     public function deleteEntities($entities) {
         if ( empty($entities) ) return;
@@ -374,7 +391,8 @@ class Entity extends CI_Model {
      */
     public function rows($where=null, $select='*') {
         $table = $this->getTable();
-        $query = $this->db->query("SELECT $select FROM $table WHERE $where");
+        if ( $where ) $where = "WHERE $where";
+        $query = $this->db->query("SELECT $select FROM $table $where");
         return $query->result_array();
     }
 

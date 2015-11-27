@@ -1,8 +1,11 @@
-<?php if ( ! getError() ) return; ?>
-<link rel="stylesheet" href="/widget/error/error.css">
-<div class="error">
+<?php
+if ( ! getError() ) return;
+widget_css();
+?>
 
-    <h3>Error</h3>
+<section class="error alert alert-danger" role="alert">
+
+    <div class="title">Error</div>
 
     <?php
         foreach ( getError() as $message ) {
@@ -10,4 +13,4 @@
         }
     ?>
 
-</div>
+</section>

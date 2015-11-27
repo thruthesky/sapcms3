@@ -12,8 +12,7 @@ class Meta_test extends Meta {
 
     private function testMetaCRUD()
     {
-
-        $meta = meta('temp_meta');
+        $meta = meta('temp_meta_crud');
         if ( $meta->tableExists() ) {
             $meta->uninit();
         }

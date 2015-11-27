@@ -51,18 +51,22 @@ class PostData_controller extends MY_Controller
 
     public function view() {
         $post_data = post_data()->getCurrent();
-        $post_config = post_config()->getCurrent();
-        $post_user = $post_data->getUser();
-        $comments = post_data()->getComments($post_data->get('id'));
+        $render = ['page' => 'post.view'];
+        if ( empty($post_data) ) {
+            setError("No post by that post id");
+        }
+        else {
+            $post_config = post_config()->getCurrent();
+            $post_user = $post_data->getUser();
+            $comments = post_data()->getComments($post_data->get('id'));
+            $render['config'] = $post_config;
+            $render['post'] = $post_data;
+            $render['user'] = $post_user;
+            $render['comments'] = $comments;
+        }
 
 
-        $this->render([
-            'page' => 'post.view',
-            'config' => $post_config,
-            'post' => $post_data,
-            'user' => $post_user,
-            'comments' => $comments,
-        ]);
+        $this->render($render);
     }
 
     public function commentSubmit() {

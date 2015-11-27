@@ -1,4 +1,7 @@
-div.error {
-    background-color:darkred;
-    color:white;
+section.error {
+    margin:1em;
 }
+section.error .title {
+    font-size:120%;
+    font-weight:bold;
+ }

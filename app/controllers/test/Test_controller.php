@@ -8,6 +8,7 @@ class Test_controller extends MY_Controller
         foreach ( getModels() as $model ) {
             $name = pathinfo($model, PATHINFO_BASENAME);
             $files = glob( $model . '/*_test.php' );
+
             foreach( $files as $file ) {
                 $filename = pathinfo($file, PATHINFO_FILENAME);
                 $path = "$name/$filename";
@@ -17,11 +18,12 @@ class Test_controller extends MY_Controller
             }
         }
 
+
         $errors = [];
         $count = 0;
         foreach( $this->unit->result() as $row ) {
             $count ++;
-            if ( $row['Result'] == 'Passed' ) echo $count . ' ';
+            if ( $row['Result'] == 'Passed' ) echo "<span>$count</span> ";
             else {
                 echo "<b style='color:red; font-size:300%;'>X</b> ";
                 $errors[] = $row;
@@ -42,6 +44,18 @@ Line Number : {$e['Line Number']}
             }
         }
 
+        echo "
+        <style>
+        span {
+        display:inline-block;
+        margin:4px 0;
+        padding:4px;
+        background-color:grey;
+        color:white;
+        border-radius:3px;
+        }
+        </style>
+        ";
         // echo $this->unit->report();
     }
 }
