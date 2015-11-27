@@ -152,6 +152,7 @@ class Message_controller extends MY_Controller
 		
 		if( !empty( $error ) ) $data['error'] = $error;
 		else{
+			$message->set('checked',time())->save();
 			$content = self::messageHTMLContent( $message );
 			$data['content'] = $content;
 		}
@@ -162,14 +163,24 @@ class Message_controller extends MY_Controller
 		$data = [];
 		$error = [];
 		$id = in('id');
+		$last_id = in('last_id');
+		$type = in('type');
+		
 		if( empty( $id ) ) $error[] = ['code'=>'-151','message'=>'ID is empty!'];
 		$message = message()->load( $id );
 		if( empty( $message ) ) $error[] = ['code'=>'-101','message'=>'Message id [ $id ] does not exist.'];
 		
 		if( !empty( $error ) ) $data['error'] = $error;
-		else{			
-			$message->delete();
+		else{
+			$added_query = "";
+			if( $type == 'inbox' ) $added_query = " AND id_to = ".login();
+			else if( $type == 'unread' ) $added_query = " AND id_to = ".login()." AND checked = 0";
+			else if( $type == 'sent' ) $added_query = " AND id_from = ".login();
+		
+			$next_message = message()->row("id>$last_id".$added_query);//returns array
+			$data['next_message'] = self::messageHTMLNextMessage( $next_message );
 			$data['id'] = $id;
+			$data['type'] = $type;
 		}
 		echo json_encode($data);
 	}	
@@ -178,5 +189,20 @@ class Message_controller extends MY_Controller
 		$content = $message->get('content');
 		
 		return "<div class='content'>$content</div>";
+	}
+	
+	public function messageHTMLNextMessage( $message ){
+		$id = $message['id'];
+		$user = user()->load( $message['id_from'] );
+		$username = $user->get('username');
+		$title = $message['title'];
+	
+		return	"
+				<div class='row' no='$id'>
+					<span>$username</span>
+					<span class='title'>$title</span>
+					<a class='delete message'>Delete</a>
+				</div>
+				";
 	}
 }

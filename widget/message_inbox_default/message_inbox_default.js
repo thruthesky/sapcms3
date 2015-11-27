@@ -39,16 +39,24 @@ function deleteMessage(){
 	var $row = $(this).parent();
 	var no = $row.attr('no');
 	
+	var last_no = $(".message-list .row:last").attr('no');
+	
+	var type = $row.parent().attr('type');	
+	
 	var request = $.ajax({
 		url: "/message/ajax/delete",
-		data: { id : no }
+		data: { id : no, last_id : last_no, type : type }
 	});
 	
 	request.done(function( data ) {
 		re = JSON.parse(data);
 		if( !re.error ){
+			console.log( re );
 			if( re.id ){
 				$row.remove();
+			}			
+			if( re.next_message ){
+				$(".message-list").append( $(re.next_message) );
 			}
 		}
 	});

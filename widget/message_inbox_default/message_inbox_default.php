@@ -21,7 +21,7 @@ widget_js();
 <span>TITLE</span>
 <span>DELETE</span>
 
-<div class="message-list">
+<div class="message-list" type='inbox'>
 <?php
 $messages = $data['messages'];
 foreach( $messages as $message ){
@@ -32,7 +32,7 @@ foreach( $messages as $message ){
     else $checked = "Not Viewed";
     ?>
     <div class="row" no="<?php echo $message->get('id')?>">
-        <span><?php echo $username; ?></span>
+        <span class='username'><?php echo $username; ?></span>
         <span class="title"><?php echo $message->get('title'); ?></span>
         <a class='delete message'>Delete</a>
     </div>
