@@ -80,6 +80,8 @@ class Entity_test extends CI_Model {
         $this->unit->run($items[0]->get('id'), 3, "entity search compare");
 
 
+        $entity->uninit();
+
 
 
     }

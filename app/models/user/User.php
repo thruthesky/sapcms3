@@ -15,7 +15,7 @@ class User extends Entity
      *
      */
     final public function deleteByUsername($username) {
-        $this->db->delete(USER_TABLE, array('username'=>$username));
+        $this->db->delete( $this->getTable(), array('username'=>$username) );
     }
 
     /**
@@ -23,7 +23,7 @@ class User extends Entity
      * @param $email
      */
     final public function deleteByEmail($email) {
-        $this->db->delete(USER_TABLE, array('email'=>$email));
+        $this->db->delete($this->getTable(), array('email'=>$email));
     }
 
 

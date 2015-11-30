@@ -1,5 +1,5 @@
 <?php
-class PostData_install extends Entity
+class PostData_install extends PostData
 {
 
     public function __construct()
@@ -160,47 +160,40 @@ class PostData_install extends Entity
                 'default' => '',
             ),
 
-            'link_1' => array(
+            'link' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'default' => '',
-            ),
-            'link_2' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'default' => '',
-            ),
-            'link_3' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'default' => '',
-            ),
+            )
 
 
             );
 
+
+        /*
         for( $i = 1; $i <= 7; $i ++ ) {
             $fields["category_$i"] = [ 'type' => 'INT', 'unsigned' => TRUE, 'default' => 0 ];
         }
+
         for( $i = 1; $i <= 10; $i ++ ) {
             $fields["int_$i"] = ['type'=>'INT','unsigned'=>TRUE];
             $fields["char_$i"] = ['type'=>'CHAR','constraint'=>1];
             $fields["varchar_$i"] = ['type'=>'VARCHAR','constraint'=>255];
         }
-
         for( $i = 1; $i <= 5; $i ++ ) {
             $fields["text_$i"] = [ 'type' => 'LONGTEXT' ];
         }
+        */
 
         $this->dbforge->add_column( $data->getTable() , $fields);
-        $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_config` (`id_config`);');
-        $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_root_order_list` (`id_root`, `order_list`);');
-        $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_data` (`id_data`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `id_config` (`id_config`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `id_root_order_list` (`id_root`, `order_list`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `id_data` (`id_data`);');
 
     }
 
     public function uninstall()
     {
-        if (entity('post_data')->tableExists()) entity('post_data')->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 }

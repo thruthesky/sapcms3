@@ -69,6 +69,6 @@ class Data_install extends Data
     }
 
     public function uninstall() {
-        if ( entity(USER_TABLE)->tableExists() ) entity(USER_TABLE)->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 }

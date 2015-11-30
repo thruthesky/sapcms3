@@ -52,22 +52,9 @@ class PostData extends Post {
             'country' => in('country'),
             'province' => in('province'),
             'city' => in('city'),
+            'link' => in('link'),
         ];
 
-        for( $i=1; $i<=3; $i++ ) {
-            $record["link_$i"] = in("link_$i");
-        }
-        for( $i=1; $i<=7; $i++ ) {
-            $record["category_$i"] = in("category_$i");
-        }
-        for( $i=1; $i<=10; $i++ ) {
-            $record["int_$i"] = in("int_$i");
-            $record["char_$i"] = in("char_$i");
-            $record["varchar_$i"] = in("varchar_$i");
-        }
-        for( $i = 1; $i <= 5; $i ++ ) {
-            $record["text_$i"] = in("text_$i");
-        }
 
         $post = $this->createPost($record);
         $post->update('id_root', $post->get('id'));
@@ -83,10 +70,11 @@ class PostData extends Post {
      */
     public function createPost($record) {
         if ( ! isset($record['created']) ) $record['created'] = time();
-        $this->db->insert(POST_DATA_TABLE, $record);
+        $this->db->insert( $this->getTable(), $record);
         $id = $this->db->insert_id();
         return post_data($id);
     }
+
 
 
 

@@ -45,6 +45,6 @@ class Message_install extends Message
 	
 	public function uninstall()
     {
-        if (entity(MESSAGE_TABLE)->tableExists()) entity(MESSAGE_TABLE)->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 }

@@ -2,14 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User_controller extends MY_Controller {
 	public function register()
-	{	
+	{
 		$this->load->library('form_validation');
 		$data = [
 				'page' => 'user.register',
 		];
+
+        $user_table = user()->getTable();
 		$this->form_validation->set_rules(
 				'email', 'Email',
-				'trim|required|min_length[10]|max_length[64]|valid_email|is_unique[user.email]',
+				'trim|required|min_length[10]|max_length[64]|valid_email|is_unique['.$user_table.'.email]',
 				array(
 						'required'      => 'Please input your email address.',
 						'is_unique'     => 'Email %s already exists.'
@@ -218,6 +220,9 @@ class User_controller extends MY_Controller {
      * @return null
      */
     public function loginSubmit() {
+
+
+
         if ( $name = is_email(in('username')) ) {
             $user = user()->loadByEmail($name);
         }

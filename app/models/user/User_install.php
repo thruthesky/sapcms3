@@ -49,16 +49,17 @@ class User_install extends User
             ->set('username', ROOT_USERNAME)
             ->setPassword('1234')
             ->save();
-        $this->db->query("UPDATE user SET id=".ROOT_ID." WHERE username='".ROOT_USERNAME."'");
+        $this->db->query("UPDATE ". $this->getTable() ." SET id=".ROOT_ID." WHERE username='".ROOT_USERNAME."'");
 
         $this->create()
             ->set('username', ANONYMOUS_USERNAME)
             ->save();
-        $this->db->query("UPDATE user SET id=".ANONYMOUS_ID." WHERE username='".ANONYMOUS_USERNAME."'");
+        $this->db->query("UPDATE ". $this->getTable() ." SET id=".ANONYMOUS_ID." WHERE username='".ANONYMOUS_USERNAME."'");
 
 
     }
+
     public function uninstall() {
-        if ( entity(USER_TABLE)->tableExists() ) entity(USER_TABLE)->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 }

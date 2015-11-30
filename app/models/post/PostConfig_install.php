@@ -84,6 +84,6 @@ class PostConfig_install extends PostConfig
 
     public function uninstall()
     {
-        if (entity('post_config')->tableExists()) entity('post_config')->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 }

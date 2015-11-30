@@ -2,6 +2,7 @@
 class Data_test extends Data {
     public function unitTest() {
         $this->createData();
+        return;
         $this->uploadFile();
     }
 

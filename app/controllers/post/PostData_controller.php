@@ -19,8 +19,10 @@ class PostData_controller extends MY_Controller
             'limit' =>  $per_page,
         ]);
 
+
+
         $total_rows = post_data()->searchCount([
-            'id_config' => $config->get('id'),
+            'where' => 'id_config=' . $config->get('id'),
         ]);
 
         $this->render([
