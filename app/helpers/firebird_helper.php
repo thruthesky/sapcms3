@@ -311,9 +311,6 @@ function theme_js($file) {
     return "<script type='text/javascript' src='/theme/$name/js/$file.js'></script>";
 }
 
-function js($file) {
-    return "<script type='text/javascript' src='$file.js'></script>";
-}
 
 
 function layout() {
