@@ -87,7 +87,17 @@ class Entity extends CI_Model {
      * All the vars $item1, $item2, $item3 have same item.
      *
      */
-    public function create() {
+    public function create()
+    {
+        return $this->reset();
+    }
+
+    /**
+     * Resets the entity
+     *
+     * @return $this
+     */
+    private function reset() {
         $this->record = [];
         self::set('created', time());
         self::set('updated', 0);
@@ -186,6 +196,18 @@ class Entity extends CI_Model {
     }
 
     /**
+     *
+     * It gets assoc-array to set $this->record
+     *
+     * @param $fields
+     * @return $this
+     */
+    public function sets($fields) {
+        $this->record = array_merge($this->record, $fields);
+        return $this;
+    }
+
+    /**
      * Returns the value of the field in the item record.
      *
      *
@@ -266,6 +288,7 @@ class Entity extends CI_Model {
      */
     public function query_loads($where) {
         $query = $this->db->query("SELECT id FROM " . $this->getTable() . " WHERE $where");
+
         $ids = [];
         foreach ( $query->result() as $row ) {
             $ids[] = $row->id;

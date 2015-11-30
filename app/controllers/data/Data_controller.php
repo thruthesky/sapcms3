@@ -7,26 +7,31 @@ class Data_controller extends MY_Controller
 {
     public function upload() {
         debug_log("Data_controller::upload() begins");
-        //debug_log("_FILES");
-        //debug_log($_FILES);
 
+        if ( isset($_FILES) && ! empty($_FILES) ) {
 
+            $category = 'category.' . time();
 
-
-        if ( isset($_FILES['file']) ) {
-            $upload = data()->upload('file', [
-                'max_size' => 1000,
-                'max_width' => 1024,
-                'max_height' => 768,
-            ]);
-            if ( $upload['result'] === FALSE ) {
-                debug_log("ERROR: ");
-                debug_log($upload['error']);
+            foreach( $_FILES as $form_name => $file_data ) {
+                $upload = data()->upload($form_name, [
+                    'max_size' => 1000,
+                    'max_width' => 10240,
+                    'max_height' => 7680,
+                ],
+                [
+                    'category' => $category
+                ]);
+                if ( $upload['result'] === FALSE ) {
+                    debug_log("ERROR: ");
+                    debug_log($upload['error']);
+                }
+                else {
+                    debug_log("SUCCESS: ");
+                    debug_log($upload['info']);
+                }
             }
-            else {
-                debug_log("SUCCESS: ");
-                debug_log($upload['data']);
-            }
+
+            redirect( in('return_url') . '?category=' . $category);
         }
         else {
             debug_log("ERROR: _FILE['file'] is not defined.");

@@ -356,8 +356,6 @@ function url_post_edit($data) {
     }
 }
 
-
-
 function url_post_list($name = null) {
     if ( $name === null ) {
         return '/' . post_config()->getCurrent()->get('name') . '/list';
@@ -454,4 +452,10 @@ function get_CURLFileObject($file) {
     $ci = & get_instance();
     $ci->load->helper('file');
     return new CURLFile($file, get_mime_by_extension($file));
+}
+
+
+function get_current_model_name() {
+    $ci = & get_instance();
+    return $ci->uri->segment(1);
 }

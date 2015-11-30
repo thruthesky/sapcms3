@@ -1,4 +1,6 @@
 <?php
+use firebird\FireBird;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Test_controller extends MY_Controller
 {
@@ -8,8 +10,9 @@ class Test_controller extends MY_Controller
         $this->load->library('unit_test');
     }
     public function index() {
+
         static $co = 0;
-        foreach ( getModels() as $model ) {
+        foreach ( FireBird::getModels() as $model ) {
             $name = pathinfo($model, PATHINFO_BASENAME);
             $files = glob( $model . '/*_test.php' );
 

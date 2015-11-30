@@ -1,4 +1,6 @@
 <?php
+use firebird\FireBird;
+
 class User extends Entity
 {
     private static $current = null; // ID of current logged user.
@@ -47,7 +49,7 @@ class User extends Entity
      */
     final public function setPassword($plain_text_password)
     {
-        return $this->set('password', encrypt_password($plain_text_password));
+        return $this->set('password', FireBird::encryptPassword($plain_text_password));
     }
 
 
@@ -60,7 +62,7 @@ class User extends Entity
     final public function checkPassword($plain_text_password)
     {
         if ( empty($plain_text_password) ) return FALSE;
-        return check_password($plain_text_password, $this->get('password'));
+        return FireBird::checkPassword($plain_text_password, $this->get('password'));
     }
 
 

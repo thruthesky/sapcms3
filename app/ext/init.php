@@ -7,21 +7,22 @@
  *
  */
 
-$uri = is_command_line_interface() ? 'Command Line Interface' : $_SERVER['REQUEST_URI'];
+use firebird\FireBird;
+
+$uri = FireBird::is_cli() ? 'Command Line Interface' : $_SERVER['REQUEST_URI'];
 debug_log("init.php begins : " . $uri);
 
 /**
  *
  * Load Routes in each theme.
  */
-foreach ( getThemes() as $dir) {
+foreach ( FireBird::getThemes() as $dir) {
     $path = "$dir/init.php";
     if ( file_exists($path) ) include $path;
 }
 
 
-setModels( glob(APPPATH . "models/*", GLOB_ONLYDIR) );
-foreach ( getModels() as $dir) {
+foreach ( FireBird::getModels() as $dir) {
     $path = "$dir/Routes.php";
     if ( file_exists($path) ) include $path;
 }

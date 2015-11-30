@@ -24,7 +24,8 @@ class MY_Controller extends CI_Controller {
             if ( isset($data['title'] ) ) {
                 $data['path_theme_script'] = get_theme_script( $data['page'] );
             }
-            $data['model'] = $this->uri->segment(1);
+
+            $data['model'] = get_current_model_name();
         }
         $this->data  = $data;
         $this->load->view( layout(), $data );

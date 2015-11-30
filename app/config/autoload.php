@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('sapcms3', 'form', 'url', 'file');
+$autoload['helper'] = array('firebird', 'form', 'url', 'file');
 
 /*
 | -------------------------------------------------------------------

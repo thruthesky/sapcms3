@@ -15,9 +15,6 @@
 <a href="/post/config/list">Post Config List</a><br>
 
 
-<?php
-
-?>
 
 <script>
     $(function(){

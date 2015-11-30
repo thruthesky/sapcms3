@@ -38,7 +38,7 @@
 /**
  *
  */
-include 'app/ext/sapcms3_function.php';
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -285,6 +285,13 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder);
 
+
+/**
+ * --------------------------------------------------------------------
+ * LOAD THE FIREBIRD BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ */
+include 'app/ext/firebird.php';
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

@@ -13,7 +13,7 @@ class Data_install extends Data
                 'constraint' => 64,
                 'default' => '',
             ),
-            'type' => array(
+            'category' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 64,
                 'default' => '',
@@ -63,8 +63,8 @@ class Data_install extends Data
         $this->dbforge->add_column($data->getTable(), $fields);
 
         $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model` (`model`);');
-        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_type` (`model`,`type`);');
-        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_type_id_entity` (`model`,`type`,`id_entity`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_category` (`model`,`category`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_category_id_entity` (`model`,`category`,`id_entity`);');
 
     }
 
