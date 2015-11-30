@@ -16,31 +16,34 @@ widget_js();
 </div>
 
 
-
-<span>FROM</span>
-<span>TITLE</span>
-<span>DELETE</span>
-
-<div class="message-list" type='inbox'>
+<ul class="list-group message-list" type='inbox'>
 <?php
 $messages = $data['messages'];
 foreach( $messages as $message ){
     $user = user()->load( $message->get('id_from') );
     $username = $user->get('username');
     $stamp = $message->get('checked');
-    if ( $stamp ) $checked = date( 'M d, Y H:i', $stamp );
-    else $checked = "Not Viewed";
+    if ( $stamp ){
+		$checked = date( 'M d, Y H:i', $stamp );
+		$class = ' viewed';
+	}
+    else{
+		$checked = "Not Viewed";
+		$class = '';
+	}
     ?>
-    <div class="row" no="<?php echo $message->get('id')?>">
+    <li class="list-group-item<?php echo $class; ?>" no="<?php echo $message->get('id')?>">
         <span class='username'><?php echo $username; ?></span>
         <span class="title"><?php echo $message->get('title'); ?></span>
+        <span class="checked"><?php echo $checked; ?></span>
         <a class='delete message'>Delete</a>
-    </div>
+    </li>
 
     <?php
 }
 ?>
-</div>
+</ul>
+
 
 
 
