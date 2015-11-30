@@ -23,9 +23,12 @@ class Meta extends Entity {
         return $this;
     }
 
+    /*
     public function uninit() {
-        entity($this->getTable())->uninit();
+        parent::uninit();
+        //entity($this->getTable())->uninit();
     }
+    */
 
 
 

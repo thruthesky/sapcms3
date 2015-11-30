@@ -7,9 +7,10 @@ class Entity extends CI_Model {
         $this->load->database();
     }
     public function setTable($name) {
-        $this->table = $name;
+        $this->table = $name . '_entity';
         return $this;
     }
+
     public function getTable() {
         return $this->table;
     }

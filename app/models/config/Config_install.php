@@ -13,7 +13,7 @@ class Config_install extends Config {
     }
 
     public function uninstall() {
-        if ( meta('config')->tableExists() ) meta('config')->uninit();
+        if ( $this->tableExists() ) $this->uninit();
     }
 
 }
