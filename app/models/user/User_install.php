@@ -20,7 +20,7 @@ class User_install extends User
             ),
             'password' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 64,
+                'constraint' => 255,
             ),
             'first_name' => array(
                 'type' => 'VARCHAR',

@@ -45,7 +45,7 @@ class PostConfig extends Post {
     /**
      * Returns the PostConfig object of current forum.
      * @note $this->setCurrent() must be called before using this method.
-     * @return PostConfig|null
+     * @return PostConfig
      */
     public function getCurrent() {
         if ( self::$current ) return self::$current;

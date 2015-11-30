@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('sapcms3', 'form', 'url');
+$autoload['helper'] = array('sapcms3', 'form', 'url', 'file');
 
 /*
 | -------------------------------------------------------------------
@@ -128,11 +128,12 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'entity/entity'=>'entity',
+    'data/data' => 'my_data', /**  @NOTE Name duplication */
     'post/post' => 'post',
     'post/postconfig' =>'postconfig',
     'post/postdata' => 'postdata',
     'meta/meta' => 'meta',
-    'config/config' => 'my_config', /** @WARNING MUST USE MY CONFIG */
+    'config/config' => 'my_config', /** @WARNING Name duplication */
     'user/user' => 'user',
     'message/message' => 'message'
 );

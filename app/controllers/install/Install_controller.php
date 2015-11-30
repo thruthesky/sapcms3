@@ -5,7 +5,7 @@ class Install_controller extends MY_Controller {
     public function page() {
 
         echo "
-        <a href='?'>Front</a>,
+        <a href='/'>Front</a>,
         <a href='?mode=install'>Install</a>,
         <a href='?mode=uninstall'>Uninstall</a>,
         <a href='?mode=reinstall'>Reinstall</a>,

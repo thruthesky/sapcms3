@@ -32,6 +32,7 @@
     <div class="footer"><div class="footer-inner"><?php include theme_script('footer')?></div></div>
 </div>
 <?php echo bootstrap_js()?>
+<?php echo js('/etc/js/common')?>
 <?php echo theme_js('default')?>
 </body>
 </html>

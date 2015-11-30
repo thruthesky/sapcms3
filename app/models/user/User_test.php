@@ -2,7 +2,6 @@
 class User_test extends User {
     public function unitTest() {
 
-        $this->load->library('unit_test');
 
         $this->testEntity();
         $this->testUserCreation();
@@ -67,22 +66,25 @@ class User_test extends User {
     {
         /** User password check */
         user()->deleteByUsername('jaeho');
-        user()->create()
+        $jaeho = user()->create()
             ->set('username', 'jaeho')
             ->setPassword('1234')
             ->set('email', 'jaeho@gmail.com')
             ->save();
+        $this->unit->run( $jaeho->checkPassword('1234'), TRUE, "Passsword Check");
+        $this->unit->run( $jaeho->checkPassword('abcd'), FALSE, "Passsword Check. Wrong");
 
-        $user = user()->login('jaeho');
+
+        $user = user()->login('jaeho', FALSE);
         $this->unit->run( user()->getCurrent()->get('username'), 'jaeho', "Login test - jaeho");
         $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Login test - jaeho@gmail.com");
 
-        user()->loginByEmail('jaeho@gmail.com');
+        user()->loginByEmail('jaeho@gmail.com', FALSE);
         $this->unit->run( user()->getCurrent()->get('username'), 'jaeho', "Login test - jaeho");
         $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Login test - jaeho@gmail.com");
 
         $user->set('username', 'song')->save();
-        user()->login('song');
+        user()->login('song', FALSE);
         $this->unit->run( user()->getCurrent()->get('email'), 'jaeho@gmail.com', "Username update test.");
 
 
@@ -102,7 +104,7 @@ class User_test extends User {
         user()->create()->set('username','naver')->set('email', 'naver@naver.com')->save();
         user()->create()->set('username', 'daum')->set('email', 'daum@hanmail.net')->save();
 
-        $naver = user('naver')->login();
+        $naver = user('naver')->login(null, FALSE);
         $this->unit->run( $naver->get('id'), user('naver@naver.com')->get('id'), "User load test");
         $this->unit->run( user('daum@hanmail.net')->get('id'), user('daum')->get('id'), "User load test by username and email");
 

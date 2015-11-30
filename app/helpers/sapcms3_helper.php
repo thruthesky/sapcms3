@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file sapcms3_helper.php
+ * @desc This script should holds only those function that are dependant on CodeIgniter.
+ */
+
 
 /**
  * Returns a new 'Entity' object.
@@ -46,6 +51,25 @@ function meta($table = null) {
     return $meta;
     */
 }
+
+
+/**
+ *
+ *
+ * @param null $id
+ * @return Data
+ *
+ */
+function data($id = null)
+{
+    $ci = & get_instance();
+    $data = clone $ci->my_data;
+    if ( $id ) $data->load($id);
+    return $data;
+}
+
+
+
 
 /**
  *
@@ -287,6 +311,10 @@ function theme_js($file) {
     return "<script type='text/javascript' src='/theme/$name/js/$file.js'></script>";
 }
 
+function js($file) {
+    return "<script type='text/javascript' src='$file.js'></script>";
+}
+
 
 function layout() {
     return get_theme_name() . '/layout';
@@ -414,4 +442,16 @@ function login($field='id') {
 	$user_current = user()->getCurrent();
 	if( !empty( $user_current ) ) return $user_current->get($field);
 	//return user()->getCurrent()->get($field);//original code here
+}
+
+
+/**
+ *
+ * Returns CURLFile object based on the input file.
+ *
+ */
+function get_CURLFileObject($file) {
+    $ci = & get_instance();
+    $ci->load->helper('file');
+    return new CURLFile($file, get_mime_by_extension($file));
 }

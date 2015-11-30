@@ -3,6 +3,7 @@ define('POST_CONFIG_TABLE', 'post_config');
 define('POST_DATA_TABLE', 'post_data');
 define('CONFIG_TABLE', 'config');
 define('USER_TABLE', 'user');
+define('DATA_TABLE', 'data');
 
 define('MESSAGE_TABLE', 'message');//added by benjamin
 
@@ -78,7 +79,11 @@ function di($data) {
  * @return string
  */
 function encrypt_password($plain_text_password) {
-    return md5($plain_text_password);
+    return password_hash($plain_text_password, PASSWORD_DEFAULT);
+}
+
+function check_password($plain_text_password, $hash) {
+    return password_verify($plain_text_password, $hash);
 }
 
 /**
@@ -198,21 +203,18 @@ function errorBox($message) {
 
 
 
+function debug_log($str) {
+    static $count_debug_log = 0;
+    $str = is_string($str) ? $str : print_r( $str, true );
 
-/**
- * HTML Decoration Functions
- */
+    $count_debug_log ++;
+    $str = "[$count_debug_log] $str\n";
+    $fd = fopen('debug.log', 'a+');
+    fwrite($fd, $str);
+    fclose($fd);
 
-function html_id($str) {
-    return "<span class='id'>$str</span>";
 }
-function html_username($str) {
-    return "<span class='username'>$str</span>";
-}
-function html_content($str) {
-    $str = nl2br($str);
-    return "<span class='content'>$str</span>";
-}
-function html_reply($str) {
-    return "<span class='reply'>$str</span>";
+
+function is_command_line_interface() {
+    return (php_sapi_name() === 'cli' OR defined('STDIN'));
 }

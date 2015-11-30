@@ -35,11 +35,21 @@ class User extends Entity
      *
      * @param $plain_text_password
      * @return $this
+     * @code
+     * $jaeho = user()->create()
+    ->set('username', 'jaeho')
+    ->setPassword('1234')
+    ->set('email', 'jaeho@gmail.com')
+    ->save();
+    $this->unit->run( $jaeho->checkPassword('1234'), TRUE, "Passsword Check");
+
+     * @endcode
      */
     final public function setPassword($plain_text_password)
     {
         return $this->set('password', encrypt_password($plain_text_password));
     }
+
 
 
     /**
@@ -50,7 +60,7 @@ class User extends Entity
     final public function checkPassword($plain_text_password)
     {
         if ( empty($plain_text_password) ) return FALSE;
-        return $this->get('password') == encrypt_password($plain_text_password);
+        return check_password($plain_text_password, $this->get('password'));
     }
 
 
@@ -81,17 +91,17 @@ class User extends Entity
      * @note it does not actually set the user logged in. It uses $this->setLogin() method to do that.
      *
      * @param $username
-     * @return User|FALSE
-     *
+     * @param bool $cookie_save
+     * @return FALSE|User
      * @example See User_test.php
      */
-    final public function login($username=null) {
+    final public function login($username=null, $cookie_save=TRUE) {
         if ($username) {
             $user = $this->loadByUsername($username);
-            return $this->setLogin($user);
+            return $this->setLogin($user,$cookie_save);
         }
         else {
-            return $this->setLogin($this);
+            return $this->setLogin($this,$cookie_save);
         }
     }
 
@@ -103,22 +113,30 @@ class User extends Entity
     }
 
 
-
     /**
      * This method actually sets the user logged in.
      * @param $user
+     * @param $cookie_save - if it is true, then it saves 'id' to COOKIE ID in cookie.
+     *              For CLI-use or Test-use, you can use this without saving 'id' in cookie.
      * @return User
      */
-    final private function setLogin(&$user) {
+    final private function setLogin(&$user,$cookie_save) {
+
         $this->setCurrent($user);
-        $cookie = array(
-            'name'   => COOKIE_ID,
-            'value'  => $user->get('id'),
-            'expire' => 365 * 24 * 60 * 60,
-            'domain' => '.' . getBaseDomain(getDomain()),
-            'path'   => '/',
-        );
-        $this->input->set_cookie($cookie);
+
+        if ( is_cli() ) {
+
+        }
+        else if ( $cookie_save ) {
+            $cookie = array(
+                'name'   => COOKIE_ID,
+                'value'  => $user->get('id'),
+                'expire' => 365 * 24 * 60 * 60,
+                'domain' => '.' . getBaseDomain(getDomain()),
+                'path'   => '/',
+            );
+            $this->input->set_cookie($cookie);
+        }
         return $user;
     }
 
@@ -138,11 +156,12 @@ class User extends Entity
      * @note it sets
      *
      * @param $email
-     * @return User|FALSE
+     * @param bool $cookie_save
+     * @return FALSE|User
      */
-    final public function loginByEmail($email) {
+    final public function loginByEmail($email, $cookie_save=TRUE) {
         $user = $this->loadByEmail($email);
-        $this->setCurrent($user);
+        $this->setCurrent($user, $cookie_save);
         return $user;
     }
 

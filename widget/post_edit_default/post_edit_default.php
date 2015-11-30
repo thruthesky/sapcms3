@@ -1,10 +1,18 @@
 <?php
-$name = post_config()->getCurrent()->get('name');
-?>
-<?php echo form_open("$name/edit/submit") ?>
+widget_css();
 
+$post_config = post_config()->getCurrent();
+$name = $post_config->get('name');
+$subject = $post_config->get('subject');
+?>
+<div class="post-edit">
+<div class="page-header">
+    <h1><?php echo $subject?> Post Upload</h1>
+</div>
+    <?php echo form_open_multipart("$name/edit/submit");?>
 <input type="text" name="subject" value="<?php echo set_value('')?>"><br>
 <textarea name="content"></textarea><br>
 <input type="submit">
-<?php echo form_close() ?>
+<?php form_close();?>
+</div>
 
