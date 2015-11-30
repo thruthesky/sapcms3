@@ -84,7 +84,7 @@ class Message_controller extends MY_Controller
 		if( empty( $my_id ) ) $error[] = ['code'=>'-1','message'=>'You are not logged in'];
 		$username = in('username');
 		$user_to = user()->loadByUsername($username);
-		if( empty( $user_to ) ) $error[] = ['code'=>'-11','message'=>'User $username does no exist'];
+		if( empty( $user_to ) ) $error[] = ['code'=>'-11','message'=>"User $username does no exist"];
 		
 		if( empty( $error ) ){
 			message()->create()
@@ -93,14 +93,16 @@ class Message_controller extends MY_Controller
 						->set('title', $title)
 						->set('content', $content)
 						->save();
+			self::sent();
 		}
-		
-		$data = [
+		else{
+			$data = [
 				'page' => 'message.send',
 				'error' => $error,
-		];
-	
-		$this->render( $data );
+			];
+			
+			$this->render( $data );
+		}
 	}
 	
 	public function viewItem($id=null){
