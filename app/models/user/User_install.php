@@ -6,7 +6,7 @@ class User_install extends User
     }
 
     public function install() {
-        $user = entity(USER_TABLE)->init();
+        $user = $this->init();
         $fields = array(
             'username' => array(
                 'type' => 'VARCHAR',

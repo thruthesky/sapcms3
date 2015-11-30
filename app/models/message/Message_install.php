@@ -9,7 +9,7 @@ class Message_install extends Message
 
     public function install()
     {
-        $message = entity(MESSAGE_TABLE)->init();
+        $message = $this->init();
 		
 		$fields = array(
             'id_from' => array(

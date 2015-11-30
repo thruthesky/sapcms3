@@ -1,7 +1,7 @@
 <?php
 use firebird\FireBird;
 
-class User extends Entity
+class User extends Node
 {
     private static $current = null; // ID of current logged user.
 

@@ -6,8 +6,8 @@ class PostTestData_controller extends MY_Controller
 
     public function testData() {
 
-        if ( $config = post_config('testForum') ) {
-
+        $config = post_config('testForum');
+        if ( $config->exists() ) {
         }
         else {
             $config = post_config()->create()

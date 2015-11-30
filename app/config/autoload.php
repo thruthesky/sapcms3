@@ -128,6 +128,7 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'entity/entity'=>'entity',
+    'node/node' => 'node',
     'data/data' => 'my_data', /**  @NOTE Name duplication */
     'post/post' => 'post',
     'post/postconfig' =>'postconfig',

@@ -1,6 +1,10 @@
 <?php
 class PostConfig_test extends PostConfig {
+    /**
+     *
+     */
     public function unitTest() {
+        $this->postConfigExists();
         $this->createPostConfig();
     }
 
@@ -53,5 +57,10 @@ class PostConfig_test extends PostConfig {
         $this->unit->run($this->searchCount( ['where' => "name LIKE 'test%'"] ), 0, "Create PostConfig and count => 0");
 
         user()->deleteByUsername($username);
+    }
+
+    private function postConfigExists()
+    {
+        $this->unit->run($this->tableExists(), TRUE, $this->getTable() . ' table exists');
     }
 }

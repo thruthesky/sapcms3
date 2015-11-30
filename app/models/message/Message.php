@@ -1,6 +1,6 @@
 <?php
 
-class Message extends Entity
+class Message extends Node
 {
     public function __construct() {
         parent::__construct();
