@@ -1,4 +1,7 @@
 <?php
+$route['message/testdata'] = 'message/MessageTestData_controller/testData';
+$route['message/testdata/remove'] = 'message/MessageTestData_controller/testData_remove';
+
 //'collection' should be list but was change due to post routing conflict
 $route['message/inbox'] = 'message/Message_controller/inbox';
 $route['message/inbox/(:num)'] = 'message/Message_controller/inbox/$1';
