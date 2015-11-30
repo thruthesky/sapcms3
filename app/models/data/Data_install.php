@@ -6,7 +6,7 @@ class Data_install extends Data
     }
 
     public function install() {
-        $user = entity(DATA_TABLE)->init();
+        $data = entity(DATA_TABLE)->init();
         $fields = array(
             'model' => array(
                 'type' => 'VARCHAR',
@@ -59,15 +59,15 @@ class Data_install extends Data
                 'default' => 0,
             ),
         );
-        $this->dbforge->add_column($user->getTable(), $fields);
 
-        $this->db->query('ALTER TABLE `'.DATA_TABLE.'` ADD INDEX `model` (`model`);');
-        $this->db->query('ALTER TABLE `'.DATA_TABLE.'` ADD INDEX `model_type` (`model`,`type`);');
-        $this->db->query('ALTER TABLE `'.DATA_TABLE.'` ADD INDEX `model_type_id_entity` (`model`,`type`,`id_entity`);');
+        $this->dbforge->add_column($data->getTable(), $fields);
 
-
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model` (`model`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_type` (`model`,`type`);');
+        $this->db->query('ALTER TABLE `'. $data->getTable() .'` ADD INDEX `model_type_id_entity` (`model`,`type`,`id_entity`);');
 
     }
+
     public function uninstall() {
         if ( entity(USER_TABLE)->tableExists() ) entity(USER_TABLE)->uninit();
     }

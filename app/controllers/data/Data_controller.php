@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Client;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Data_controller extends MY_Controller
 {
@@ -7,6 +9,8 @@ class Data_controller extends MY_Controller
         debug_log("Data_controller::upload() begins");
         //debug_log("_FILES");
         //debug_log($_FILES);
+
+
 
 
         if ( isset($_FILES['file']) ) {

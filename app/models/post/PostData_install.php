@@ -192,7 +192,7 @@ class PostData_install extends Entity
             $fields["text_$i"] = [ 'type' => 'LONGTEXT' ];
         }
 
-        $this->dbforge->add_column($data->getTable(), $fields);
+        $this->dbforge->add_column( $data->getTable() , $fields);
         $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_config` (`id_config`);');
         $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_root_order_list` (`id_root`, `order_list`);');
         $this->db->query('ALTER TABLE `'.POST_DATA_TABLE.'` ADD INDEX `id_data` (`id_data`);');
