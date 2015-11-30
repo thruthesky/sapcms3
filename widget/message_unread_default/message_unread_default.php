@@ -2,6 +2,7 @@
 $ci = & get_instance();
 $data = $ci->data;
 widget_css();
+widget_js();
 ?>
 
 
@@ -15,42 +16,38 @@ widget_css();
 </div>
 
 
-<table class='list-table' cellpadding=0 cellspacing=0 width='100%'>
-    <tr class='header'>
-        <td><span>ID FROM</span></td>
-        <td><span>ID TO</span></td>
-        <td><span>TITLE</span></td>
-        <td><span>CONTENT</span></td>
-        <td><span>CHECKED</span></td>
-        <td><span>VIEW</span></td>
-        <td><span>DELETE</span></td>
-    </tr>
-    <?php
-    $messages = $data['messages'];
-    foreach( $messages as $message ){
-        $user_from_username = user()->load( $message->get('id_from') );
-        if( empty( $user_from_username ) ) $user_from_username = "Anonymous";
-        else $user_from_username = $user_from_username->get('username');
-        $user_to_username = user()->load( $message->get('id_to') );
-        if( empty( $user_to_username ) ) $user_to_username = "Anonymous";
-        else $user_to_username = $user_to_username->get('username');
-
-        $checked = date( 'M d, Y H:i',$message->get('checked') );
-		if( $checked == 0 ) $checked = "Not Viewed";
-        ?>
-        <tr valign='top'>
-            <td><span><?php echo $user_from_username; ?></span></td>
-            <td><span><?php echo $user_to_username; ?></span></td>
-            <td><span><?php echo $message->get('title'); ?></span></td>
-            <td><span><?php echo $message->get('content'); ?></span></td>
-            <td><span><?php echo $checked; ?></span></td>
-            <td><a href='/message/viewItem/<?php echo $message->get('id') ?>'>View</a></td>
-            <td><a href='/message/deleteItem/inbox/<?php echo $data['offset']; ?>/<?php echo $message->get('id') ?>'>Delete</a></td>
-        </tr>
-        <?php
-    }
+<ul class="list-group message-list" type='unread'>
+<?php
+$messages = $data['messages'];
+foreach( $messages as $message ){
+    $user = user()->load( $message->get('id_from') );
+    $username = $user->get('username');
+    $stamp = $message->get('checked');
+    if ( $stamp ){
+		$checked = date( 'M d, Y H:i', $stamp );
+		$class = ' viewed';
+	}
+    else{
+		$checked = "Not Viewed";
+		$class = '';
+	}
     ?>
-</table>
+    <li class="list-group-item<?php echo $class; ?>" no="<?php echo $message->get('id')?>">
+        <span class='username'><?php echo $username; ?></span>
+        <span class="title"><?php echo $message->get('title'); ?></span>
+        <span class="checked"><?php echo $checked; ?></span>
+        <a class='delete message'>Delete</a>
+    </li>
+
+    <?php
+}
+?>
+</ul>
+
+
+
+
+
 
 
 <?php widget('navigator_default', [

@@ -1,9 +1,15 @@
-.message-list .row {
-    margin:0;
-    padding:0;
+.message-list{
+	width:100%;
+}
+
+.message-list .list-group-item {
     cursor:pointer;
 }
 
-.message-list .row .content {
+.message-list .list-group-item.viewed{
+    background-color:#f1f1f1;
+}
+
+.message-list .list-group-item .content {
     display:none;
 }

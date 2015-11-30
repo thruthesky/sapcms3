@@ -67,8 +67,9 @@ class Message_controller extends MY_Controller
 	}
 	
 	public function send($id=null){
-		$data = [
+		$data = [				
 				'page' => 'message.send',
+				'type' => 'send',
 		];
 	
 		$this->render( $data );
@@ -104,7 +105,7 @@ class Message_controller extends MY_Controller
 			$this->render( $data );
 		}
 	}
-	
+	/*
 	public function viewItem($id=null){
 		$error = [];
 		$message = message()->load( $id );
@@ -143,20 +144,31 @@ class Message_controller extends MY_Controller
 		
 		self::$type( $offset );
 	}
-	
+	*/
 	public function ajaxLoad(){
 		$data = [];
 		$error = [];
 		$id = in('id');
+		$type = in('type');
+		
 		if( empty( $id ) ) $error[] = ['code'=>'-151','message'=>'ID is empty!'];
 		$message = message()->load( $id );
 		if( empty( $message ) ) $error[] = ['code'=>'-101','message'=>'Message id [ $id ] does not exist.'];
 		
 		if( !empty( $error ) ) $data['error'] = $error;
 		else{
-			$message->set('checked',time())->save();
+			if( $type != 'sent' ){
+				$stamp = $message->get('checked');
+				if( ! $stamp ){
+					$stamp = time();
+					$checked = date( 'M d, Y H:i', $stamp );
+					$message->set('checked',$stamp)->save();
+					$data['checked'] = $checked;
+				}
+			}
 			$content = self::messageHTMLContent( $message );
 			$data['content'] = $content;
+			
 		}
 		echo json_encode($data);
 	}
@@ -183,7 +195,7 @@ class Message_controller extends MY_Controller
 			
 			$message->delete();
 			
-			$data['next_message'] = self::messageHTMLNextMessage( $next_message );
+			$data['next_message'] = self::messageHTMLNextMessage( $next_message, $type );
 			$data['id'] = $id;
 			$data['type'] = $type;
 		}
@@ -196,9 +208,11 @@ class Message_controller extends MY_Controller
 		return "<div class='content'>$content</div>";
 	}
 	
-	public function messageHTMLNextMessage( $message ){
+	public function messageHTMLNextMessage( $message, $type ){
 		$id = $message['id'];
-		$user = user()->load( $message['id_from'] );
+		if( $type == 'sent' ) $user_id = $message['id_to'];
+		else $user_id = $message['id_from'];
+		$user = user()->load( $user_id );
 		$username = $user->get('username');
 		$title = $message['title'];
 	
