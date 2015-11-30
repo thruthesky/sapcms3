@@ -7,6 +7,7 @@ $(function () {
 
 function openMessageContent( e ){
 	if( $(e.target).hasClass('delete') ) return;
+	if( $(e.target).hasClass('reply') ) return;
 	if( is_animating == true ) return;
 	is_animating = true;
 	
@@ -48,7 +49,7 @@ function deleteMessage(){
 	re = confirm("Are you sure you want to delete this message?");
 	if( !re ) return;
 	
-	var $row = $(this).parent();
+	var $row = $(this).parents(".list-group-item");
 	var no = $row.attr('no');
 	
 	var last_no = $(".message-list .list-group-item:last").attr('no');

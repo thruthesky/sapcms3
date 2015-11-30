@@ -6,10 +6,21 @@
     cursor:pointer;
 }
 
+.message-list .list-group-item:after{
+	display:block;
+    content:"";
+	clear:both;
+}
+
 .message-list .list-group-item.viewed{
     background-color:#f1f1f1;
 }
 
 .message-list .list-group-item .content {
     display:none;
+}
+
+.message-list .list-group-item .btn {
+    float:right;
+	margin-right:5px;
 }
