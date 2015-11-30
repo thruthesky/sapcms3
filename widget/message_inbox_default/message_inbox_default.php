@@ -35,8 +35,9 @@ foreach( $messages as $message ){
     <li class="list-group-item<?php echo $class; ?>" no="<?php echo $message->get('id')?>">
         <span class='username'><?php echo $username; ?></span>
         <span class="title"><?php echo $message->get('title'); ?></span>
-        <span class="checked"><?php echo $checked; ?></span>
-        <a class='delete message'>Delete</a>
+        <span class="checked"><?php echo $checked; ?></span>		
+        <span class='delete message btn btn-danger'>Delete</span>
+		<a class='reply message btn btn-success' href='/message/send?reply=<?php echo $username; ?>'>Reply</a>
     </li>
 
     <?php

@@ -18,11 +18,15 @@ if ( in('category') ) {
 <input type="hidden" name="return_url" value="/data/test/upload">
 
 file : <input type="file" name="file" size="20" /><br>
+<?php if( !empty( $uploads ) ){ ?>
 <img src="<?php echo $uploads['file']->get('url')?>" style="max-width:200px;"><br>
 <hr>
+<?php } ?>
 photo : <input type="file" name="photo" size="255"><br>
+<?php if( !empty( $uploads ) ){ ?>
 <img src="<?php echo $uploads['photo']->get('url')?>" style="max-width:200px;"><br>
 <hr>
+<?php } ?>
 <br /><br />
 
 <input type="submit" value="upload" />

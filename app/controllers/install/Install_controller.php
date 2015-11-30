@@ -1,4 +1,6 @@
 <?php
+use firebird\Firebird;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Install_controller extends MY_Controller {
 
@@ -30,7 +32,7 @@ class Install_controller extends MY_Controller {
 
     public function work($mode) {
         static $co = 0;
-        foreach ( getModels() as $model ) {
+        foreach ( Firebird::getModels() as $model ) {
             $name = pathinfo($model, PATHINFO_BASENAME);
             $files = glob( $model . '/*_install.php' );
             foreach( $files as $file ) {
