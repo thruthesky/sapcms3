@@ -30,9 +30,8 @@ function ajax_upload() {
     var $progressBar = $(".ajax-upload-progress-bar");
 
 
-    /*
-
-
+    /**
+     *
     var lastAction = $this.prop('action');
     $this.prop('action', '/file/upload');
 
