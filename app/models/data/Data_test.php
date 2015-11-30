@@ -17,9 +17,9 @@ class Data_test extends Data {
     {
         $upload_url = base_url() . 'data/upload';
 
+
         $data = array(
-            'files[0]'=> get_CURLFileObject('./app/models/data/test-file-upload.png'),
-            //'files[1]'=> get_CURLFileObject('./app/models/data/test-file-upload2.png'),
+            'file'=> get_CURLFileObject('./app/models/data/test-file-upload.png'),
             );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$upload_url);

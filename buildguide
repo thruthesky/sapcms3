@@ -11,7 +11,68 @@
 7.
 8.
 9.
+------------------------------------------------
+Sapcms3.2 - 코드네임 FireBird ( 불새. ) 코드이그나이터가 코드를 점화시킨다는 뜻이 있으므로 불새라는 뜻이 좋다.
+한국커뮤니티 사이트에 같이 개발 할 사람을 공모한다.
+트레이니와 함께 기본 코드를 개발 한다.
+해외 개발자와 함께 하므로, 많은 부분이 영어 문서화 될 수 있음.
 
+* core 부분은 autoload 방식을 사용하지 않는다. 그것은 CodeIgniter 방식을 배신하는 것이다.
+* 단, FireBird 클래스와 Guzzle 과 같은 좋은 라이브러리를 사용 하기 위해서 반드시 autoload.php 를 사용한다.
+* Entity, Meta, Node, Bundle 방식으로 데이터를 관리한다.
+
+Entity
+    - Meta (키와 값을 바탕으로 하는. 또는 간단한 정보를 담는 테이블이다. 단순 작업만 하는 경우, 사용한다. )
+        -- Config ( 테이블 이름 config_meta_entity )
+        -- Theme ( theme_meta_entity )
+        -- ACL ( acl_meta_entity ) 관리자 권한 관련 정보 보관.
+    - Node (글 관련.)
+        -- Node 라이브러리. NodeList, NodeEdit, NodeDelete 등의 기능을 기본 제공해서 DB 테이블만 만들어도 자동으로 CRUD 가 되도록 한다.
+        -- Post ( 테이블 이름 post_node_entity )
+            -- PostConfig ( post_config_node_entity )
+            -- PostData ( post_data_node_entity )
+        -- Comment ( 테이블 이름 comment_node_entity )
+        -- Vote ( 테이블 이름 vote_node_entity )
+        -- User ( 테이블 이름 user_node_entity )
+        -- Data ( data_node_entity )
+        -- Message ( message_node_entity )
+        -- Group
+            -- GroupConfig
+            -- GroupUser
+        -- Mall ( 쇼핑몰 )
+            -- mall_item_node_entity
+            -- mall_order_node_entity
+            -- mall_cart_node_entity
+            -- mall_payment_node_entity
+            -- mall_history_node_enitty
+            
+     - Bundle ( 추가 필드가 필요한 경우 )
+        -- bundle('post_data')->add_fields(array(...));
+        -- 테이블을 새로 만드는게 아니라, 필드만 더 추가를 해 놓는다.
+
+* create 방법
+    $entity = clone $this;
+    $entity->reset();
+    return $entity;
+------------------------------------------------
+질문.
+    - CI3 를 바탕으로 한 CMS 개발을 같이 하실 분. 명칭은 FireBird.
+    - controllers 와 models 폴더를 view 처럼 임의의 경로로 옮길 수 있는지.
+------------------------------------------------
+        /**
+         * 여러 파일 등록하는 방법
+         */
+        $data = array(
+            'files[0]'=> get_CURLFileObject('./app/models/data/test-file-upload.png'),
+            'files[1]'=> get_CURLFileObject('./app/models/data/test-file-upload2.png'),
+            );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$upload_url);
+        curl_setopt($ch, CURLOPT_POST,TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        $result = curl_exec ($ch);
+        if ( ! $result ) echo "ERROR: Data_test.php::uploadFile() : " . curl_error($ch) . "\n";
+        curl_close ($ch);
 
 트레이니 해야 할 일
 ------------------------------------------------

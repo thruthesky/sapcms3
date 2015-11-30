@@ -8,7 +8,7 @@
 
 <?php echo form_open_multipart('data/upload');?>
 
-<input type="file" name="userfile" size="20" />
+<input type="file" name="file" size="20" />
 
 <br /><br />
 
