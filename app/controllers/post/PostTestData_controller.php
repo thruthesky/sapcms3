@@ -6,13 +6,18 @@ class PostTestData_controller extends MY_Controller
 
     public function testData() {
 
-        $config = post_config()->create()
-            ->set('name', 'testForum')
-            ->set('id_user', user('root')->get('id'))
-            ->set('subject', 'This is Test Forum')
-            ->set('description', 'This is Test forum...')
-            ->save();
-        echo "testForum created<hr>";
+        if ( $config = post_config('testForum') ) {
+
+        }
+        else {
+            $config = post_config()->create()
+                ->set('name', 'testForum')
+                ->set('id_user', user('root')->get('id'))
+                ->set('subject', 'This is Test Forum')
+                ->set('description', 'This is Test forum...')
+                ->save();
+            echo "testForum created<hr>";
+        }
 
         for( $i=0; $i<200; $i++ ) {
             post_data()

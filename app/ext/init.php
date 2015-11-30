@@ -21,7 +21,6 @@ foreach ( FireBird::getThemes() as $dir) {
     if ( file_exists($path) ) include $path;
 }
 
-
 foreach ( FireBird::getModels() as $dir) {
     $path = "$dir/Routes.php";
     if ( file_exists($path) ) include $path;

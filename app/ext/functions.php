@@ -19,7 +19,6 @@ function debug_log($str) {
     fclose($fd);
 }
 
-
 function setError($message) {
     global $_list_error;
     $_list_error[] = $message;
@@ -137,3 +136,8 @@ function getUserAgent() {
     return '';
 }
 
+
+
+function js($file) {
+    return "<script type='text/javascript' src='$file.js'></script>";
+}

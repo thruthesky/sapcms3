@@ -14,6 +14,11 @@
 <a href="/user/admin/list">User List</a><br>
 <a href="/post/config/list">Post Config List</a><br>
 
+<hr>
+
+<a href="/data/test/upload">File Upload Test</a>
+
+<hr>
 
 
 <script>
