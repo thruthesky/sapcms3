@@ -176,8 +176,11 @@ class Message_controller extends MY_Controller
 			if( $type == 'inbox' ) $added_query = " AND id_to = ".login();
 			else if( $type == 'unread' ) $added_query = " AND id_to = ".login()." AND checked = 0";
 			else if( $type == 'sent' ) $added_query = " AND id_from = ".login();
-		
+			
 			$next_message = message()->row("id>$last_id".$added_query);//returns array
+			
+			$message->delete();
+			
 			$data['next_message'] = self::messageHTMLNextMessage( $next_message );
 			$data['id'] = $id;
 			$data['type'] = $type;
