@@ -230,6 +230,18 @@ class Entity extends CI_Model {
         }
     }
 
+    /**
+     * Returns $this->record
+     * @return array
+     *
+     * @code
+     * return ['result'=>0, 'record'=>$data->getRecord()];
+     * @endcode
+     */
+    public function getRecord() {
+        return $this->record;
+    }
+
 
 
 
@@ -396,10 +408,14 @@ class Entity extends CI_Model {
      * @param string $select
      * @return null
      *
-     * @todo UnitTest
+     * @code Getting the first row.
+     *      $query = $entity->row();
+     *      di($this->db->last_query());
+     * @endcode
      */
-    public function row($where, $select='*') {
-        $rows = $this->rows($where, $select);
+    public function row($where=null, $select='*') {
+        if ( empty($where) ) $where = '1';
+        $rows = $this->rows($where . ' LIMIT 1', $select);
         if ( $rows ) {
             return $rows[0];
         }
@@ -495,7 +511,7 @@ class Entity extends CI_Model {
         */
     }
 
-    public function searchCount($o)
+    public function searchCount($o=[])
     {
         if ( isset( $o['from'] ) ) $this->db->from($o['from']);
         else $this->db->from($this->getTable());

@@ -30,25 +30,25 @@ function ajax_upload() {
     var $progressBar = $(".ajax-upload-progress-bar");
 
 
-    /**
-     *
-     * var lastAction = $this.prop('action');
-    $this.prop('action', '/file/upload');
+
+    var lastAction = $this.prop('action');
+    $this.prop('action', '/data/ajax/upload');
+
 
     $this.ajaxSubmit({
         beforeSend: function () {
             console.log("bseforeSend:");
-            showProgressBar();
+            showAjaxUploadProgressBar();
         },
         uploadProgress: function (event, position, total, percentComplete) {
             //console.log("while uploadProgress:" + percentComplete + '%');
-            setProgressBar(percentComplete + '%');
+            setAjaxUploadProgressBar(percentComplete + '%');
         },
         success: function () {
             console.log("upload success:");
-            setProgressBar('100%');
+            setAjaxUploadProgressBar('100%');
             setTimeout(function () {
-                hideProgressBar();
+                hideAjaxUploadProgressBar();
             }, 150);
         },
         complete: function (xhr) {
@@ -56,8 +56,6 @@ function ajax_upload() {
             var re;
             try {
                 re = JSON.parse(xhr.responseText);
-                //alert errors...
-                if (re.error) return alert(re.message);
             }
             catch (e) {
                 return alert(xhr.responseText);
@@ -65,10 +63,30 @@ function ajax_upload() {
 
             console.log(re);
 
-            fileDisplay($this, re);
-            fileCallback(re);
-            setFid(re);
+            if ( typeof callback_ajax_upload == 'function' ) callback_ajax_upload($this, re);
         }
     });
-    */
+
+    return false;
+
+    function showAjaxUploadProgressBar() {
+        $progressBar.find('.progress-bar')
+            .width(0);
+        $progressBar.show();
+    }
+    function hideAjaxUploadProgressBar() {
+        $progressBar.hide();
+    }
+    function setAjaxUploadProgressBar(percent) {
+        $progressBar.find('.progress-bar')
+            .text(percent)
+            .width(percent);
+    }
+
+    function setFid(re) {
+        var $data_id = $this.find("[name='data_id']");
+        var val = $data_id.val();
+        val += ','+ re['record'].id;
+        $data_id.val(val);
+    }
 }

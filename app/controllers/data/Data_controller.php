@@ -18,9 +18,9 @@ class Data_controller extends MY_Controller
                     'max_width' => 10240,
                     'max_height' => 7680,
                 ],
-                [
-                    'category' => $category
-                ]);
+                    [
+                        'category' => $category
+                    ]);
                 if ( $upload['result'] === FALSE ) {
                     debug_log("ERROR: ");
                     debug_log($upload['error']);
@@ -37,5 +37,18 @@ class Data_controller extends MY_Controller
             debug_log("ERROR: _FILE['file'] is not defined.");
         }
 
+    }
+
+    public function ajaxUpload() {
+        foreach( $_FILES as $form_name => $file_data ) {
+            $upload = data()->upload($form_name, [
+                'max_size' => 1000,
+                'max_width' => 10240,
+                'max_height' => 7680,
+            ]);
+            debug_log("Data::ajaxUpload()");
+            debug_log($upload);
+            $this->renderAjax($upload);
+        }
     }
 }

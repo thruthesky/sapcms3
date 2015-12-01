@@ -4,6 +4,18 @@
  * @param $navigator - is the 'config' array as the same values of CI3
  *
  *
+ * @example /theme/default/page/user.admin_list.php
+ * @example /theme/default/page/post_list_list.php
+ *
+ * @code
+ *
+<?php widget('navigator_default', [
+'base_url' => "/message/$data[type]",
+'per_page'=> $data['per_page'],
+'total_rows' => $data['total_rows'],
+] )?>
+
+ * @endcode
  *
  *
  */

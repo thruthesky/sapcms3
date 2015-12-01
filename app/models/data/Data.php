@@ -13,7 +13,6 @@
  */
 class Data extends Node {
 
-
     public function __construct()
     {
         parent::__construct();
@@ -30,13 +29,18 @@ class Data extends Node {
      */
     public function upload($form_name, $config, $record=[]) {
 
+        debug_log("Data::upload($form_name, config, record)");
+
         $config = $this->get_upload_options ($config);
-        $this->upload->initialize ( $this->get_upload_options ($config) );
+        debug_log("Data::upload() config");
+        debug_log($config);
+        $this->upload->initialize ( $config );
 
         if ( ! $this->upload->do_upload($form_name))
         {
             $error = $this->upload->display_errors('','');
-            return ['result'=>FALSE, 'error'=>$error];
+            debug_log("ERROR: upload error: $error");
+            return ['code'=>-1, 'message'=>$error];
         }
         else
         {
@@ -47,15 +51,15 @@ class Data extends Node {
             if ( ! isset($record['id_entity']) ) $record['id_entity'] = in('id_entity', 0);
             if ( ! isset($record['id_user']) ) $record['id_user'] = user()->getCurrent()->get('id');
             if ( ! isset($record['finish']) ) $record['finish'] = in('finish', 0);
-            $this->createDataRecord( $record, $info);
-            return ['result'=>TRUE, 'info'=>$info];
+            $uploaded = $this->createDataRecord( $record, $info);
+            $data = data()->load( $uploaded->get('id') );
+            return ['code'=>0, 'record'=>$data->getRecord()];
         }
-
     }
 
     private function createDataRecord($record, $info)
     {
-        data()->create()
+        return data()->create()
             ->sets($record)
             ->set('name', $info['client_name'])
             ->set('name_saved', $info['file_name'])
@@ -65,9 +69,6 @@ class Data extends Node {
     }
 
 
-
-
-
     public function get_upload_options(&$config) {
         $config ['upload_path'] = DATA_PATH;
         $config ['allowed_types'] = 'gif|jpg|png';
@@ -75,28 +76,6 @@ class Data extends Node {
         return $config;
     }
 
-    /**
-     * @deprecated Do not support array-var-uploads.
-     *
-     * Uploads array of files based on the $_FILE
-     *
-    public function upload_array($form_name) {
-
-        $files = $_FILES;
-
-        $count_upload_files = count ( $_FILES [$form_name]['name'] );
-        for($i = 0; $i < $count_upload_files; $i ++) {
-            $_FILES ['file'] ['name'] = $files [$form_name] ['name'] [$i];
-            $_FILES ['file'] ['type'] = $files [$form_name] ['type'] [$i];
-            $_FILES ['file'] ['tmp_name'] = $files [$form_name] ['tmp_name'] [$i];
-            $_FILES ['file'] ['error'] = $files [$form_name] ['error'] [$i];
-            $_FILES ['file'] ['size'] = $files [$form_name] ['size'] [$i];
-            $this->upload->initialize ( $this->get_upload_options () );
-            $this->upload->do_upload ('file');
-        }
-    }
-     *
-     */
 
 
     /**

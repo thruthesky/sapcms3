@@ -14,7 +14,16 @@
 <a href="/user/admin/list">User List</a><br>
 <a href="/post/config/list">Post Config List</a><br>
 
+<b>ADMIN --------------------------------------------</b>
+<br>
+
+<a href="/entity/list">Entity List</a>
+
+
+
 <hr>
+<b>TEST --------------------------------------------</b><br>
+
 
 <a href="/data/test/upload">File Upload Test</a><br>
 <a href="/post/testdata">Post Test Data</a>
