@@ -8,7 +8,11 @@ $(function () {
 function openMessageContent( e ){
 	if( $(e.target).hasClass('delete') ) return;
 	if( $(e.target).hasClass('reply') ) return;
+	if( $(e.target).hasClass('message-content') ) return;
+	if( $(e.target).parent().hasClass('.message-content') ) return;
+	if( $(e.target).parents('.message-content').length ) return;
 	if( is_animating == true ) return;
+	
 	is_animating = true;
 	
 	var $row = $(this);
@@ -23,8 +27,8 @@ function openMessageContent( e ){
 	request.done(function( data ) {
 		re = JSON.parse(data);
 		if( !re.error ){
-			if( $row.find(".content").length ){
-				$row.find(".content").slideToggle("500",callbackAnimateSlide);
+			if( $row.find(".message-content").length ){
+				$row.find(".message-content").slideToggle("500",callbackAnimateSlide);
 			}
 			else{
 				if( re.checked ){
@@ -34,7 +38,7 @@ function openMessageContent( e ){
 					}
 				}				
 				$row.append( $(re.content) );
-				$row.find(".content").slideDown("500",callbackAnimateSlide);
+				$row.find(".message-content").slideDown("500",callbackAnimateSlide);
 			}
 		}
 	});

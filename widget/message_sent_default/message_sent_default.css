@@ -21,9 +21,20 @@
     padding:6px 10px;
 }
 
-.message-list .list-group-item .content {
+.message-list .list-group-item .message-content {
     display:none;
 	margin-top:20px;
+	cursor:initial;
+}
+
+.message-list .list-group-item .message-content .file-display > div{
+	display:inline-block;
+    width:25%;
+	max-width:150px;
+}
+
+.message-list .list-group-item .message-content .file-display .photo img{
+    width:100%;
 }
 
 .message-list .list-group-item .btn {

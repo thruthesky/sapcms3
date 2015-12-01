@@ -21,9 +21,10 @@
     padding:6px 10px;
 }
 
-.message-list .list-group-item .content {
+.message-list .list-group-item .message-content {
     display:none;
 	margin-top:20px;
+	cursor:initial;
 }
 
 .message-list .list-group-item .btn {
