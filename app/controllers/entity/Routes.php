@@ -1,4 +1,4 @@
 <?php
 
-$route['entity/(:any)/list'] = 'entity/Entity_controller/collection/$1';
+$route['entity/(:any)/list'] = 'entity/Entity_manage/collection/$1';
 
