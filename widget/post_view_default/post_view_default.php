@@ -3,6 +3,7 @@ $ci = & get_instance();
 $config = $ci->data['config'];
 $post = $ci->data['post'];
 $user = $ci->data['user'];
+$files = $ci->data['files'];
 $name = $config->get('name');
 ?>
 <h2><?php echo $name?></h2>
@@ -21,8 +22,15 @@ Subject: <?php echo $post->get('subject')?>
 Content: <?php echo $post->get('content')?>
 <hr>
 
+<?php
+foreach ( $files as $file ) {
+    $url = $file->get('url');
+    echo "<img src='$url'><br>";
+}
+?>
+
 
 <?php widget('post_comment_form_default')?>
 
-
 <?php widget('post_comment_list_default')?>
+

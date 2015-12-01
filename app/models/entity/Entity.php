@@ -138,8 +138,6 @@ class Entity extends CI_Model {
      * @param $field
      * @param $value
      * @return $this|bool
-     * @TODO unittest
-     * @TODO make it accept 'array' as input.
      */
     public function update($field, $value) {
         if ( $this->get('id') ) {
@@ -151,6 +149,27 @@ class Entity extends CI_Model {
         }
         else return FALSE;
     }
+
+    /**
+     *
+     * Updates fields of the record.
+     * @note This is an array version of $this->update()
+     * @param $array
+     * @return $this|bool
+     */
+    public function updates($array) {
+        if ( $this->get('id') ) {
+            foreach ( $array as $field => $value ) {
+                $this->db->set($field, $value);
+                $this->set($field, $value);
+            }
+            $this->db->where('id', $this->get('id'));
+            $this->db->update( $this->getTable());
+            return $this;
+        }
+        else return FALSE;
+    }
+
 
     /**
      * Deletes the current Entity

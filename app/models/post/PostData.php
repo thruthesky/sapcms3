@@ -54,10 +54,21 @@ class PostData extends Post {
             'city' => in('city'),
             'link' => in('link'),
         ];
-
-
         $post = $this->createPost($record);
         $post->update('id_root', $post->get('id'));
+
+        if ( $data_id = in('data_id') ) {
+            $ids = explode(',', $data_id);
+            if ( $ids ) {
+                foreach ( $ids as $id ) {
+                    data($id)->updates([
+                        'id_entity' => $post->get('id'),
+                        'finish' => 1
+                    ]);
+                }
+            }
+        }
+
         return $post;
     }
 
@@ -91,12 +102,27 @@ class PostData extends Post {
      *
      * @code To get current post's comment
      *      $comments = post_data()->getComments( post_data()->getCurrent()->get('id') );
+     *      post_data()->getComments($post_data->get('id'));
      * @endcode
      *
      */
-    public function getComments($id_root) {
+    public function getComments($id_root=0) {
+        if ( empty($id_root) ) $id_root = $this->get('id_root');
         return $this->query_loads("id_root=$id_root AND id_parent>0 ORDER BY order_list ASC");
         //return self::getCommentsInOrder($id_root);
+    }
+
+
+    /**
+     * @param int $id
+     * @return array
+     * @code
+     * $files = $post_data->getFiles();
+     * @endcode
+     */
+    public function getFiles($id=0) {
+        if ( empty($id) ) $id = $this->get('id');
+        return data()->query_loads("model='post' AND id_entity=$id");
     }
 
     public function escapeContent($content)

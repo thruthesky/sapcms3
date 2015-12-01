@@ -29,6 +29,9 @@ class Data extends Node {
      */
     public function upload($form_name, $config, $record=[]) {
 
+
+        $this->deleteUnfishedUploads();
+
         debug_log("Data::upload($form_name, config, record)");
 
         $config = $this->get_upload_options ($config);
@@ -46,7 +49,7 @@ class Data extends Node {
         {
             $info = $this->upload->data();
             $record['form_name'] = $form_name;
-            if ( ! isset($record['model']) ) $record['model'] = get_current_model_name();
+            if ( ! isset($record['model']) ) $record['model'] = in('model', get_current_model_name());
             if ( ! isset($record['category']) ) $record['category'] = in('category', '');
             if ( ! isset($record['id_entity']) ) $record['id_entity'] = in('id_entity', 0);
             if ( ! isset($record['id_user']) ) $record['id_user'] = user()->getCurrent()->get('id');
@@ -55,6 +58,7 @@ class Data extends Node {
             $data = data()->load( $uploaded->get('id') );
             return ['code'=>0, 'record'=>$data->getRecord()];
         }
+
     }
 
     private function createDataRecord($record, $info)
@@ -87,9 +91,22 @@ class Data extends Node {
         parent::load($id);
         if ( $this->exists() ) {
             $this->set('url', base_url(DATA_PATH . $this->get('name_saved')));
+            $this->set('path', DATA_PATH . $this->get('name_saved') );
         }
         return $this;
     }
+
+
+    private function deleteUnfishedUploads()
+    {
+        $stamp = time() - 60 * 60 * 1; // 1 hours.
+        $entities = $this->query_loads("finish=0 AND created<$stamp");
+        foreach ( $entities as $data ) {
+            unlink($data->get('path'));
+            $data->delete();
+        }
+    }
+
 
 
 

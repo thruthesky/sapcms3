@@ -44,7 +44,6 @@ class PostData_controller extends MY_Controller
     }
 
     public function editSubmit() {
-
         $post = post_data()->createPostFromInput();
         $name = post_config()->getCurrent()->get('name');
         $id = $post->get('id');
@@ -60,13 +59,14 @@ class PostData_controller extends MY_Controller
         else {
             $post_config = post_config()->getCurrent();
             $post_user = $post_data->getUser();
-            $comments = post_data()->getComments($post_data->get('id'));
+            $comments = $post_data->getComments();
+            $files = $post_data->getFiles();
             $render['config'] = $post_config;
             $render['post'] = $post_data;
             $render['user'] = $post_user;
             $render['comments'] = $comments;
+            $render['files'] = $files;
         }
-
 
         $this->render($render);
     }

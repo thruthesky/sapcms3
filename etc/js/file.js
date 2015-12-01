@@ -67,6 +67,7 @@ function ajax_upload() {
         }
     });
 
+    $this.prop('action', lastAction);
     return false;
 
     function showAjaxUploadProgressBar() {
