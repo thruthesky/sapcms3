@@ -9,7 +9,6 @@ class PostData extends Post {
     }
 
     public function setCurrent($id) {
-
         if ( is_numeric($id) ) self::$current = $this->load($id);
         else if ( $id instanceof PostData ) self::$current = $id;
         else self::$current = null;
@@ -17,9 +16,7 @@ class PostData extends Post {
     }
 
     public function getCurrent() {
-
         if ( self::$current ) return self::$current;
-
         $mode = $this->uri->segment(2);
         if ( $mode == 'edit' || $mode == 'view' ) {
             $id = $this->uri->segment(3);
@@ -81,7 +78,7 @@ class PostData extends Post {
      */
     public function createPost($record) {
         if ( ! isset($record['created']) ) $record['created'] = time();
-        $this->db->insert( $this->getTable(), $record);
+        $this->db->insert( $this->getTable(), $record );
         $id = $this->db->insert_id();
         return post_data($id);
     }

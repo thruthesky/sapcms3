@@ -296,8 +296,9 @@ class Entity extends CI_Model {
     public function loads($ids) {
         $these = [];
         foreach ($ids as $id) {
-            $this->load($id);
-            $these[] = clone $this;
+            $entity = clone $this;
+            $entity->load($id);
+            $these[] = $entity;
         }
         return $these;
     }
@@ -319,7 +320,6 @@ class Entity extends CI_Model {
      */
     public function query_loads($where) {
         $query = $this->db->query("SELECT id FROM " . $this->getTable() . " WHERE $where");
-
         $ids = [];
         foreach ( $query->result() as $row ) {
             $ids[] = $row->id;

@@ -53,6 +53,9 @@ class PostConfig_test extends PostConfig {
         $post_configs = $this->search([
             'where' => "name LIKE 'test%'",
         ]);
+
+
+
         $this->deleteEntities($post_configs);
         $this->unit->run($this->searchCount( ['where' => "name LIKE 'test%'"] ), 0, "Create PostConfig and count => 0");
 

@@ -7,6 +7,7 @@ $files = $ci->data['files'];
 $name = $config->get('name');
 ?>
 <h2><?php echo $name?></h2>
+<a href="<?php echo url_post_edit($post)?>">EDIT</a>
 <a href="<?php echo url_post_list()?>">LIST</a>
 <a href="">Vote Good</a>
 <a href="">Vote Bad</a>

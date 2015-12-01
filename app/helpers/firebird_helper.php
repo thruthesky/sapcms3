@@ -347,6 +347,10 @@ function url_post_edit($data) {
     else if ( $data instanceof PostConfig ) {
         return '/' . $data->get('name') . '/edit';
     }
+    else if ( $data instanceof PostData ) {
+        $config = post_config($data->get('id_config'));
+        return '/' . $config->get('name') . '/edit/' . $data->get('id');
+    }
     else {
         setError("url_post_data : Wrong input");
         return '';

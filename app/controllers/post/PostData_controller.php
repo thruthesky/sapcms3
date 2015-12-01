@@ -37,10 +37,19 @@ class PostData_controller extends MY_Controller
     public function edit($name, $id = 0 ) {
         $config = post_config($name);
         if ( ! $config->exists() ) setError("PostConfig does not exists");
-        $this->render([
+
+        $data = [
             'page' => 'post.edit',
             'config' => $config,
-        ]);
+        ];
+
+        if ( $id ) {
+            $post = post_data($id);
+            $data['post'] = $post;
+            $data['files'] = $post->getFiles();
+        }
+
+        $this->render($data);
     }
 
     public function editSubmit() {
@@ -67,7 +76,6 @@ class PostData_controller extends MY_Controller
             $render['comments'] = $comments;
             $render['files'] = $files;
         }
-
         $this->render($render);
     }
 

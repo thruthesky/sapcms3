@@ -49,7 +49,6 @@ class PostConfig extends Post {
      */
     public function getCurrent() {
         if ( self::$current ) return self::$current;
-
         $mode = $this->uri->segment(2);
         if ( $mode == 'list' || $mode == 'edit' || $mode == 'view' ) {
             $name = $this->uri->segment(1);

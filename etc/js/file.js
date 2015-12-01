@@ -12,6 +12,8 @@ function onFileChange(obj) {
 
 $(function(){
     $("body").on('submit', '.ajax-upload', ajax_upload);
+    $("body").on('click', '.files .file .delete', ajax_delete);
+
 });
 
 /**
@@ -83,11 +85,8 @@ function ajax_upload() {
             .text(percent)
             .width(percent);
     }
+}
 
-    function setFid(re) {
-        var $data_id = $this.find("[name='data_id']");
-        var val = $data_id.val();
-        val += ','+ re['record'].id;
-        $data_id.val(val);
-    }
+function ajax_delete() {
+    alert( $(this).parent().attr('no'));
 }

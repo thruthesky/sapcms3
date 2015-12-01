@@ -33,7 +33,6 @@ class Post extends Node {
      */
     public function createComment($id_parent, $content) {
 
-
         $parent = post_data( $id_parent );
         $user = user()->getCurrent();
         $config = post_config($parent->get('id_config'));

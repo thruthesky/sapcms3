@@ -7,3 +7,16 @@
     width:100%;
     min-height:6em;
 }
+
+.files .file {
+    width:200px;
+}
+
+.files .file img {
+    width:100%;
+    height:auto;
+}
+
+.files .file .delete {
+    cursor:pointer;
+}

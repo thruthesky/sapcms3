@@ -5,13 +5,13 @@ class PostTestData_controller extends MY_Controller
 {
 
     public function testData() {
-
-        $config = post_config('testForum');
+        $name = 'FORUM';
+        $config = post_config($name);
         if ( $config->exists() ) {
         }
         else {
             $config = post_config()->create()
-                ->set('name', 'testForum')
+                ->set('name', $name)
                 ->set('id_user', user('root')->get('id'))
                 ->set('subject', 'This is Test Forum')
                 ->set('description', 'This is Test forum...')
@@ -31,7 +31,7 @@ class PostTestData_controller extends MY_Controller
     }
 
     public function testData_remove() {
-        $post_config = post_config('testForum');
+        $post_config = post_config('FORUM');
         $this->db->delete(POST_DATA_TABLE, ['id_config'=>$post_config->get('id')]);
         $post_config->delete();
     }
