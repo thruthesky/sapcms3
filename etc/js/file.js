@@ -32,7 +32,7 @@ function ajax_upload() {
 
     /**
      *
-    var lastAction = $this.prop('action');
+     * var lastAction = $this.prop('action');
     $this.prop('action', '/file/upload');
 
     $this.ajaxSubmit({
