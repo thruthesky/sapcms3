@@ -91,13 +91,25 @@ class Message_controller extends MY_Controller
 		if( empty( $user_to ) ) $error[] = ['code'=>'-11','message'=>"User $username does no exist"];
 		
 		if( empty( $error ) ){
-			message()->create()
+			$message = message()->create()
 						->set('id_to', $user_to->get('id') )
 						->set('id_from', $my_id )
 						->set('title', $title)
 						->set('content', $content)
 						->save();
-			self::sent();
+			if ( $data_id = in('data_id') ) {
+				$ids = explode(',', $data_id);
+				if ( $ids ) {
+					foreach ( $ids as $id ) {
+						data($id)->updates([
+							'id_entity' => $message->get('id'),
+							'finish' => 1
+						]);
+					}
+				}
+			}
+			
+			self::sent();			
 		}
 		else{
 			$data = [
@@ -207,8 +219,30 @@ class Message_controller extends MY_Controller
 	
 	public function messageHTMLContent( $message ){
 		$content = $message->get('content');
+		$fileHTML = "";
+		$files = $message->getFiles();
+		if( !empty( $files ) ) $fileHTML = self::filesHTMLContent($files);
+		return "<div class='message-content'>$content$fileHTML</div>";
+	}
+	
+	public function filesHTMLContent( $files ){
+		$fileHTML = "";
+		$imageHTML = "";
+		foreach( $files as $file ){
+			$id = $file->get('id');
+			$mime = $file->get('mime');
+			$url = $file->get('url');
+			
+			if( strpos( $mime, "image"  ) !== false ){
+				$imageHTML .=  "<div no='$id' class='photo'><img src='$url'/></div>";
+			}
+			else{
+				$name = $file->get('name');
+				$fileHTML .= "<div no='$id' class='file'><a href='$url' download>$name</a></div>";
+			}	
+		}
 		
-		return "<div class='content'>$content</div>";
+		return "<div class='file-display'>".$fileHTML.$imageHTML."</div>";
 	}
 	
 	public function messageHTMLNextMessage( $message, $type ){

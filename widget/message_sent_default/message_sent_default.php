@@ -30,7 +30,7 @@ foreach( $messages as $message ){
     else{
 		$checked = "Not Viewed";
 		$class = '';
-	}
+	}	
     ?>
     <li class="list-group-item<?php echo $class; ?>" no="<?php echo $message->get('id')?>">
 		<div class='message-info'>
@@ -39,7 +39,7 @@ foreach( $messages as $message ){
 			<span class="checked"><?php echo $checked; ?></span>		
 			
 			<span class='delete message btn btn-danger'>Delete</span>
-		<a class='reply message btn btn-success' href='/message/send?reply=<?php echo $username; ?>'>Send Message</a>
+			<a class='reply message btn btn-success' href='/message/send?reply=<?php echo $username; ?>'>Send Message</a>
 		</div>        
     </li>
 
