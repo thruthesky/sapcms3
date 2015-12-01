@@ -219,7 +219,7 @@ class Message_controller extends MY_Controller
 		}
 		else {
 			$user_id = $message['id_from'];
-			$reply_text = "Replay";
+			$reply_text = "Reply";
 		}
 		$user = user()->load( $user_id );
 		$username = $user->get('username');
