@@ -6,7 +6,7 @@ class Data_install extends Data
     }
 
     public function install() {
-        $data = entity(DATA_TABLE)->init();
+        $data = $this->init();
         $fields = array(
             'model' => array(
                 'type' => 'VARCHAR',

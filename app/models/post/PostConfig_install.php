@@ -9,7 +9,7 @@ class PostConfig_install extends PostConfig
 
     public function install()
     {
-        $config = entity(POST_CONFIG_TABLE)->init();
+        $config = $this->init();
         $fields = array(
             'id_user' => array(
                 'type' => 'CHAR',

@@ -4,7 +4,7 @@
  *
  * @desc This class holds methods that are used both in PostConfig and PostData
  */
-class Post extends Entity {
+class Post extends Node {
 
     private $id = null;
 

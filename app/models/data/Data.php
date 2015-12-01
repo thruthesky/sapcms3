@@ -11,7 +11,7 @@
  *
  *
  */
-class Data extends Entity {
+class Data extends Node {
 
 
     public function __construct()

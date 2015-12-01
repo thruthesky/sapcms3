@@ -25,3 +25,14 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+
+## FireBird Files
+#
+# Data files
+--------------------------
+data/
+!data/index.html
+
+# Debug files
+--------------------------
+debug.log

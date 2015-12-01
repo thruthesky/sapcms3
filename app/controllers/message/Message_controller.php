@@ -67,9 +67,12 @@ class Message_controller extends MY_Controller
 	}
 	
 	public function send($id=null){
+		$reply = in('reply');
+	
 		$data = [				
 				'page' => 'message.send',
 				'type' => 'send',
+				'reply' => $reply,
 		];
 	
 		$this->render( $data );
@@ -210,18 +213,40 @@ class Message_controller extends MY_Controller
 	
 	public function messageHTMLNextMessage( $message, $type ){
 		$id = $message['id'];
-		if( $type == 'sent' ) $user_id = $message['id_to'];
-		else $user_id = $message['id_from'];
+		if( $type == 'sent' ) {
+			$user_id = $message['id_to'];
+			$reply_text = "Send Message";
+		}
+		else {
+			$user_id = $message['id_from'];
+			$reply_text = "Replay";
+		}
 		$user = user()->load( $user_id );
 		$username = $user->get('username');
 		$title = $message['title'];
-	
+		
+		$stamp = $message['checked'];
+		if ( $stamp ){
+			$checked = date( 'M d, Y H:i', $stamp );
+			$class = ' viewed';			
+		}
+		else{
+			$checked = "Not Viewed";
+			$class = '';
+		}
+		
 		return	"
-				<div class='row' no='$id'>
-					<span>$username</span>
-					<span class='title'>$title</span>
-					<a class='delete message'>Delete</a>
-				</div>
+				<li class='list-group-item$class' no='$id'>
+					<div class='message-info'>
+						<span class='username'>$username</span>
+						<span class='title'>$title</span>
+						<span class='checked'>$checked</span>
+						
+						<span class='delete message btn btn-danger'>Delete</span>
+						<a class='reply message btn btn-success' href='/message/send?reply=$username'>$reply_text</a>
+					</div>        
+				</li>
 				";
+		
 	}
 }

@@ -2,8 +2,6 @@
 class Meta_test extends Meta {
     public function unitTest() {
 
-        $this->load->library('unit_test');
-
         $this->testMetaCRUD();
         $this->testMetaDuplication();
         $this->testSearch();
@@ -41,6 +39,7 @@ class Meta_test extends Meta {
             ->save();
 
         $item = $meta->loadBy('code', 'apple');
+
 
         $this->unit->run( $item->get('code'), 'apple', "Create() and check value");
         $this->unit->run( $item->get('value'), 'delicious', "Create() and check value");
@@ -152,5 +151,6 @@ class Meta_test extends Meta {
         $meta->uninit();
 
     }
+
 
 }

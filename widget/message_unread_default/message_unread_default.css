@@ -1,5 +1,15 @@
+.message-list{
+	width:100%;
+}
+
 .message-list .list-group-item {
     cursor:pointer;
+}
+
+.message-list .list-group-item:after{
+	display:block;
+    content:"";
+	clear:both;
 }
 
 .message-list .list-group-item.viewed{
@@ -8,4 +18,9 @@
 
 .message-list .list-group-item .content {
     display:none;
+}
+
+.message-list .list-group-item .btn {
+    float:right;
+	margin-right:5px;
 }

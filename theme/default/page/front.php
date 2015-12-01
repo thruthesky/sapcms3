@@ -16,8 +16,8 @@
 
 <hr>
 
-<a href="/data/test/upload">File Upload Test</a>
-
+<a href="/data/test/upload">File Upload Test</a><br>
+<a href="/post/testdata">Post Test Data</a>
 <hr>
 
 
