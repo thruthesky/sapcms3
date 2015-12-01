@@ -16,8 +16,14 @@
     background-color:#f1f1f1;
 }
 
+.message-list .list-group-item .message-info > span {
+	display:inline-block;
+    padding:6px 10px;
+}
+
 .message-list .list-group-item .content {
     display:none;
+	margin-top:20px;
 }
 
 .message-list .list-group-item .btn {
