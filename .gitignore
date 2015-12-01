@@ -26,6 +26,10 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 
+
+## COMPOSER FILES
+composer.lock
+
 ## FireBird Files
 #
 # Data files
