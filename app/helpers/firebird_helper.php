@@ -272,7 +272,14 @@ function get_default_theme_name() {
 }
 
 function get_theme_name() {
-    return get_default_theme_name();
+    global $theme_name;
+    if ( empty($theme_name) ) return get_default_theme_name();
+    else return $theme_name;
+}
+
+function set_theme($theme) {
+    global $theme_name;
+    $theme_name = $theme;
 }
 
 /**

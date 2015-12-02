@@ -6,28 +6,33 @@ class Entity_controller extends MY_Controller
 
     public function collectionEntity() {
         $tables = $this->db->list_tables();
+        $entities = [];
         foreach ($tables as $table)
         {
-
             if ( strpos($table, '_meta_entity')  ) {
                 $name = str_replace('_meta_entity', '', $table);
-                echo "Meta Entity : <a href='/entity/$name/list'>$name</a>";
+                $entities[] = $name;
+                //$entityList[$name] = "Meta Entity : <a href='/entity/$name/list'>$name</a>";
             }
             else if ( strpos($table, '_node_entity')  ) {
                 $name = str_replace('_node_entity', '', $table);
-                echo "Node Entity : <a href='/entity/$name/list'>$name</a>";
+                $entities[] = $name;
+                //$entityList[$name] = "Node Entity : <a href='/entity/$name/list'>$name</a>";
             }
             else continue;
 
+            /*
             $fields = $this->db->list_fields($table);
             $numrows = $name()->countAll();
             echo " ( $numrows )";
-            /*
-            echo count($fields) . ' fields<br>';
-            echo implode(', ', $fields);
-            */
             echo '<hr>';
+            */
         }
+        $this->render([
+            'page' => 'entity.entities',
+            'theme' => 'admin',
+            'entities' => $entities,
+        ]);
     }
     public function collection($name, $offset=0)
     {
@@ -42,6 +47,7 @@ class Entity_controller extends MY_Controller
 
         $this->render([
             'page'=>'entity.list',
+            'theme' => 'admin',
             'name' => $name,
             'list' => $list,
             'per_page' =>  $per_page,

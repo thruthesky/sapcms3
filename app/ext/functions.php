@@ -1,7 +1,7 @@
 <?php
 
 $_list_error = [];
-
+$theme_name = null;
 
 function di($data) {
     echo "<pre>";

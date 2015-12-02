@@ -17,6 +17,9 @@ class MY_Controller extends CI_Controller {
      */
     public function render($data=null) {
 
+        $theme = isset($data['theme']) ? $data['theme'] : null;
+        set_theme($theme);
+
         if ( is_array($data) ) {
             if ( ! isset($data['title']) ) $data['title'] = '';
             if ( isset($data['title'] ) ) {
