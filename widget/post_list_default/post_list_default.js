@@ -23,7 +23,7 @@ $(function(){
     $body.on('click', '.file[no] .delete', ajax_delete);
     $body.on('click', '.post-menu .edit', click_post_edit);
     $body.on('click', '.post-edit .cancel', click_post_edit_cancel);
-    $body.on('click', '.post-edit .delete', click_post_delete);
+    $body.on('click', '.post-menu .delete', click_post_delete);
     $body.on('click', '.post-menu .reply', click_post_reply);
 });
 
@@ -230,8 +230,8 @@ function get_display_file(url, id, edit) {
 function click_post_delete() {
     var $this = $(this);
     var $post = $this.parents('.post');
-
+    var url = '/post/ajax/delete/' + $post.attr('no');
     ajax_load(url, function(re) {
-
+        console.log(re);
     });
 }

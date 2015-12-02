@@ -110,5 +110,8 @@ class PostData_controller extends MY_Controller
         redirect( url_post_view_comment( $comment->get('id_root'), $comment->get('id'))  );
     }
 
+    public function ajaxDelete($id) {
+        $this->renderAjax(['id'=>$id]);
+    }
 
 }

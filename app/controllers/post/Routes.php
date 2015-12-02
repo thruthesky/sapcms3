@@ -26,3 +26,5 @@ $route['post/comment/edit/submit'] = 'post/postdata_controller/commentEditSubmit
 $route['(:any)/edit/ajax/submit'] = 'post/postdata_controller/ajaxEditSubmit';
 
 $route['post/ajax/comment/edit/(:num)'] = 'post/postdata_controller/ajaxCommentEdit/$1';
+
+$route['post/ajax/delete/(:num)'] = 'post/postdata_controller/ajaxDelete/$1';
