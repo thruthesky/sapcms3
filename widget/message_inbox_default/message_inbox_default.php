@@ -3,6 +3,11 @@ $ci = & get_instance();
 $data = $ci->data;
 widget_css();
 widget_js();
+
+$start = $data['offset'] + 1;
+if( $start <= 1 ) $start = 1;
+$end = $data['offset'] + 10;
+if( $end >= $data['total_rows'] ) $end = $data['total_rows'];
 ?>
 
 
@@ -12,7 +17,7 @@ widget_js();
 
 
 <div class='search-label'>
-    Showing <?php echo ( $data['offset'] + 1 ); ?> - <?php echo ( $data['offset'] + 10 ); ?> of <?php echo $data['total_rows']?>
+    Showing <?php echo $start; ?> - <?php echo $end; ?> of <?php echo $data['total_rows']?>
 </div>
 
 

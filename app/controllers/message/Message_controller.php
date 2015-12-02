@@ -234,7 +234,7 @@ class Message_controller extends MY_Controller
 			$url = $file->get('url');
 			
 			if( strpos( $mime, "image"  ) !== false ){
-				$imageHTML .=  "<div no='$id' class='photo'><img src='$url'/></div>";
+				$imageHTML .=  "<div no='$id' class='photo modal-image'><img src='$url'/></div>";
 			}
 			else{
 				$name = $file->get('name');
@@ -283,4 +283,44 @@ class Message_controller extends MY_Controller
 				";
 		
 	}
+	
+	
+	
+	
+	
+	
+	/*temp*/
+	public function imageModalWindow(){
+		$file_id = in('id');		
+		$file = data()->load( $file_id );
+		//if not image return
+		$data = [];
+		
+		$id_entity = $file->get('id_entity');
+		$model = $file->get('model');
+		
+		$total_images = data()->count( "id_entity = $id_entity AND model = '$model' AND mime LIKE 'image%'" );
+		$data['total_images'] = $total_images;
+		$data['current_file'] = $file_id;
+		if( $total_images > 1 ){
+			$prev_file = data()->row("id < $file_id AND id_entity = $id_entity AND model = '$model' AND mime LIKE 'image%' ORDER BY id DESC");
+			if( empty( $prev_file ) ) $prev_file = data()->row("id_entity = $id_entity AND model = '$model' AND mime LIKE 'image%' ORDER BY id DESC");
+			$next_file = data()->row("id > $file_id AND id_entity = $id_entity AND model = '$model' AND mime LIKE 'image%'");
+			if( empty( $next_file ) ) $next_file = data()->row("id_entity = $id_entity AND model = '$model' AND mime LIKE 'image%'");
+			
+			$data['prev_file'] = $prev_file['id'];
+			$data['next_file'] = $next_file['id'];
+		}
+		
+		if( !empty( $prev_file ) ) $prev_file_html = "<span class='modal-image arrow prev' no='$prev_file[id]'>Prev</span>";
+		else $prev_file_html = null;
+		
+		if( !empty( $next_file ) ) $next_file_html = "<span class='modal-image arrow next' no='$next_file[id]'>Next</span>";
+		else $next_file_html = null;
+		
+		$url = $file->get('url');
+		$data['html'] = "<div class='modalImageWrapper' no='$file_id'>$prev_file_html<img src='$url'/>$next_file_html</div>";
+		echo json_encode( $data );
+	}
+	/*eo temp*/
 }

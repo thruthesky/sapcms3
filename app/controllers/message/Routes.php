@@ -22,3 +22,6 @@ $route['message/deleteItem/(inbox|unread|sent)/(:num)/(:num)'] = 'message/Messag
 
 $route['message/ajax/load'] = 'message/Message_controller/ajaxLoad';
 $route['message/ajax/delete'] = 'message/Message_controller/ajaxDelete';
+
+
+$route['message/ajax/imageModalWindow'] = 'message/Message_controller/imageModalWindow';

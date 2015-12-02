@@ -1,0 +1,23 @@
+.send-message .files .file{
+	position:relative;
+	max-width:150px;
+}
+
+.send-message .files .file .delete{
+	position:absolute;
+	right:5px;
+	top:5px;
+	padding:4px 10px;
+	border-radius:3px;
+	color:#fff;
+	background-color:#000;
+	cursor:pointer;
+}
+
+.send-message .files .file .delete:hover{
+	background-color:red;
+}
+
+.send-message .files .file img{
+	width:100%;
+}
