@@ -26,33 +26,6 @@ class Post extends Node {
     }
 
 
-    /**
-     * @param $id_parent
-     * @param $content
-     * @return PostData
-     */
-    public function createComment($id_parent, $content) {
-
-        $parent = post_data( $id_parent );
-        $user = user()->getCurrent();
-        $config = post_config($parent->get('id_config'));
-
-        $id_root = $parent->get('id_root');
-
-        $comment = [];
-        $comment['id_config'] = $config->get('id');
-        $comment['id_user'] = $user->get('id');
-        $comment['id_root'] = $id_root;
-        $comment['id_parent'] = $parent->get('id');
-        $comment['depth'] = $parent->get('depth') + 1;
-        $comment['content'] = $content;
-
-        $comment['order_list'] = post_data()->getListOrder($parent);
-
-        $post = post_data()->createPost($comment);
-
-        return $post;
-    }
 
     /**
      * Returns the number of items.

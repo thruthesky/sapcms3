@@ -53,7 +53,8 @@ class PostData_controller extends MY_Controller
     }
 
     public function editSubmit() {
-        $post = post_data()->createPostFromInput();
+        if ( in('id') ) $post = post_data()->updateFromInput();
+        else $post = post_data()->createPostFromInput();
         $name = post_config()->getCurrent()->get('name');
         $id = $post->get('id');
         redirect("/$name/view/$id");
@@ -69,18 +70,24 @@ class PostData_controller extends MY_Controller
             $post_config = post_config()->getCurrent();
             $post_user = $post_data->getUser();
             $comments = $post_data->getComments();
-            $files = $post_data->getFiles();
+            //$files = $post_data->getFiles();
             $render['config'] = $post_config;
             $render['post'] = $post_data;
             $render['user'] = $post_user;
             $render['comments'] = $comments;
-            $render['files'] = $files;
+            //$render['files'] = $files;
         }
         $this->render($render);
     }
 
     public function commentSubmit() {
-        $comment = post()->createComment(in('id_parent'),in('content'));
+        $comment = post_data()->createComment(in('id_parent'),in('content'));
+        redirect( url_post_view_comment( $comment->get('id_root'), $comment->get('id'))  );
+    }
+
+
+    public function commentEditSubmit() {
+        $comment = post_data()->createComment(in('id_parent'),in('content'));
         redirect( url_post_view_comment( $comment->get('id_root'), $comment->get('id'))  );
     }
 

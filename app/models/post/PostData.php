@@ -54,21 +54,9 @@ class PostData extends Post {
         $post = $this->createPost($record);
         $post->update('id_root', $post->get('id'));
 
-        if ( $data_id = in('data_id') ) {
-            $ids = explode(',', $data_id);
-            if ( $ids ) {
-                foreach ( $ids as $id ) {
-                    data($id)->updates([
-                        'id_entity' => $post->get('id'),
-                        'finish' => 1
-                    ]);
-                }
-            }
-        }
-
+        $this->updateData($post);
         return $post;
     }
-
 
     /**
      * Creates a post data from the input array.
@@ -246,5 +234,77 @@ class PostData extends Post {
             }
         }
         return $newOrderList;
+    }
+
+    /**
+     * Updates file uploads.
+     * @usage Use this methods after post or comment submit.
+     * @param PostData $post
+     */
+    private function updateData(PostData $post)
+    {
+        if ( $data_id = in('data_id') ) {
+            $ids = explode(',', $data_id);
+            if ( $ids ) {
+                foreach ( $ids as $id ) {
+                    data($id)->updates([
+                        'id_entity' => $post->get('id'),
+                        'finish' => 1
+                    ]);
+                }
+            }
+        }
+    }
+
+
+    /**
+     *
+     * @note This is only for comment creating
+     * @param $id_parent
+     * @param $content
+     * @return PostData
+     */
+    public function createComment($id_parent, $content) {
+
+        $parent = post_data( $id_parent );
+        $user = user()->getCurrent();
+        $config = post_config($parent->get('id_config'));
+
+        $id_root = $parent->get('id_root');
+
+        $comment = [];
+        $comment['id_config'] = $config->get('id');
+        $comment['id_user'] = $user->get('id');
+        $comment['id_root'] = $id_root;
+        $comment['id_parent'] = $parent->get('id');
+        $comment['depth'] = $parent->get('depth') + 1;
+        $comment['content'] = $content;
+
+        $comment['order_list'] = post_data()->getListOrder($parent);
+
+        $post = post_data()->createPost($comment);
+
+        $this->updateData($post);
+
+        return $post;
+    }
+
+
+    /**
+     *
+     * @note this is for updating post & comment
+     *
+     */
+    public function updateFromInput() {
+        $id = in('id');
+        $post = post_data($id);
+        $subject = in('subject', '');
+        $content = in('content', '');
+        $post = $post
+            ->set('subject', $subject)
+            ->set('content', $content)
+            ->save();
+        $this->updateData($post);
+        return $post;
     }
 }

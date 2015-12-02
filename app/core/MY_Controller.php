@@ -11,8 +11,6 @@ class MY_Controller extends CI_Controller {
 
 
     }
-
-
     /**
      *
      * @return null
@@ -36,4 +34,15 @@ class MY_Controller extends CI_Controller {
         echo json_encode($data);
         return null;
     }
+
+    /*
+    public function renderTemplate($name) {
+        $path = get_theme_template($name);
+        ob_start();
+        include $path;
+        $template = ob_get_clean();
+        return $template;
+    }
+    */
+
 }

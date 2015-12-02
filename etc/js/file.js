@@ -12,8 +12,7 @@ function onFileChange(obj) {
 
 $(function(){
     $("body").on('submit', '.ajax-upload', ajax_upload);
-    $("body").on('click', '.files .file .delete', ajax_delete);
-
+    $("body").on('click', '.file[no] .delete', ajax_delete);
 });
 
 /**
@@ -30,8 +29,6 @@ function ajax_upload() {
     console.log( $fileSelected.prop('name') );
 
     var $progressBar = $(".ajax-upload-progress-bar");
-
-
 
     var lastAction = $this.prop('action');
     $this.prop('action', '/data/ajax/upload');
@@ -63,7 +60,7 @@ function ajax_upload() {
                 return alert(xhr.responseText);
             }
 
-            console.log(re);
+            //console.log(re);
 
             if ( typeof callback_ajax_upload == 'function' ) callback_ajax_upload($this, re);
         }
@@ -88,5 +85,6 @@ function ajax_upload() {
 }
 
 function ajax_delete() {
-    alert( $(this).parent().attr('no'));
+    var no = $(this).parent().attr('no');
+    ajax_load('/data/ajax/delete/' + no, callback_ajax_delete);
 }

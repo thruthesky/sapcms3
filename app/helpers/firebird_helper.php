@@ -271,12 +271,12 @@ function getDirNames(&$list) {
 
 
 
-function get_default_theme() {
+function get_default_theme_name() {
     return 'default';
 }
 
 function get_theme_name() {
-    return get_default_theme();
+    return get_default_theme_name();
 }
 
 /**
@@ -289,9 +289,20 @@ function get_theme_name() {
  */
 function get_theme_script($page) {
     $path = 'theme/' . get_theme_name() . "/page/$page.php";
-    if ( ! file_exists($path) ) $path = 'theme/' . get_default_theme() . "/page/$page.php";
+    if ( ! file_exists($path) ) $path = 'theme/' . get_default_theme_name() . "/page/$page.php";
     return $path;
 }
+
+/*
+function get_theme_template($name) {
+    $path = get_theme_template_path(get_theme_name(), $name);
+    if ( ! file_exists($path) ) $path = get_theme_template_path(get_theme_name(), $name);
+    return $path;
+}
+function get_theme_template_path($theme, $name) {
+    return "theme/$theme/template/$name.php";
+}
+*/
 
 /**
  * Alias of get_theme_script()

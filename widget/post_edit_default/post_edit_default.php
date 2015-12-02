@@ -22,6 +22,9 @@ if ( isset($ci->data['post']) ) {
     <?php echo js('/etc/js/jquery.form/jquery.form.min');?>
     <?php echo js('/etc/js/file');?>
     <form class="ajax-upload" action="<?php echo base_url("$post_config_name/edit/submit")?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+        <?php if ( isset($post) ) { ?>
+            <input type="hidden" name="id" value="<?php echo $post->get('id')?>">
+        <?php } ?>
         <input type="hidden" name="data_id" value="">
         <input type="hidden" name="model" value="post">
         <input type="hidden" name="category" value="upload">
@@ -42,12 +45,14 @@ if ( isset($ci->data['post']) ) {
                 display_file(re['record']['url'], re['record']['id']);
             }
         }
-
         function display_file(url, id) {
             var $files = $(".files");
             $files.append("<div class='file' no='"+id+"'><span class='delete'>X</span><img src='"+url+"'></div>");
         }
-
+        function callback_ajax_delete(re) {
+            if ( re.code ) return alert("Failed to delete the file");
+            $(".file[no='"+re.id+"']").remove();
+        }
         <?php
             if ( isset($ci->data['files']) ) {
                 $files = $ci->data['files'];

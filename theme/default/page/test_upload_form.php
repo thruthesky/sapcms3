@@ -59,7 +59,11 @@ photo : <input type="file" name="photo" size="255"><br>
         var new_val = val + ',' + re['record'].id;
         $data_id.val( new_val );
         var $obj = $this.find("[name='"+re['record'].form_name+"']");
-        $obj.after("<img class='uploaded' src='"+re['record']['url']+"'>");
+        $obj.after("<div class='file' no='"+re['record']['id']+"'><span class='delete'>X</span><img class='uploaded' src='"+re['record']['url']+"'></div>");
+    }
+    function callback_ajax_delete(re) {
+        if ( re.code ) return alert("Failed to delete the file");
+        $(".file[no='"+re.id+"']").remove();
     }
 </script>
 <style>
