@@ -3,8 +3,6 @@ widget_css();
 widget_js();
 $current = post_data()->getCurrent();
 ?>
-<?php echo js('/etc/js/jquery.form/jquery.form.min');?>
-<?php echo js('/etc/js/file');?>
 <script>
     var id = <?php echo $current->get('id')?>;
     var markup = post_comment_form(id);

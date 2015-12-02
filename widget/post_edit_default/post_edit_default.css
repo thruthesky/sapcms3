@@ -8,6 +8,15 @@
     min-height:6em;
 }
 
+
+.post-edit .file {
+    float:left;
+}
+.post-edit .submit {
+    float:right;
+}
+
+
 .files .file {
     width:200px;
 }

@@ -1,4 +1,12 @@
 function ajax_load($input, $callback) {
+
+    if ( typeof $input == 'String' ) {
+        console.log($input);
+    }
+    else {
+        console.log($input.url);
+    }
+
     var request = $.ajax($input);
     request.done(function( data ) {
         //console.log(data);

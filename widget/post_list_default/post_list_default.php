@@ -5,6 +5,8 @@ $forumName = post_config()->getCurrent()->get('name');
 
 <?php widget('post_menu_default')?>
 
+<?php widget('post_edit_default')?>
+
 <ul class="list-group">
 
 <?php foreach($o['list'] as $post) { ?>
@@ -13,7 +15,6 @@ $forumName = post_config()->getCurrent()->get('name');
 
 <?php } ?>
 </ul>
-
 
 <?php widget('navigator_default', [
     'base_url' => "/$forumName/list",

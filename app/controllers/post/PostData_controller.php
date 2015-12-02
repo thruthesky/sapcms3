@@ -52,13 +52,21 @@ class PostData_controller extends MY_Controller
         $this->render($data);
     }
 
-    public function editSubmit() {
+    public function editSubmit($name) {
+        $post = $this->formEditSubmit();
+        redirect("/$name/view/" . $post->get('id'));
+    }
+
+    public function ajaxEditSubmit($name) {
+        $post = $this->formEditSubmit();
+        $this->renderAjax($post->getRecord());
+    }
+    public function formEditSubmit() {
         if ( in('id') ) $post = post_data()->updateFromInput();
         else $post = post_data()->createPostFromInput();
-        $name = post_config()->getCurrent()->get('name');
-        $id = $post->get('id');
-        redirect("/$name/view/$id");
+        return $post;
     }
+
 
     public function view() {
         $post_data = post_data()->getCurrent();
@@ -87,7 +95,7 @@ class PostData_controller extends MY_Controller
 
 
     public function commentEditSubmit() {
-        $comment = post_data()->createComment(in('id_parent'),in('content'));
+        $comment = post_data()->updateFromInput();
         redirect( url_post_view_comment( $comment->get('id_root'), $comment->get('id'))  );
     }
 

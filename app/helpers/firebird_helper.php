@@ -261,15 +261,11 @@ function in($index=null, $default=NULL) {
  */
 function getDirNames(&$list) {
     $new_list = [];
-    di($list);
     foreach( $list as $dir ) {
         $new_list[] = pathinfo($dir, PATHINFO_BASENAME);
     }
     return $new_list;
 }
-
-
-
 
 function get_default_theme_name() {
     return 'default';

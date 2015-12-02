@@ -12,7 +12,7 @@ function editComment() {
     var $this = $(this);
     var $row = $this.parents('.row');
     var $content = $row.find(".content");
-    var content = $content.html();
+    var content = $content.text();
     var id = $row.attr('no');
     var form = post_comment_edit_form(id);
     $content.html(form);
@@ -20,7 +20,7 @@ function editComment() {
     $content.find("[name='content']").val(content);
 }
 function post_comment_edit_form(id) {
-    var m = '<div class="post-comment-form clearfix">';
+    var m = '<div class="post-comment-edit-form clearfix">';
     m += '<form class="ajax-upload" action="/post/comment/edit/submit" enctype="multipart/form-data" method="post" accept-charset="utf-8">';
     m += '<input type="hidden" name="id" value="'+id+'">';
     m += '<input type="hidden" name="data_id" value="">';
