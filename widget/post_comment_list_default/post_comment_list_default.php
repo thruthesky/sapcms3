@@ -4,6 +4,7 @@ widget_js();
 $ci = & get_instance();
 $comments = $ci->data['comments'];
 ?>
+
 <div class="post-comment-list">
     <?php
     foreach ( $comments as $comment ) {

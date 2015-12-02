@@ -1,39 +1,46 @@
-.post-comment-edit-form {
+.post-list {
 
 }
-.post-comment-edit-form [name='content'] {
+.post-list .post {
+    margin:1em 0;
+    padding:1em;
+    border:1px solid #dfdfdf;
+}
+.post-list .post .post-menu {
+
+}
+.post-list .post .author {
+
+}
+.post-list .post .subject {
+
+}
+.post-list .post .content {
+
+}
+
+
+.post-list .files {
+
+}
+
+.post-list .files .file {
     width:100%;
-    height:4em;
 }
 
-.post-comment-edit-form .file {
-    float:left;
-}
-.post-comment-edit-form .submit {
-    float:right;
-}
-
-
-.files .file {
-    width:200px;
-}
-
-.files .file img {
+.post-list .files .file img {
     width:100%;
-    height:auto;
 }
 
-.files .file .delete {
+
+.post-menu .edit {
+    cursor:pointer;
+}
+.post-menu .reply {
     cursor:pointer;
 }
 
 
-
-.post-comment-list .row {
-    margin:0.4em 0;
-    padding:.8em;
-    background-color:#efefef;
-}
 
 
 .post-list .post[depth='1'] {
