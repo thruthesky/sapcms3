@@ -14,7 +14,7 @@ class Data_controller extends MY_Controller
 
             foreach( $_FILES as $form_name => $file_data ) {
                 $upload = data()->upload($form_name, [
-                    'max_size' => 1000,
+                    'max_size' => 4096,
                     'max_width' => 10240,
                     'max_height' => 7680,
                 ],
@@ -42,7 +42,7 @@ class Data_controller extends MY_Controller
     public function ajaxUpload() {
         foreach( $_FILES as $form_name => $file_data ) {
             $upload = data()->upload($form_name, [
-                'max_size' => 1000,
+                'max_size' => 10240,
                 'max_width' => 10240,
                 'max_height' => 7680,
             ]);
@@ -50,5 +50,10 @@ class Data_controller extends MY_Controller
             debug_log($upload);
             $this->renderAjax($upload);
         }
+    }
+
+    public function ajaxDelete($id) {
+        $re = data($id)->delete();
+        $this->renderAjax(['code'=>$re, 'id'=>$id]);
     }
 }

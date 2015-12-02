@@ -110,4 +110,17 @@ class Data extends Node {
 
 
 
+    public function delete() {
+        if ( $this->exists() ) {
+            debug_log("Data::delete() : path: " . $this->get('path'));
+            @unlink($this->get('path'));
+            parent::delete();
+            return 0;
+        }
+        else {
+            debug_log("Data::delete() : File does not exists.");
+            return FILE_DOES_NOT_EXIST;
+        }
+    }
+
 }

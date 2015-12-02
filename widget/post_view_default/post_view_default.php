@@ -3,14 +3,13 @@ $ci = & get_instance();
 $config = $ci->data['config'];
 $post = $ci->data['post'];
 $user = $ci->data['user'];
-$files = $ci->data['files'];
 $name = $config->get('name');
 ?>
 <h2><?php echo $name?></h2>
 <a href="<?php echo url_post_edit($post)?>">EDIT</a>
 <a href="<?php echo url_post_list()?>">LIST</a>
 <a href="">Vote Good</a>
-<a href="">Vote Bad</a>
+<a href="">Vote Bad</a><br>
 <a href="">Report</a>
 <a href="">Blind</a>
 <a href="">Block</a>
@@ -23,15 +22,7 @@ Subject: <?php echo $post->get('subject')?>
 Content: <?php echo $post->get('content')?>
 <hr>
 
-<?php
-foreach ( $files as $file ) {
-    $url = $file->get('url');
-    echo "<img src='$url'><br>";
-}
-?>
-
-
+<?php widget('post_display_data_default', $post)?>
 <?php widget('post_comment_form_default')?>
-
 <?php widget('post_comment_list_default')?>
 

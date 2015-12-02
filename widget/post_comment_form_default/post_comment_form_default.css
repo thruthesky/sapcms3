@@ -1,4 +1,28 @@
+.post-comment-form {
+
+}
 .post-comment-form [name='content'] {
     width:100%;
     height:4em;
 }
+
+.post-comment-form .file {
+    float:left;
+}
+.post-comment-form .submit {
+    float:right;
+}
+
+.files .file {
+    width:200px;
+}
+
+.files .file img {
+    width:100%;
+    height:auto;
+}
+
+.files .file .delete {
+    cursor:pointer;
+}
+

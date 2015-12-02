@@ -110,6 +110,7 @@ class Entity extends CI_Model {
      * Saves or Updates an item.
      *
      * @note if it has value in $this->get('id'), then it updates.
+     * @note when it updates, it updates 'updated' field.
      *
      * @return Entity|boolean
      *
@@ -119,6 +120,7 @@ class Entity extends CI_Model {
     public function save() {
         if ( empty($this->record) ) return FALSE;
         if ( $id = self::get('id') ) {
+            $this->set('updated', time());
             $this->db->where('id', $id);
             $this->db->update($this->getTable(), $this->record, ['id'=>$id]);
         }
