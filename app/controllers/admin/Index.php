@@ -5,6 +5,6 @@ class Index extends CI_Controller {
 
     public function welcome()
     {
-        echo 'Welcome Admin Index page.';
+        
     }
 }
