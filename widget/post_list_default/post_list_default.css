@@ -6,6 +6,27 @@
     padding:1em;
     border:1px solid #dfdfdf;
 }
+.post-edit [name='subject'] {
+    width:100%;
+}
+
+.post-edit [name='content'] {
+    margin:.4em 0 0;
+    width:100%;
+    min-height:6em;
+}
+
+
+.post-edit .file {
+    float:left;
+}
+.post-edit .submit {
+    float:right;
+}
+
+
+
+
 .post-list .post .post-menu {
 
 }
@@ -20,16 +41,13 @@
 }
 
 
-.post-list .files {
 
-}
-
-.post-list .files .file {
+.files .file {
     width:100%;
 }
 
-.post-list .files .file img {
-    width:100%;
+.files .file img {
+    max-width:100%;
 }
 
 
@@ -70,3 +88,19 @@
 .post-list .post[depth='9'] {
     margin-left:93px;
 }
+
+/** post like */
+.post .like {
+    cursor:pointer;
+}
+.post .like .no {
+    padding-left:.4em;
+    font-weight:bold;
+}
+
+
+/** post file uplod */
+input[type='file'] {
+    width:8em;
+}
+

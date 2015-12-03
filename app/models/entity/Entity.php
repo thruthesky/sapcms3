@@ -120,7 +120,7 @@ class Entity extends CI_Model {
     public function save() {
         if ( empty($this->record) ) return FALSE;
         if ( $id = self::get('id') ) {
-            $this->set('updated', time());
+            self::set('updated', time());
             $this->db->where('id', $id);
             $this->db->update($this->getTable(), $this->record, ['id'=>$id]);
         }

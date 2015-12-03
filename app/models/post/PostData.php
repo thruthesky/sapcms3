@@ -1,4 +1,21 @@
 <?php
+
+/**
+ * Class PostData
+ *
+ *
+ *
+ *
+ * @code How to create a root post_data item.
+        $id_config = 123;
+        $parent = post_data()
+        ->create()
+        ->set('id_config', $id_config)
+        ->set('subject', 'abc')
+        ->save();
+        $parent->set('id_root', $parent->get('id'));
+ * @endcode
+ */
 class PostData extends Post {
 
     private static $current = null;
@@ -59,7 +76,7 @@ class PostData extends Post {
     }
 
     /**
-     * Creates a post data from the input array.
+     * Creates a post data from the input array and returns a new PostData item object.
      *
      * @param $record
      * @return PostData
@@ -95,6 +112,18 @@ class PostData extends Post {
         if ( empty($id_root) ) $id_root = $this->get('id_root');
         return $this->query_loads("id_root=$id_root AND id_parent>0 ORDER BY order_list ASC");
         //return self::getCommentsInOrder($id_root);
+    }
+
+
+
+    /**
+     * Returns the number of items.
+     * @param $id_root
+     * @return mixed
+     */
+    public function countComment($id_root=0) {
+        if ( empty($id_root) ) $id_root = $this->get('id_root');
+        return post_data()->count("id_root=$id_root AND id_parent>0");
     }
 
 
@@ -307,4 +336,39 @@ class PostData extends Post {
         $this->updateData($post);
         return $post;
     }
+
+    /**
+     * @return PostData
+     *
+     * @Attention This method may not actually delete the table record. Instead, it marks the data as deleted.
+     *
+     *
+     */
+    public function delete() {
+        $files = $this->getFiles();
+        debug_log("PostData::delete() count of files:" . count($files));
+
+        foreach ( $files as $file ) {
+            $file->delete();
+        }
+
+        $this->updates([
+            'delete' => 'Y',
+            'subject' => '',
+            'content' => '',
+            'content_stripped' => '',
+        ]);
+
+        return $this;
+    }
+
+
+
+    public function deleted() {
+        return $this->get('delete') == 'Y';
+    }
+
+
+
+
 }

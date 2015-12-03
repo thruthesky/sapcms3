@@ -111,7 +111,22 @@ class PostData_controller extends MY_Controller
     }
 
     public function ajaxDelete($id) {
-        $this->renderAjax(['id'=>$id]);
+
+        post_data($id)->delete();
+        $this->renderAjax([
+            'id'=>$id,
+            'html' => ln('post deleted'),
+        ]);
+
     }
 
+
+    public function ajaxLike($id) {
+        $post = post_data($id);
+        $post->update('no_vote_good', $post->get('no_vote_good')+1);
+        $this->renderAjax([
+            'id'=>$id,
+            'like' => $post->get('no_vote_good'),
+        ]);
+    }
 }

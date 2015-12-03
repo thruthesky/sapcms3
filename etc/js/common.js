@@ -1,6 +1,6 @@
 function ajax_load($input, $callback) {
 
-    if ( typeof $input == 'String' ) {
+    if ( typeof $input == 'string' ) {
         console.log($input);
     }
     else {

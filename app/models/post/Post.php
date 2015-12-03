@@ -27,14 +27,6 @@ class Post extends Node {
 
 
 
-    /**
-     * Returns the number of items.
-     * @param $id_root
-     * @return mixed
-     */
-    public function countComment($id_root) {
-        return post_data()->count("id_root=$id_root AND id_parent>0");
-    }
 
 
 

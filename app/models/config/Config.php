@@ -23,9 +23,7 @@ class Config extends Meta {
 
         parent::set('code', $code);
         parent::set('value', $value);
-        $this->save();
-
-        return $this;
+        return $this->save();
     }
 
     /**

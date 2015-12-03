@@ -25,6 +25,7 @@ $(function(){
     $body.on('click', '.post-edit .cancel', click_post_edit_cancel);
     $body.on('click', '.post-menu .delete', click_post_delete);
     $body.on('click', '.post-menu .reply', click_post_reply);
+    $body.on('click', '.post-menu .like', click_post_like);
 });
 
 /**
@@ -170,9 +171,12 @@ function click_post_reply() {
 function click_post_edit() {
     var $this = $(this);
     var $post = $this.parents('.post');
-    var $subject  = $post.find(".subject");
-    var subject = '';
-    if ( $subject.length ) subject = $subject.text();
+
+    //var $subject  = $post.find(".subject");
+    //var subject = '';
+
+    // if ( $subject.length ) subject = $subject.text();
+
     var $content  = $post.find(".content");
     var content = '';
     if ( $content.length ) content = $content.text();
@@ -185,7 +189,7 @@ function click_post_edit() {
     $post.find('.form-area').hide();
     $post.append(form);
 
-    $post.find("[name='subject']").val(subject);
+    //$post.find("[name='subject']").val(subject);
     $post.find("[name='content']").val(content);
 
     var $files = $post.find(".files");
@@ -233,5 +237,18 @@ function click_post_delete() {
     var url = '/post/ajax/delete/' + $post.attr('no');
     ajax_load(url, function(re) {
         console.log(re);
+        $post.find('.content').html(re.html);
+        $post.find('.author').remove();
+        $post.find('.files').remove();
+    });
+}
+
+function click_post_like() {
+    var $this = $(this);
+    var $post = $this.parents('.post');
+    var url = '/post/ajax/like/' + $post.attr('no');
+    ajax_load(url, function(re) {
+        //console.log(re);
+        $this.find(".no").text(re.like);
     });
 }

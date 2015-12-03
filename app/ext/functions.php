@@ -1,5 +1,8 @@
 <?php
 
+use firebird\FireBird;
+use firebird\Language;
+
 $_list_error = [];
 $theme_name = null;
 
@@ -140,4 +143,20 @@ function getUserAgent() {
 
 function js($file) {
     return "<script type='text/javascript' src='$file.js'></script>";
+}
+
+
+function ln($code, $kvs=[]) {
+    return Language::string($code, $kvs);
+}
+
+
+/**
+ * @short returns the first two  bytes of web browser language
+ * 이 함수는 오직 두 글자만 리턴한다.
+ */
+function browser_language()
+{
+    if ( FireBird::is_cli() ) return null;
+    else return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 }

@@ -1,5 +1,4 @@
 <?php
-widget_css();
 $ci = & get_instance();
 $post_config = post_config()->getCurrent();
 $post_config_name = $post_config->get('name');
