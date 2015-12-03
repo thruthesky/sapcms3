@@ -37,11 +37,12 @@ class Entity_controller extends MY_Controller
     public function collection($name, $offset=0)
     {
         $entity = $name();
-        $per_page = 10;
+        //$per_page = 10; //not compatible with almsaeedstudio
+		
         $list = $entity->search([
             'order_by' => 'id DESC',
             'offset' => $offset,
-            'limit' =>  $per_page,
+            //'limit' =>  $per_page,//not compatible with almsaeedstudio
         ]);
         $total_rows = $entity->searchCount();
 
@@ -50,8 +51,9 @@ class Entity_controller extends MY_Controller
             'theme' => 'admin',
             'name' => $name,
             'list' => $list,
-            'per_page' =>  $per_page,
+            //'per_page' =>  $per_page, //not compatible with almsaeedstudio
             'total_rows' => $total_rows,
+			'collapsedTab' => 'entity',
         ]);
     }
 
