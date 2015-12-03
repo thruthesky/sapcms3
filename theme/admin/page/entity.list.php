@@ -12,7 +12,7 @@
  <section class="content">
    <div class="box">
 		<div class="box-header">
-		  <h3 class="box-title">Data Table With Full Features</h3>
+		  <h3 class="box-title">Data Table With Full Features ( ALL DATA LOADED )</h3>
 		</div><!-- /.box-header -->
 		<div class='box-body'>
 		<table id="entityTable" class="table table-bordered table-striped">
@@ -56,7 +56,7 @@ widget('navigator_default', [
 	</div><!--/.box-->
 		   <div class="box">
 				<div class="box-header">
-				  <h3 class="box-title">Data Table With Full Features</h3>
+				  <h3 class="box-title">Data TABLE USING AJAX and SSP</h3>
 				</div><!-- /.box-header -->
 				<div class='box-body'>
 				<table id="entityTableAjax" class="table table-bordered table-striped" entity_type="<?php echo $name?>">
