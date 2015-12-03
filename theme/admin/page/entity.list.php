@@ -1,4 +1,6 @@
-<section class="content-header">
+<?php 
+ //di( date_default_timezone_get() );
+?><section class="content-header">
   <h1>
 	Entity 
 	<small><?php echo $name?></small>
@@ -33,7 +35,7 @@ foreach( $list as $entity ) {
     echo "
     <tr>
         <td>$id</td>
-        <td>$created</td>
+        <td>".date("m/d/Y H:i",$created)."</td>
         <td>$updated</td>
         <td><a href='/entity/$name/edit/$id'>Edit</a></td>
         <td>Delete</td>
@@ -77,6 +79,9 @@ widget('navigator_default', [
 <?php echo theme_js('alm/plugins/datatables/jquery.dataTables.min')?>
 <?php echo theme_js('alm/plugins/datatables/dataTables.bootstrap.min')?>
 <script>
+	//var offset = new Date().getTimezoneOffset();
+	//alert( offset );//takes in current device timezone
+
   $(function () {
 	$("#entityTable").DataTable();
 	
