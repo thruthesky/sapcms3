@@ -129,4 +129,39 @@ class PostData_controller extends MY_Controller
             'like' => $post->get('no_vote_good'),
         ]);
     }
+
+    public function ajaxEndless($name, $no) {
+
+        $config = post_config($name);
+        $id_config = $config->get('id');
+        $per_page = $config->get('per_page');
+        $offset = $no * $per_page;
+
+        $where = "id_config=$id_config AND id_parent=0";
+
+        $list = post_data()->search([
+            'where' => $where,
+            'order_by' => 'id DESC',
+            'offset' => $offset,
+            'limit' =>  $per_page,
+        ]);
+
+        $render = ['code' => 0];
+        if ( empty($list) ) {
+            $render['code'] = -4;
+        }
+        else {
+            $code = 0;
+            ob_start();
+            foreach( $list as $post ) {
+                widget('post_list_template_post', $post);
+                $comments = $post->getComments();
+                foreach ( $comments as $comment ) {
+                    widget('post_list_template_post', $comment);
+                }
+            }
+            $render['html'] = ob_get_clean();
+        }
+        $this->renderAjax($render);
+    }
 }

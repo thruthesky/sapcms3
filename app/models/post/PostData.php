@@ -237,6 +237,7 @@ class PostData extends Post {
         $id_root = $parent->get('id_root');
         $id_parent = $parent->get('id');
         $count = $this->countComment($id_root);
+
         $newOrderList = 0;
         if ($count) {
             if ($id_root == $id_parent) { // first comment
@@ -309,7 +310,9 @@ class PostData extends Post {
         $comment['depth'] = $parent->get('depth') + 1;
         $comment['content'] = $content;
 
+
         $comment['order_list'] = post_data()->getListOrder($parent);
+
 
         $post = post_data()->createPost($comment);
 

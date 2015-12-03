@@ -13,6 +13,9 @@
     <?php echo theme_css('state')?>
     <?php echo theme_css('theme')?>
     <?php echo jquery()?>
+    <script>
+        var base_url = '<?php echo base_url();?>';
+    </script>
 </head>
 <body>
 <div class="layout">

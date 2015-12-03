@@ -20,12 +20,13 @@ class PostTestData_controller extends MY_Controller
         }
 
         for( $i=0; $i<200; $i++ ) {
-            post_data()
+            $post_data = post_data()
                 ->create()
                 ->set('id_config', $config->get('id'))
                 ->set('subject', "Subject $i")
-                ->set('content', "Content $i<hr>How are you, JK$i")
+                ->set('content', "Content $i<hr>How are you, SJ $i")
                 ->save();
+            $post_data->update('id_root', $post_data->get('id'));
         }
         echo "testForum Posts created";
     }
