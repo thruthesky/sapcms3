@@ -2,6 +2,8 @@
 $forumName = post_config()->getCurrent()->get('name');
 widget_css();
 widget_js();
+widget_js('post_list_endless');
+
 ?>
 
 <?php echo js('/etc/js/jquery.form/jquery.form.min');?>

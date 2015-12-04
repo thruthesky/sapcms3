@@ -26,3 +26,4 @@ $route['post/ajax/delete/(:num)'] = 'post/postdata_controller/ajaxDelete/$1';
 
 
 $route['post/ajax/like/(:num)'] = 'post/postdata_controller/ajaxLike/$1';
+$route['(:any)/ajax/endless/(:num)'] = 'post/postdata_controller/ajaxEndless/$1/$2';
