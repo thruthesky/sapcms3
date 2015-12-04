@@ -1,4 +1,4 @@
-<a href="/" class='logo'>
+<a href="/admin" class='logo'>
 <!-- mini logo for sidebar mini 50x50 pixels -->
 <span class="logo-mini">AP</span>
 <!-- logo for regular state and mobile devices -->
@@ -33,7 +33,7 @@
 					  <li><a href="#">7</a></li>
                     </ul>					
                   </li>
-                  <li class="footer"><a href="#">See All Notificationsg</a></li>
+                  <li class="footer"><a href="#">See All Notifications</a></li>
                 </ul>			
 			  </li>
 			  <li class="dropdown">

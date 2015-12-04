@@ -1,59 +1,26 @@
+<?php 
+ //di( date_default_timezone_get() );
+ $temp_icons = [
+				'config'=>'fa-gear',
+				'data'=>'fa-file',
+				'message'=>'fa-envelope',
+				'post_config'=>'fa-gear',
+				'post_data'=>'fa-file-text',
+				'user'=>'fa-user'
+				];
+?>
 <section class="content-header">
   <h1>
 	Entity 
 	<small><?php echo $name?></small>
   </h1>
   <ol class="breadcrumb">
-	<li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-	<li><a href="/entity/list"/>Entity List</a></li>
-	<li class="active"><?php echo $name?></li>
+	<li><a href="/admin"><i class="fa fa-home"></i> Home</a></li>
+	<li><a href="/entity/list"/><i class="fa fa-list"></i> Entity List</a></li>
+	<li class="active"><i class="fa <?php echo  $temp_icons[$name]; ?>"></i> <?php echo $name?></li>
   </ol>
 </section>
- <section class="content">
-   <div class="box">
-		<div class="box-header">
-		  <h3 class="box-title">Data Table With Full Features ( ALL DATA LOADED )</h3>
-		</div><!-- /.box-header -->
-		<div class='box-body'>
-		<table id="entityTable" class="table table-bordered table-striped">
-		<thead>
-		  <tr>
-			<th>ID</th>
-			<th>Created</th>
-			<th>Updated</th>
-			<th>Edit</th>
-			<th>Delete</th>
-		  </tr>
-		</thead>
-<?php
-foreach( $list as $entity ) {
-    $id = $entity->get('id');
-    $created = $entity->get('created');
-    $updated = $entity->get('updated');
-    echo "
-    <tr>
-        <td>$id</td>
-        <td>$created</td>
-        <td>$updated</td>
-        <td><a href='/entity/$name/edit/$id'>Edit</a></td>
-        <td>Delete</td>
-    </tr>
-    ";
-}
-
-?>
-		</table>
-<?php
-/*
-widget('navigator_default', [
-    'base_url' => "/entity/$name/list",
-    'per_page'=> $per_page,
-    'total_rows' => $total_rows,
-]);
-*/
-?>
-	</div><!--/.box-body-->
-	</div><!--/.box-->
+<section class="content">
 		   <div class="box">
 				<div class="box-header">
 				  <h3 class="box-title">Data TABLE USING AJAX and SSP</h3>
@@ -77,8 +44,11 @@ widget('navigator_default', [
 <?php echo theme_js('alm/plugins/datatables/jquery.dataTables.min')?>
 <?php echo theme_js('alm/plugins/datatables/dataTables.bootstrap.min')?>
 <script>
+	//var offset = new Date().getTimezoneOffset();
+	//alert( offset );//takes in current device timezone
+
   $(function () {
-	$("#entityTable").DataTable();
+	//$("#entityTable").DataTable();
 	
 	var entity_type = $('#entityTableAjax').attr("entity_type");
 	var table = $('#entityTableAjax').DataTable( {
@@ -91,7 +61,7 @@ widget('navigator_default', [
 						if( data != 0 ){
 							var dtStart = new Date(parseInt(data+"000"));
 							var dtStartWrapper = moment(dtStart);
-							return dtStartWrapper.format('MM/DD/YYYY HH:mm');
+							return dtStartWrapper.format('MM/DD/YYYY HH:mm:ss');
 						}
 						else return 0;
 					}
@@ -108,19 +78,7 @@ widget('navigator_default', [
 				"defaultContent": "<span class='delete'>delete</span>",
 				"orderable": false,
 				}
-		  ],
-			/*"columnDefs": [ {
-				"targets": -2,
-				"data": null,
-				"defaultContent": "<span class='edit'>Edit</span>",
-				"orderable": false,
-				},{
-				"targets": -1,
-				"data": null,
-				"defaultContent": "<span class='delete'>Delete</span>",
-				"orderable": false,
-				},
-			],	*/	  
+		  ], 
 		} );
 
 	$('#entityTableAjax tbody').on( 'click', '.edit', function () {

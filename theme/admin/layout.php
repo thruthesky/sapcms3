@@ -17,7 +17,10 @@
 	
 	
     <?php echo theme_css('alm/bootstrap/css/bootstrap.min')?>
-    <?php echo theme_css('alm/font-awesome.min')?>
+    <?php //echo theme_css('alm/font-awesome.min')?>
+    <?php //echo theme_css('alm/ionicons.min')?>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"><?php // required online script for the icons ?>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"><?php // required online script for the icons ?>
     <?php echo theme_css('alm/dist/css/AdminLTE.min')?>
     <?php echo theme_css('alm/dist/css/skins/_all-skins.min')?>
     <?php echo theme_css('alm/plugins/iCheck/flat/blue')?>
@@ -42,10 +45,8 @@
 			<div class="page $model">$path_theme_script</div>
         </div>
 		*/?>
-		<div class="content body">
-			<div class="error"><?php widget('error') ?></div>
-			<div class="page <?php echo $model?>"><?php include $path_theme_script ?></div>
-		</div>
+		<div class="error"><?php widget('error') ?></div>
+		<div class="page <?php echo $model?>"><?php include $path_theme_script ?></div>
     </div>
     <div class="main-footer">
 		<div class="footer-inner"><?php include theme_script('footer')?></div>
@@ -80,13 +81,15 @@
     });
 </script>
 <?php echo theme_js('alm/bootstrap/js/bootstrap.min')?>
-<?php echo theme_js('alm/raphael-min')?>
+<?php //echo theme_js('alm/raphael-min')?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <?php echo theme_js('alm/plugins/morris/morris.min')?>
 <?php echo theme_js('alm/plugins/sparkline/jquery.sparkline.min')?>
 <?php echo theme_js('alm/plugins/jvectormap/jquery-jvectormap-1.2.2.min')?>
 <?php echo theme_js('alm/plugins/jvectormap/jquery-jvectormap-world-mill-en')?>
 <?php echo theme_js('alm/plugins/knob/jquery.knob')?>
-<?php echo theme_js('alm/moment.min')?>
+<?php //echo theme_js('alm/moment.min')?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 <?php echo theme_js('alm/plugins/daterangepicker/daterangepicker')?>
 <?php echo theme_js('alm/plugins/datepicker/bootstrap-datepicker')?>
 <?php echo theme_js('alm/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min')?>

@@ -4,9 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_controller extends MY_Controller {
 
     function adminPage(){
+		$data = [];
+	
+		$stamp_today = strtotime("today");
+		$today_query = "created > $stamp_today";
+		
+		$data['user_count'] = user()->count("$today_query");
+		$data['message_count'] = message()->count("$today_query");
+		$data['data_count'] = data()->count("$today_query");
+		$data['post_data_count'] = post_data()->count("$today_query");
+	
 		$this->render([
             'page'=>'front',
             'theme' => 'admin',
+			'data' => $data,
 		]);
 	}
 	
