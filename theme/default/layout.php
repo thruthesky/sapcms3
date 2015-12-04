@@ -9,6 +9,7 @@
     <?php echo theme_css('layout')?>
     <?php echo theme_css('component')?>
     <?php echo theme_css('component.header')?>
+    <?php echo theme_css('component.slide_menu')?>
     <?php echo theme_css('component.footer')?>
     <?php echo theme_css('state')?>
     <?php echo theme_css('theme')?>
@@ -20,6 +21,7 @@
 <body>
 <div class="layout">
     <div class="header"><div class="header-inner"><?php include theme_script('header')?></div></div>
+    <div class="slide-menu"><?php include 'page/menu.slide.php';?></div>
     <div class="content">
         <div class="content-inner">
             <div class="error"><?php widget('error') ?></div>
