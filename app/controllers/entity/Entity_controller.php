@@ -32,11 +32,17 @@ class Entity_controller extends MY_Controller
             'page' => 'entity.entities',
             'theme' => 'admin',
             'entities' => $entities,
+			'collapsedTab' => 'entity',
+			'name' => 'all',
         ]);
     }
     public function collection($name, $offset=0)
     {
-        $entity = $name();
+		//commented out because this is not needed if we use dataTables
+		$list = [];
+		$total_rows = 0;
+        /*
+		$entity = $name();
         //$per_page = 10; //not compatible with almsaeedstudio
 		
         $list = $entity->search([
@@ -45,7 +51,8 @@ class Entity_controller extends MY_Controller
             //'limit' =>  $per_page,//not compatible with almsaeedstudio
         ]);
         $total_rows = $entity->searchCount();
-
+		*/		
+		
         $this->render([
             'page'=>'entity.list',
             'theme' => 'admin',
@@ -58,16 +65,26 @@ class Entity_controller extends MY_Controller
     }
 
 
-    public function edit($name, $id) {
+    public function edit($name, $id) {		
         $entity = $name()->load($id);
 
         $table = $entity->getTable();
-
         $query = $this->db->query("SELECT * FROM $table WHERE 1 LIMIT 1");
-        $rows = $query->result_array();
-        $row = $rows[0];
+        $rows =  $query->result_array();
+        //$row = $rows[0];
+		
         $fields = $query->field_data();
-
+		
+		 $this->render([
+            'page'=>'entity.edit',
+            'theme' => 'admin',
+			//'id' => $id,
+			'entity' => $entity,
+            'fields' => $fields,
+			'name' => $name,			
+			'collapsedTab' => 'entity',
+        ]);
+		/*
         echo "<form>";
         echo "<table>";
         foreach ($fields as $field)
@@ -89,5 +106,6 @@ class Entity_controller extends MY_Controller
         echo "<input type='submit'>";
 
         echo "</form>";
+		*/
     }
 }
