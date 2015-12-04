@@ -10,6 +10,8 @@
 use firebird\FireBird;
 use firebird\Language;
 
+
+
 $uri = FireBird::is_cli() ? 'Command Line Interface' : $_SERVER['REQUEST_URI'];
 debug_log("init.php begins : " . $uri);
 
@@ -26,6 +28,7 @@ foreach ( FireBird::getModels() as $dir) {
     $path = "$dir/Routes.php";
     if ( file_exists($path) ) include $path;
 }
+
 
 Language::initialize( browser_language() );
 

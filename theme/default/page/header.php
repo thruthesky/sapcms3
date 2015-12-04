@@ -12,9 +12,6 @@
         <a href="/user/login">Login</a>
     <? } ?>
 
+    <span class="slide-menu-button">MENU</span>
 
 </div>
-
-
-
-<?php
