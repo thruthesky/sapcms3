@@ -25,12 +25,22 @@ class Ajax_controller extends MY_Controller
         $this->renderAjax($render);
     }
 
-    public function widget($name) {
-        $render = ['name'=>$name];
-        ob_start();
-        widget('app_'.$name);
-        $markup = ob_get_clean();
-        $render['html'] = $markup;
+    public function widget($widget_name) {
+        $render = ['code'=>0, 'markup'=>'', 'length'=>0, 'widget'=>$widget_name];
+        $widget_real_name = 'app-'.$widget_name;
+        $dir_path = "widget/$widget_real_name";
+        if ( is_dir($dir_path) ) {
+            ob_start();
+            widget($widget_real_name);
+            $markup = ob_get_clean();
+            $render['html'] = $markup;
+            $render['length'] = strlen($markup);
+        }
+        else {
+            $render['message'] = "<b>Widget($widget_name) does not exits. $widget_name 위젯은 없습니다.</b>";
+            $render['code'] = 404;
+        }
         $this->renderAjax($render);
+
     }
 }

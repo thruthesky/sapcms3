@@ -1,4 +1,5 @@
 <?php
+return;
 
 $ci = & get_instance();
 
@@ -18,7 +19,7 @@ $list = post_data()->search([
 
 debug_log("config_name: $config_name");
 
-echo "App Page Front<hr>";
+echo "App Page Life<hr>";
 
 foreach ( $list as $post ) {
 
