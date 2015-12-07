@@ -267,12 +267,9 @@ function getDirNames(&$list) {
     return $new_list;
 }
 
-/**
- * @TODO Theme settings on each domain.
- * @return string
- */
+
 function get_default_theme_name() {
-    return 'mobile';
+    return 'default';
 }
 
 function get_theme_name() {
