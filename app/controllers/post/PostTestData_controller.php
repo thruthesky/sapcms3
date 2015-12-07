@@ -19,7 +19,7 @@ class PostTestData_controller extends MY_Controller
             echo "testForum created<hr>";
         }
 
-        for( $i=0; $i<200; $i++ ) {
+        for( $i=0; $i<5000; $i++ ) {
             $post_data = post_data()
                 ->create()
                 ->set('id_config', $config->get('id'))

@@ -4,7 +4,6 @@ use firebird\FireBird;
 use firebird\Language;
 
 $_list_error = [];
-$theme_name = null;
 
 function di($data) {
     echo "<pre>";

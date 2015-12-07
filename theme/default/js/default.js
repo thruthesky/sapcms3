@@ -2,6 +2,11 @@ $ = jQuery;
 
 $(function(){
     $("body").on("click",".change-password", callbackChangePassword);
+    $(".slide-menu-button").click(function(){
+        $(".slide-menu").animate({
+            width: "toggle"
+        });
+    });
 });
 
 function callbackChangePassword(){

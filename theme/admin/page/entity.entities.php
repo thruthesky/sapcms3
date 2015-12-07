@@ -4,8 +4,8 @@
 	<small>All</small>
   </h1>
   <ol class="breadcrumb">
-	<li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-	<li class="active">Entity List</li>
+	<li><a href="/admin"><i class="fa fa-home"></i> Home</a></li>
+	<li class="active"><i class="fa fa-list"></i> Entity List</li>
   </ol>
 </section>
  <section class="content">

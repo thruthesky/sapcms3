@@ -38,6 +38,13 @@ class User_controller extends MY_Controller {
 		$this->render( $data );
 	}
 
+
+    /**
+     *
+     *
+     *
+     * @return $this|Entity|FALSE
+     */
 	public function create() {
 		$request = $this->input->post();
 		if( empty( $request['id'] ) ) {
@@ -62,7 +69,6 @@ class User_controller extends MY_Controller {
 				->set( 'address',  $request['address'] )
 				->set( 'mobile',  $request['mobile'] )
 				->save();
-
 
 		//returns the user entity after create...
 		return $user;
