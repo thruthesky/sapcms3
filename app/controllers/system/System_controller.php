@@ -11,5 +11,8 @@ class System_controller extends MY_Controller {
         $this->renderAjax($info);
     }
 
+    public function phpinfo() {
+        phpinfo();
+    }
 }
 

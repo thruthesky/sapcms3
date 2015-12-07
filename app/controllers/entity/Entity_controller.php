@@ -51,7 +51,9 @@ class Entity_controller extends MY_Controller
             //'limit' =>  $per_page,//not compatible with almsaeedstudio
         ]);
         $total_rows = $entity->searchCount();
-		*/		
+		*/				
+		$date_from = in("date_from");
+		$date_to = in("date_to");
 		
         $this->render([
             'page'=>'entity.list',
@@ -60,6 +62,8 @@ class Entity_controller extends MY_Controller
             'list' => $list,
             //'per_page' =>  $per_page, //not compatible with almsaeedstudio
             'total_rows' => $total_rows,
+			'date_from' => $date_from,
+			'date_to' => $date_to,
 			'collapsedTab' => 'entity',
         ]);
     }
@@ -108,4 +112,55 @@ class Entity_controller extends MY_Controller
         echo "</form>";
 		*/
     }
+	
+	 public function editSubmit($name) {
+		$id = in('id');
+		if( empty( $id ) ) {
+			//error
+			setError("ID [ $id } does not exist.");
+			self::collection( $name, null );
+		}
+		else{
+			$entity = $name()->load( $id );
+			if( empty( $entity ) ){
+				setError("Entity [ $name ] ID [ $id } does not exist.");
+				self::collection( $name, null );
+			}
+			else{
+				$table = $name()->getTable();
+				$query = $this->db->query("SELECT * FROM $table WHERE 1 LIMIT 1");
+				$fields = $query->field_data();
+				foreach( $fields as $field ){
+					$field_name = $field->name;
+					if( $field_name == 'id' ) continue;
+					$value = in( $field_name );
+					if( !empty( $value ) ){				
+						$entity->set( $field_name, $value );
+					}					
+				}
+				$entity->save();
+				redirect("/entity/$name/edit/$id");
+			}
+		}
+	 }
+	 
+	 public function deleteSubmit($name) {
+		$id = in('id');
+		if( empty( $id ) ) {
+			//error
+			setError("ID [ $id } does not exist.");
+			self::collection( $name, null );
+		}
+		else{
+			$entity = $name()->load( $id );
+			if( empty( $entity ) ){
+				setError("Entity [ $name ] ID [ $id } does not exist.");
+				self::collection( $name, null );
+			}
+			else{
+				$entity->delete();		
+				self::collection( $name, null );
+			}
+		}
+	 }
 }

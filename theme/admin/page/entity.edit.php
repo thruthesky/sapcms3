@@ -8,24 +8,36 @@
 		</div><!-- /.box-header -->
 		<!-- form start -->
 		<form class='form-horizontal' role="form" action="/entity/<?php echo $name; ?>/edit/submit">
+			<input type='hidden' name='id' value='<?php echo $entity->get('id'); ?>'>
 			<div class='box-body'>
 				<?php foreach( $fields as $field ) { 
-					$name = $field->name;
+					$field_name = $field->name;
 					
-					if( $name == 'id' ||$name == 'created' || $name == 'updated' || $name == 'password' ) continue;
+					if( $field_name == 'id' || $field_name == 'created' || $field_name == 'updated' || $field_name == 'password' ) continue;
 					
-					$value = $entity->get( $name );
+					$value = $entity->get( $field_name );
+					
+					if( $field_name == 'password' ) $type = 'password';
+					else if( $field_name == 'email' ) $type = 'email';
+					else $type = "text";
 				?>
 				<div class="form-group">
-				  <label class='col-sm-2' for="exampleInputPassword1"><?php echo $name ?></label>
+				  <label class='col-sm-2'><?php echo $field_name ?></label>
 				  <div class='col-sm-10'>
-					<input class='form-control' type="text" name='username' class="form-control" id="exampleInputPassword1" placeholder="Input <?php echo $name ?>" value=<?php echo $value ?>>
+					<?php if( $field_name == 'content' ) {?>
+					<textarea style='height:200px;resize:none;' name='content' class="form-control">
+						<?php echo $value; ?>
+					</textarea>
+					<?php } else { ?>
+					<input class='form-control' type="<?php echo $type; ?>" name='<?php echo $field_name; ?>' class="form-control" placeholder="Input <?php echo $field_name ?>" value=<?php echo $value ?>>
+					<?php } ?>
 				  </div>
 				</div>
 				<?php } ?>
 			</div>
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<a href="/entity/<?php echo $name; ?>/list" class="btn btn-default">Cancel</a>
+				<button type="submit" class="btn btn-primary pull-right">Submit</button>
 			</div>
 		</form>
 	</div>

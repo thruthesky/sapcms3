@@ -56,4 +56,11 @@ class Data_controller extends MY_Controller
         $re = data($id)->delete();
         $this->renderAjax(['code'=>$re, 'id'=>$id]);
     }
+
+    public function downloadBase64($id) {
+        echo data($id)->getBase64();
+    }
+    public function displayBase64Image($id) {
+        echo "<img src='".data($id)->getBase64()."'>";
+    }
 }

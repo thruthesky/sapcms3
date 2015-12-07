@@ -31,7 +31,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="/entity/user/list?date_from=today" class="small-box-footer">
                   More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -46,7 +46,7 @@
                 <div class="icon">
                   <i class="ion ion-ios-email"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="/entity/message/list?date_from=today" class="small-box-footer">
                   More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -61,7 +61,7 @@
                 <div class="icon">
                   <i class="ion ion-edit"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="/entity/post_data/list?date_from=today" class="small-box-footer">
                   More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -76,7 +76,7 @@
                 <div class="icon">
                   <i class="ion ion-ios-paper"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="/entity/data/list?date_from=today" class="small-box-footer">
                   More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>

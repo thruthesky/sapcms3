@@ -97,6 +97,17 @@ class Data extends Node {
     }
 
 
+    public function getBase64() {
+        $content = file_get_contents($this->get('path'));
+        if ( $content === FALSE ) return FALSE;
+        return "data:" . $this->get('mime') . ';base64,' . base64_encode($content);
+    }
+
+    public function getImageBase64() {
+        return "<img src='".$this->getBase64()."'>";
+    }
+
+
     private function deleteUnfishedUploads()
     {
         $stamp = time() - 60 * 60 * 1; // 1 hours.
