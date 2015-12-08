@@ -1,4 +1,9 @@
 <?php
+/*
+*requires image data object from a post_data model
+*
+*/
+
 widget_css();
 
 $images = $o['images'];
