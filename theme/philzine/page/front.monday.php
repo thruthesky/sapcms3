@@ -20,10 +20,16 @@
 		?>
 		</div>
 		<div class='b'>
-			<?php widget( "philzine_hover_image_with_title", $data );  ?>
+			<?php 
+				if( !empty( $data ) ) widget( "philzine_hover_image_with_title", $data );
+				else echo "<h1>Empty Data</h1>";
+			?>
 		</div>
 		<div class='c'>
-			<?php widget( "philzine_hover_image_with_title", $data );  ?>
+			<?php 
+				if( !empty( $data ) ) widget( "philzine_hover_image_with_title", $data );
+				else echo "<h1>Empty Data</h1>";
+			?>
 		</div>
 	</div>
 </div>
