@@ -1,0 +1,22 @@
+.philzine-hover-image-with-title{
+	
+}
+
+.philzine-hover-image-with-title .inner{
+	position:relative;
+}
+
+.philzine-hover-image-with-title .inner img{	
+	width:100%;	
+}
+
+.philzine-hover-image-with-title .inner .content{
+	position:absolute;
+	left:0;
+	bottom:0;	
+	width:100%;
+	padding:10px;
+	background-color:rgba(0,0,0,.5);
+	color:#fff;
+	box-sizing:border-box;
+}
