@@ -1,0 +1,15 @@
+.grid3 > *{
+	box-sizing:border-box;
+}
+
+.grid3 > .a{
+	padding:0 6.66px 0 0;
+}
+
+.grid3 > .b{
+	padding:0 3.33px 0 3.33px;
+}
+
+.grid3 > .c{
+	padding:0 0 0 6.66px;
+}

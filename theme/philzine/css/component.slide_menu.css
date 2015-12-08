@@ -1,0 +1,10 @@
+.slide-menu {
+    position:absolute;
+    right:0;
+    z-index:999;
+    display:none;
+}
+.slide-menu-inner {
+    background-color:#efefef;
+    width:200px;
+}
