@@ -1,0 +1,70 @@
+.header {
+	margin-bottom:10px;
+}
+
+.header .top-inner, .header .bottom-inner{
+	margin:0 auto;
+    max-width:1234px;
+}
+
+.header .top{
+	padding:10px;
+	background-color:#2980b9;
+	color:#fff;
+	text-align:center;
+}
+
+.header .top .logo{
+	display:inline-block;
+	font-size:2em;	
+}
+
+.header .top .header-button{
+	cursor:pointer;
+}
+
+.header .top .header-button.home{
+	float:left;
+}
+
+.header .top .header-button.menu{
+	float:right;
+}
+
+.header .bottom{	
+	padding:5px 0;
+	background-color:#fff;
+	text-align:center;
+}
+
+.header .bottom a{	
+	color:#858484;
+}
+
+.header .bottom ul{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+
+.header .bottom li{
+	display:inline-block;
+}
+
+.header .bottom .main-menu .item{
+	display:inline-block;
+	width:20%;	
+	box-sizing:border-box;
+}
+
+.header .bottom .main-menu .item a{
+	display:inline-block;
+	padding:5px 3px;
+}
+
+.header .bottom .main-menu .item a:hover, .header .bottom .main-menu .item a.selected{	
+	padding-bottom:3px;
+	border-bottom:2px solid #e5802b;
+	color:#e5802b;
+	text-decoration:none;	
+}
