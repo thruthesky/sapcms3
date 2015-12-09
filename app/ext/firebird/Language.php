@@ -56,6 +56,7 @@ class Language
      * @endcode
      */
     public static function string($code, $kvs=[]) {
+        if ( ! isset(self::$language[$code]) ) return $code;
         $message = self::$language[$code];
         foreach( $kvs as $k => $v ) {
             $message = str_replace('#'.$k, $v, $message);
