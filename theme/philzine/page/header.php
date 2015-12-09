@@ -17,12 +17,12 @@
 </nav>
 */
 ?>
-<div class='container-fluid' style="height:61px;padding:10px;background-color:#2980b9;">
+<div class='container-fluid top'>
 	<ul class="container nav nav-inline text-xs-center">
 	  <li class="nav-item pull-xs-left">
 		<a class='nav-link' href='#'><img class='header-button home' src="/theme/philzine/img/home.png"/></a>
 	  </li>
-	  <li class="nav-item">
+	  <li class="nav-item logo">
 		<a class="nav-link" href="#">Logo</a>
 	  </li>
 	  <li class="nav-item pull-xs-right">
@@ -30,7 +30,7 @@
 	  </li>
 	</ul>
 </div>
-<div class='container-fluid' style="background-color:#fff;padding:10px;">
+<div class='container-fluid bottom'>
 	<nav class="container nav nav-inline">
 	  <a class="nav-link active" href="#">Active</a>
 	  <a class="nav-link" href="#">Link</a>
