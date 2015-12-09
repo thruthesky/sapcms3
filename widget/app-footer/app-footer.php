@@ -18,4 +18,3 @@
         display:inline-block;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>widget/app-footer/server.css?v=1">
