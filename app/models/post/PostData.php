@@ -69,7 +69,6 @@ class PostData extends Post {
             'link' => in('link'),
         ];
         $post = $this->createPost($record);
-        $post->update('id_root', $post->get('id'));
 
         $this->updateData($post);
         return $post;
@@ -78,6 +77,7 @@ class PostData extends Post {
     /**
      * Creates a post data from the input array and returns a new PostData item object.
      *
+     * @note It updates 'id_root' if the input '$record[id_root]' is not set.
      * @param $record
      * @return PostData
      */
@@ -85,6 +85,9 @@ class PostData extends Post {
         if ( ! isset($record['created']) ) $record['created'] = time();
         $this->db->insert( $this->getTable(), $record );
         $id = $this->db->insert_id();
+
+        if ( ! isset($record['id_root']) ) $this->update('id_root', $id);
+
         return post_data($id);
     }
 
@@ -137,6 +140,15 @@ class PostData extends Post {
     public function getFiles($id=0) {
         if ( empty($id) ) $id = $this->get('id');
         return data()->query_loads("model='post' AND id_entity=$id");
+    }
+
+    public function getFirstImageUrl() {
+        $files = $this->getFiles();
+        if ( empty($files) ) return null;
+        foreach ( $files as $file ) {
+            //// $file->get('mime');
+            return $file->get('url');
+        }
     }
 
     public function escapeContent($content)
@@ -371,7 +383,34 @@ class PostData extends Post {
         return $this->get('delete') == 'Y';
     }
 
-
+    /**
+     * Returns an array of PostData objects order by 'id desc'.
+     * @param $config_name
+     * @param $numrows
+     * @param int $offset
+     * @return mixed
+     * @code
+                $posts = post_data()->latest($o, 10);
+                echo "<div class='posts $o'>";
+                foreach( $posts as $post ) {
+                $content = $post->get('content');
+                echo "<div class='post'>$content</div>";
+                }
+                echo "</div>";
+     * @endcode
+     */
+    public function latest($config_name, $numrows, $offset=0)
+    {
+        $post_config = post_config($config_name);
+        $id_config = $post_config->get('id');
+        $where = "id_config=$id_config AND id_parent=0";
+        return post_data()->search([
+            'where' => $where,
+            'order_by' => 'id DESC',
+            'offset' => $offset,
+            'limit' =>  $numrows,
+        ]);
+    }
 
 
 }

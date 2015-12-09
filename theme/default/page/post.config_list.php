@@ -19,6 +19,7 @@
         echo "<td><a href='/$name/list'>" . $config->get('id') . "</a></td>";
         echo "<td>$name</td>";
         echo "<td>" . $config->get('description') . "</td>";
+        echo "<td>" . $config->countPosts() . "</td>";
         echo "</tr>";
     }
     ?>

@@ -66,4 +66,14 @@ class PostConfig extends Post {
 
         return self::$current;
     }
+
+    /**
+     * Returns the number of posts of the forum.
+     * @return int
+     */
+    public function countPosts() {
+        return post_data()->searchCount([
+            'where' => 'id_config=' . $this->get('id'),
+        ]);
+    }
 }

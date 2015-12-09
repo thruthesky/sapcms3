@@ -39,6 +39,10 @@
     })
 </script>
 
+
+<?php widget('post_latest', 'FORUM')?>
+
+
 <hr>
 In the long history of the world, only a few generation have been granted the roll of depending of the world in its our maximum danger.
 
