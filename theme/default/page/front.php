@@ -40,7 +40,7 @@
 </script>
 
 
-<?php widget('post_latest', 'FORUM')?>
+<?php widget('post_latest', ['post_config_name'=>'FORUM'])?>
 
 
 <hr>

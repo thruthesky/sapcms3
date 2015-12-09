@@ -416,11 +416,11 @@ function message() {
 
 
 function bootstrap_css() {
-    return '<link href="/etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
+    return '<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">';
 }
 
 function bootstrap_js() {
-    return '<script src="/etc/bootstrap/js/bootstrap.min.js"></script>';
+    return '<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>';
 }
 
 function jquery() {
