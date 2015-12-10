@@ -272,9 +272,9 @@ function get_default_theme_name() {
     return 'default';
 }
 
-function get_theme_name() {
-	return "philzine";
-    global $theme_name;
+function get_theme_name() {	
+    global $theme_name;	
+	if( empty( $theme_name ) ) return "philzine";//temp
     if ( empty($theme_name) ) return get_default_theme_name();
     else return $theme_name;
 }
@@ -417,10 +417,13 @@ function message() {
 
 
 function bootstrap_css() {
+	global $theme_name;	
+	if( $theme_name == "admin" ) return null;//temp
     return '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">';
 }
 
 function bootstrap_js() {
+	if( $theme_name == "admin" ) return null;//temp
     return '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>';
 }
 
