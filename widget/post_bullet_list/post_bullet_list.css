@@ -1,0 +1,21 @@
+.list-group.bullet-list{
+	border:2px solid #ddd;
+	margin-bottom:10px;
+}
+
+.list-group.bullet-list .list-group-item{
+	position:relative;
+	padding-left:10px;
+	border:0;	
+}
+
+.list-group.bullet-list .list-group-item .bullet{
+	position:relative;
+	top:-2px;
+	display:inline-block;
+	height:5px;
+	width:5px;
+	margin:0 10px 0 0;
+	border-radius:100%;
+	background-color:#d35400;
+}

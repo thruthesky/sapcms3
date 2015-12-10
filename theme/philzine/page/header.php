@@ -20,7 +20,7 @@
 <div class='container-fluid top'>
 	<ul class="container nav nav-inline text-xs-center">
 	  <li class="nav-item pull-xs-left">
-		<a class='nav-link' href='#'><img class='header-button home' src="/theme/philzine/img/home.png"/></a>
+		<a class='nav-link' href='/'><img class='header-button home' src="/theme/philzine/img/home.png"/></a>
 	  </li>
 	  <li class="nav-item logo">
 		<a class="nav-link" href="#">Logo</a>

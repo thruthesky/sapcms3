@@ -1,0 +1,26 @@
+.list-group.list-with-bottom-border-only{
+	
+}
+
+.list-group.list-with-bottom-border-only .list-group-item{
+	border:0;
+	border-bottom:1px solid #ddd;
+	background-color:transparent;
+}
+
+.list-group.list-with-bottom-border-only .list-group-item:last-child{
+	border:0;
+}
+
+.list-group.list-with-bottom-border-only .list-group-item > a{
+	display:block;
+	height:38px;
+	overflow:hidden;	
+	color:#4878a9;
+	line-height:130%;
+}
+
+.list-group.list-with-bottom-border-only .list-group-item > .extra-info{
+	font-size:.8em;
+	color:#6f6f6f;
+}

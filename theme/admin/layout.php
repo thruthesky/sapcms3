@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>ADMIN PAGE</title>
-    <?php echo bootstrap_css()?>
+    <?php //echo bootstrap_css()?>
     <?php //echo theme_css('base')?>
     <?php //echo theme_css('layout')?>
     <?php //echo theme_css('component')?>
@@ -71,7 +71,7 @@
     </aside>
 	<div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
 </div>
-<?php echo bootstrap_js()?>
+<?php //echo bootstrap_js()?>
 <?php echo js('/etc/js/common')?>
 <?php echo theme_js('default')?>
 <script>

@@ -1,94 +1,22 @@
-/*carousel override*/
-.carousel{
-	margin-bottom:10px;
-}
-
-.carousel .carousel-item{
-	position:relative;
-}
-
-.carousel .carousel-item .carousel-image{
-	position:absolute;
-	left:0;
-	top:0;
-	width:150%;
-	max-width:none;
-}
-
-.carousel.hover-type .carousel-caption{
-	width:100%;
-	left:0;
-	right:0;
-	bottom:0;
-	padding:1.25em 10px;
-	background:rgba(0,0,0,.5);
-	text-align:left;
-}
-
-.carousel.hover-type .carousel-caption h3{
-	font-size:1.2em;
-}
-/*eo carousel override*/
-
-/*list-group override*/
-.list-group.bullet-list{
-	border:2px solid #ddd;
-	margin-bottom:10px;
-}
-
-.list-group.bullet-list .list-group-item{
-	position:relative;
-	padding-left:10px;
-	border:0;	
-}
-
-.list-group.bullet-list .list-group-item .bullet{
-	position:relative;
-	top:-2px;
-	display:inline-block;
-	height:5px;
-	width:5px;
-	margin:0 10px 0 0;
-	border-radius:100%;
-	background-color:#d35400;
-}
-/*eo list-group override*/
-
 /*row third*/
-.row.third{
-	margin-bottom:10px;
+.row.third .carousel.bottom-text-type{
+	background-color:#fff;
 }
 
-.carousel.bottom-text-type{
-	
-}
-
-.carousel.bottom-text-type .carousel-caption{
-	position:initial;
-	text-align:left;	
-}
-
-.carousel.bottom-text-type .carousel-caption h3{
-	font-size:1.2em;
+.row.third .carousel.bottom-text-type .carousel-caption{
+	height: 90px;
+    overflow: hidden;
+	line-height: 157%;
 }
 /*eo row third*/
 
-/*row fourth*/
-.row.fourth{
-	margin-bottom:10px;
+/*row sixth*/
+.row.sixth .carousel.bottom-text-type{
+	background-color:#fff;
 }
 
-.list-group.list-with-bottom-border-only{
-	
+.row.sixth .carousel.bottom-text-type .carousel-caption{
+	height: 87px;
+    overflow: hidden;	
 }
-
-.list-group.list-with-bottom-border-only .list-group-item{
-	border:0;
-	border-bottom:1px solid #ddd;
-	background-color:transparent;
-}
-
-.list-group.list-with-bottom-border-only .list-group-item:last-child{
-	border:0;
-}
-/*eo row fourth*/
+/*eo row sixth*/
