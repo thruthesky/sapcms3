@@ -21,7 +21,7 @@
         <td><span class="text-button page" page="company">업소록</span></td>
         <td><span class="text-button page" page="travel">여행</span></td>
         <td><span class="text-button page" page="photo">사진</span></td>
-        <td><span class="text-button page" page="qna">질문</span></td>
-        <td><span class="text-button page" page="community">커뮤니티</span></td>
+        <td><span class="text-button page" page="buyandsell">장터</span></td>
+        <td><span class="text-button page" page="forum">게시판</span></td>
     </tr>
 </table>
