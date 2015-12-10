@@ -36,8 +36,7 @@ class Ajax_controller extends MY_Controller
             $markup = "<div class='widget $widget_name'>$markup</div>";
         }
         else {
-            $markup = null;
-            $render['message'] = "<b>Widget($widget_name) does not exits. $widget_name 위젯은 없습니다.</b>";
+            $markup = "<b>Widget($widget_name) does not exits. $widget_name 위젯은 없습니다.</b>";
             $render['code'] = 404;
         }
         $render['html'] = $markup;
