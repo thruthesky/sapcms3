@@ -15,13 +15,13 @@
 	$post_entity = post_data()->load( $p['id'] );
 	$comment_count = $post_entity->countComment();
 	//needs human timing
-	$stamp = $p['created'];
+	$time = humanTiming( $p['created'] );
 ?>
 		<li class="list-group-item">
 			<a href='#'>
 				<?php echo $content; ?>					
 			</a>
-			<div class='extra-info'><?php echo $comment_count; ?> Comments <?php echo $stamp; ?></div>
+			<div class='extra-info'><?php echo $comment_count; ?> Comments <span class='custom-bullet'></span> <?php echo $time; ?> Ago</div>
 		</li>
 <?php 
 	} 

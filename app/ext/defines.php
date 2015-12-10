@@ -18,5 +18,3 @@ date_default_timezone_set( 'Asia/Seoul' );
 
 define('FILE_DOES_NOT_EXIST', -40401);
 
-
-$theme_name = null;

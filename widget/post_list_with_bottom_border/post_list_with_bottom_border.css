@@ -2,6 +2,17 @@
 	
 }
 
+.list-group.list-with-bottom-border-only .custom-bullet{
+	display:inline-block;
+	position:relative;
+	top:-2px;
+	height:3px;
+	width:3px;
+	margin:0 3px;
+	border-radius:100%;	
+	background-color:#6f6f6f;
+}
+
 .list-group.list-with-bottom-border-only .list-group-item{
 	border:0;
 	border-bottom:1px solid #ddd;

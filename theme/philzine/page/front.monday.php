@@ -1,7 +1,9 @@
 <?php
+
+
 $data = [];
 
-	$images = data()->rows("model='post' AND id_entity <> 0 LIMIT 1");
+	$images = data()->rows("model='post' AND id_entity <> 0 ORDER BY id DESC LIMIT 1");
 	if( !empty( $images[0] ) ){
 		$data['images'] = data()->load( $images[0]['id'] );	
 		$data['fake_image'] = "<img src='/theme/philzine/img/fake_front_carousel.png' style='width:100%;max-height:250px;opacity:0;z-index:-1;'/>";//temp
@@ -19,7 +21,7 @@ else{
 
 
 <?php
-	$posts = post_data()->rows("id_user <> 0 LIMIT 5");	
+	$posts = post_data()->rows("id_user <> 0 ORDER BY id DESC LIMIT 5");	
 	widget("post_bullet_list", $posts);
 ?>
 
@@ -33,7 +35,7 @@ else{
 
 
 <?php
-	$images = data()->rows("model='post' AND id_entity <> 0 LIMIT 3");
+	$images = data()->rows("model='post' AND id_entity <> 0 ORDER BY id DESC LIMIT 3");
 	if( count( $images ) >= 3 ){
 		foreach( $images as $image ){
 			$items['images'][] = data()->load( $image['id'] );		
@@ -73,7 +75,7 @@ else{
 
 
 <?php
-	$posts = post_data()->rows("id_user <> 0 LIMIT 3");	
+	$posts = post_data()->rows("id_user <> 0 ORDER BY id DESC LIMIT 3");	
 ?>
 <div class='row fourth'>
 	<div class="col-sm-6">
@@ -96,7 +98,7 @@ else{
 
 
 <?php
-	$images = data()->rows("model='post' AND id_entity <> 0 LIMIT 4");
+	$images = data()->rows("model='post' AND id_entity <> 0 ORDER BY id DESC LIMIT 4");
 	foreach( $images as $image ){
 		$items['images'][] = data()->load( $image['id'] );		
 	}
@@ -131,7 +133,7 @@ else{
 
 
 <?php
-	$images = data()->rows("model='post' AND id_entity <> 0 LIMIT 4");	
+	$images = data()->rows("model='post' AND id_entity <> 0 ORDER BY id DESC LIMIT 4");	
 ?>
 
 

@@ -73,7 +73,9 @@ class PostData_controller extends MY_Controller
     }
     public function formEditSubmit() {
         if ( in('id') ) $post = post_data()->updateFromInput();
-        else if ( in('id_parent') ) $post = post_data()->createComment(in('id_parent'), in('content'));
+        else if ( in('id_parent') ) {
+            $post = post_data()->createComment(in('id_parent'), in('content'));
+        }
         else $post = post_data()->createPostFromInput();
         return $post;
     }

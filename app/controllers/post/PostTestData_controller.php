@@ -34,12 +34,11 @@ class PostTestData_controller extends MY_Controller
         }
 
         for( $i=0; $i<100; $i++ ) {
-            $post_data = post_data()
-                ->create()
-                ->set('id_config', $config->get('id'))
-                ->set('subject', "$name - Subject $i")
-                ->set('content', "$name - Content $i<hr>How are you, S.J. $i")
-                ->save();
+            $p = [];
+            $p['id_config'] = $config->get('id');
+            $p['subject'] = "$name - Subject $i";
+            $p['content'] = "$name - Content $i<hr>How are you, S.J. $i";
+            post_data()->createPost($p);
         }
         echo "$name forum Posts created<hr>";
     }

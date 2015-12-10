@@ -86,7 +86,11 @@ class PostData extends Post {
         $this->db->insert( $this->getTable(), $record );
         $id = $this->db->insert_id();
 
-        if ( ! isset($record['id_root']) ) $this->update('id_root', $id);
+        $this->set('id', $id); // set id for the entity.
+
+        if ( ! isset($record['id_root']) || empty($record['id_root']) ) {
+            $this->update('id_root', $id);
+        }
 
         return post_data($id);
     }
@@ -309,10 +313,19 @@ class PostData extends Post {
     public function createComment($id_parent, $content) {
 
         $parent = post_data( $id_parent );
+		$id_root = $parent->get('id_root');
+        if ( empty( $id_root ) ) {
+            di("error: id_root cannot be 0.");
+            exit;
+        }
+
+
+
         $user = user()->getCurrent();
         $config = post_config($parent->get('id_config'));
 
         $id_root = $parent->get('id_root');
+
 
         $comment = [];
         $comment['id_config'] = $config->get('id');
@@ -321,9 +334,8 @@ class PostData extends Post {
         $comment['id_parent'] = $parent->get('id');
         $comment['depth'] = $parent->get('depth') + 1;
         $comment['content'] = $content;
-
-
         $comment['order_list'] = post_data()->getListOrder($parent);
+
 
 
         $post = post_data()->createPost($comment);

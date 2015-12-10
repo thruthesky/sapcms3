@@ -2,6 +2,16 @@
 	margin-bottom:10px;
 }
 
+.header .bottom a{
+	padding:0 3px;
+	color:#8e8e8e;
+}
+
+.header .bottom a.active{
+	color:#e5802b;
+	border-bottom:2px solid #e5802b;
+}
+
 .header .nav{
 	padding-left:15px;
 }
@@ -12,7 +22,12 @@
 }
 
 .header .top .logo{
-	padding:10px;
+	
+}
+
+.header .top .logo a{
+	font-size:1.5em;
+	color:#fff;	
 }
 
 .header .bottom{

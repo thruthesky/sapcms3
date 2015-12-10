@@ -51,3 +51,7 @@ a:hover{
 .no-margin-bottom{
 	margin-bottom:0!important;
 }
+
+.slide-menu-button{
+	cursor:pointer;
+}
