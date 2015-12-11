@@ -20,6 +20,7 @@ widget_js('post_list_endless');
 <div class="post-list">
     <?php
     foreach($o['list'] as $post) {
+		//change this to post_list_template_post to go back to the old design
         widget('post_list_template_post_philzine', $post);
         $comments = $post->getComments();
         foreach ( $comments as $comment ) {
