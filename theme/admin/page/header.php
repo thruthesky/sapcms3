@@ -61,15 +61,13 @@
 
 			<?php if ( login() ) { ?>
 				<li><a href="/user/logout">Logout</a></li>
-			<? } else { ?>
+			<?php } else { ?>
 				<li><a href="/user/login">Login</a></li>
-			<? } ?>
+			<?php } ?>
 			<li>
 				<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
 			</li>
 		</ul>
 	</div>
 </nav>
-
-
 <?php
