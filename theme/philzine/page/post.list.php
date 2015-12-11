@@ -1,2 +1,2 @@
 <?php
-widget( $config->get('widget_list'), $this->data);
+widget( "post_list_philzine", $this->data);
