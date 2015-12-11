@@ -4,12 +4,12 @@
 
 <div class="slide-menu-inner">
     <div class="list-group side-menu">
-	  <a href="#" class="list-group-item">Menu 1<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
-	  <a href="#" class="list-group-item">Menu 2<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
-	  <a href="#" class="list-group-item">Menu 3<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
-	  <a href="#" class="list-group-item">Menu 4<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
-	  <a href="#" class="list-group-item">Menu 5<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>  
-	  <a href="#" class="list-group-item slide-menu-button">Close<img class='arrow' src='/theme/philzine/img/side-menu/close.png'/></a>  
+	  <a href="/front/list" class="list-group-item">Front<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
+	  <a href="/life/list" class="list-group-item">Life<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
+	  <a href="/news/list" class="list-group-item">News<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
+	  <a href="/travel/list" class="list-group-item">Travel<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
+	  <a href="/buyandsell/list" class="list-group-item">Buy and Sell<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>  
+	  <span class="list-group-item slide-menu-button">Close<img class='arrow' src='/theme/philzine/img/side-menu/close.png'/></span>  
 	</div>
 	<div class='user-info'>
 		<div class='diagonal-bg'></div>
