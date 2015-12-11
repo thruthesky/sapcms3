@@ -5,6 +5,7 @@ $post_configs = post_config()->loadAll();
 
 //$post_configs = ['front', 'news', 'info', 'travel', 'photo', 'forum', 'buyandsell'];
 $data = $ci->data;
+
 if( !empty( $data['config'] ) ) {
 	$current_config = $data['config']->get('name');
 }
@@ -23,6 +24,7 @@ else $current_config = null;
 	  </li>
 	</ul>
 </div>
+<?php if( $data['model'] != 'user' ){ ?>
 <div class='container-fluid bottom'>
 	<nav class="container nav nav-inline">
 	  <a class="nav-link<?php if( $_SERVER['REQUEST_URI'] == '/' ) echo " active"; ?>" href="/">Home</a>
@@ -31,3 +33,4 @@ else $current_config = null;
 	  <?php } ?>
 	</nav>
 </div>
+<?php } ?>

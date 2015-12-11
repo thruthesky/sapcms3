@@ -1,0 +1,103 @@
+.form-wrapper{	
+	padding:0 7% 3% 7%;
+	margin:28px 10% 0 10%;
+	text-align:center;
+}
+
+.form-wrapper .register-logo{
+	display:block;
+	margin-bottom:10px;
+}
+
+.form-wrapper .register-logo img{	
+	margin-bottom:10px;
+}
+
+.form-wrapper .register-logo .text{		
+	font-weight:bold;
+	color:#5e5e5e;
+}
+
+.member-register-form label{
+	display:none;
+}
+
+.member-register-form .input-group.text-only{	
+	border-right:0;
+	color:#848484;
+	text-align:left;	
+}
+
+.member-register-form .input-group.text-only .form-control{
+	padding:.5rem .75rem;
+	border-right:0;
+	border-radius:0;
+}
+
+.member-register-form .input-group.text-only .form-control, .member-register-form .input-group.text-only .input-group-addon{
+	background-color:#f7f7f7;
+	font-size:.8em;
+}
+
+.member-register-form .input-group.username.text-only .form-control{
+	border-top-left-radius:3px;
+}
+
+.member-register-form .input-group.password.text-only .form-control{
+	cursor:pointer;
+}
+
+.member-register-form .input-group{
+	margin-bottom:2px;
+}
+
+.member-register-form .input-group input{
+	border-right:0;
+	background-color:#fff;
+}
+
+.member-register-form .input-group input, .member-register-form .input-group .input-group-addon{
+	border-radius:0;
+}
+
+.member-register-form .input-group.username input{
+	border-top-left-radius:3px;
+	border-bottom-left-radius:0;
+}
+
+.member-register-form .input-group.username .input-group-addon{
+	border-top-right-radius:3px;
+	border-bottom-right-radius:0;
+}
+
+.member-register-form .input-group.mobile input{
+	border-bottom-left-radius:3px;
+	border-top-left-radius:0;
+}
+
+.member-register-form .input-group.mobile .input-group-addon{
+	border-bottom-right-radius:3px;
+	border-top-right-radius:0;
+}
+
+.member-register-form .input-group .input-group-addon{
+	background-color:#fff;
+}
+
+.member-register-form [type='submit']{
+	width:100%;
+	padding:10px 10px;
+	margin:30px 0 10px 0;
+	font-weight:bold;
+}
+
+.forgot-password{
+	color:#e74c3c;
+	font-size:.8em;
+}
+
+@media (min-width: 48em) { 
+	.form-wrapper{	
+		margin:28px 20% 0 20%;
+	}
+}

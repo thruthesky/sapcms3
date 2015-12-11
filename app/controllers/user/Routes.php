@@ -1,5 +1,6 @@
 <?php
 $route['user/register'] = 'user/user_controller/register';
+$route['user/edit'] = 'user/user_controller/register';
 
 
 $route['user/login'] = 'user/user_controller/login';

@@ -20,21 +20,25 @@ class User_controller extends MY_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required',
 				array('required' => 'You must provide a %s.')
 		);
-		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
-
-		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+		
+		//$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+		//$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+		
 		if ($this->form_validation->run() == FALSE)
 		{
-
+		
 		}
 		else
-		{
+		{		
 			$data['user'] = self::create();
 			$data['message'] = 'Register Successful!';
-			echo self::createNotice( $data['message'], true );
+			//echo self::createNotice( $data['message'], true );
 			//$data['page'] = 'user.register_success';
+			user()->login( $data['user']->get('username') );			
 		}
+		
+		$current_user = login();
+		if( !empty( $current_user ) ) $data['user'] = user()->load( $current_user );
 		$this->render( $data );
 	}
 
@@ -45,8 +49,8 @@ class User_controller extends MY_Controller {
      *
      * @return $this|Entity|FALSE
      */
-	public function create() {
-		$request = $this->input->post();
+	public function create() {		
+		$request = $this->input->post();		
 		if( empty( $request['id'] ) ) {
 			$user = user()
 					->create()
@@ -60,13 +64,25 @@ class User_controller extends MY_Controller {
 		if( !empty( $request['password'] ) ){
 			$user->setPassword( $request['password'] );
 		}
+		if( !empty( $request['first_name'] ) ){
+			$user->set( "first_name",$request['first_name'] );
+		}
+		if( !empty( $request['middle_name'] ) ){
+			$user->set( "middle_name",$request['middle_name'] );
+		}
+		if( !empty( $request['last_name'] ) ){
+			$user->set( "last_name",$request['last_name'] );
+		}
+		if( !empty( $request['address'] ) ){
+			$user->set( "address",$request['address'] );
+		}
 		
 		$user
 				->set( 'email',  $request['email'] )
-				->set( 'first_name',  $request['first_name'] )
-				->set( 'middle_name',  $request['middle_name'] )
-				->set( 'last_name',  $request['last_name'] )
-				->set( 'address',  $request['address'] )
+				//->set( 'first_name',  $request['first_name'] )
+				//->set( 'middle_name',  $request['middle_name'] )
+				//->set( 'last_name',  $request['last_name'] )
+				//->set( 'address',  $request['address'] )
 				->set( 'mobile',  $request['mobile'] )
 				->save();
 
@@ -140,7 +156,12 @@ class User_controller extends MY_Controller {
 	public function editSubmit()
 	{
 		$request = $this->input->post();
-
+		if( empty( $request ) ){
+			if( login() ) $redirect_url = "/user/edit";
+			else $redirect_url = "/user/register";
+			redirect( $redirect_url );
+			exit;
+		}
 		//if empty request['id'] return
 		$user = user()->load( $request['id'] );
 
@@ -149,7 +170,9 @@ class User_controller extends MY_Controller {
 				'page' => 'user.register',
 				'user' => $user
 		];
-
+		
+		$user_table = user()->getTable();
+		
 		if( $user->get('email') == $request['email'] ){
 			//if email is the same don't validate email unique
 			$this->form_validation->set_rules(
@@ -163,7 +186,7 @@ class User_controller extends MY_Controller {
 		else{
 			$this->form_validation->set_rules(
 					'email', 'Email',
-					'trim|required|min_length[10]|max_length[64]|valid_email|is_unique[user.email]',
+					'trim|required|min_length[10]|max_length[64]|valid_email|is_unique['.$user_table.'.email]',
 					array(
 							'required'      => 'Please input your email address.',
 							'is_unique'     => 'Email %s already exists.'
@@ -179,20 +202,24 @@ class User_controller extends MY_Controller {
 		
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+		
 		if ($this->form_validation->run() == FALSE)
 		{
 
 		}
 		else
 		{
-			self::create();
+			$data['user'] = self::create();
 			$data['message'] = 'Edit Successful!';
-			echo self::createNotice( $data['message'], true );
+			//echo self::createNotice( $data['message'], true );
 		}
-		$this->load->helper('url');		
-		$redirect_url = "/user/list/".in('offset')."?keyword=".in('keyword');
 		
-		redirect( $redirect_url );		
+		$this->load->helper('url');		
+		//$redirect_url = "/user/list/".in('offset')."?keyword=".in('keyword');
+		//$redirect_url = "/user/register";
+		
+		//redirect( $redirect_url );			
+		$this->render( $data );		
 	}
 
 
@@ -206,7 +233,7 @@ class User_controller extends MY_Controller {
 		}
 
 		return	"
-				<div class='notice$successful' style='padding:10px;;border:1px solid $color;background-color:#f7f7f7;color:$color;text-align:center;'>
+				<div class='notice$class' style='padding:10px;;border:1px solid $color;background-color:#f7f7f7;color:$color;text-align:center;'>
 					$message
 				</div>
 				";
