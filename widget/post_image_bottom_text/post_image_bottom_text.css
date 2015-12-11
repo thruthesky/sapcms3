@@ -1,0 +1,15 @@
+.carousel.bottom-text-type .carousel-inner{
+	
+}
+
+.carousel.bottom-text-type .carousel-caption{
+	position:initial;	
+	padding:0;
+	color:#000;
+	text-shadow:none;
+	text-align:left;
+}
+
+.carousel.bottom-text-type .carousel-caption h3{
+	font-size:1.2em;
+}

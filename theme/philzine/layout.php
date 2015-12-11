@@ -18,10 +18,12 @@
     <script>
         var base_url = '<?php echo base_url();?>';
     </script>
+	
+	<?php include '/theme/philzine/philzine.functions.php' ?>
 </head>
 <body>
 <div class="header">
-	<?php include theme_script('header') ?>
+	<?php include theme_script('header') ?>	
 </div>
 <div class="container">    
 	<div class="slide-menu"><?php include 'page/menu.slide.php';?></div>

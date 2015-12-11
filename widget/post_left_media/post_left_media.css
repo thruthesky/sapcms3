@@ -1,0 +1,25 @@
+.media-left{
+	padding-right:0;
+}
+
+.media-left .media-image{
+	width:170px;	
+	height:130px;	
+}
+
+.media-body{
+	color:#222222;
+	background-color:#fff;
+}
+
+.media-body > .inner{
+	height:130px;
+	padding:10px;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+
+.media-body .media-heading{
+	font-size:1em;
+	color:#c0392b;
+}

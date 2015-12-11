@@ -313,8 +313,8 @@ class PostData extends Post {
     public function createComment($id_parent, $content) {
 
         $parent = post_data( $id_parent );
-
-        if ( empty($parent->get('id_root')) ) {
+		$id_root = $parent->get('id_root');
+        if ( empty( $id_root ) ) {
             di("error: id_root cannot be 0.");
             exit;
         }
