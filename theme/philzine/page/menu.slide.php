@@ -9,6 +9,7 @@
 	  <a href="#" class="list-group-item">Menu 3<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
 	  <a href="#" class="list-group-item">Menu 4<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>
 	  <a href="#" class="list-group-item">Menu 5<img class='arrow' src='/theme/philzine/img/side-menu/arrow-right-grey.png'/></a>  
+	  <a href="#" class="list-group-item slide-menu-button">Close<img class='arrow' src='/theme/philzine/img/side-menu/close.png'/></a>  
 	</div>
 	<div class='user-info'>
 		<div class='diagonal-bg'></div>
