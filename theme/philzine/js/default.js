@@ -5,6 +5,9 @@ $(function(){
 	$("body").on("click",".slide-menu-button", toggleSlideMenu);
 
 	$("body").click(function( e ){
+		var slide_menu_status = $(".slide-menu").css("display");
+		if( slide_menu_status == 'none' ) return;
+	
 		var element_class = $(e.target).prop("class");
 		if( $(e.target).parents(".slide-menu").length ) return;
 		else if( $(e.target).parent().hasClass(".slide-menu") ) return;
@@ -17,7 +20,7 @@ $(function(){
 	});
 });
 
-function toggleSlideMenu(){
+function toggleSlideMenu(){	
 	header_height = $(".header").height();
 	$(".slide-menu").css("top",header_height)
 

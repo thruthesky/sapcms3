@@ -5,6 +5,17 @@ a:hover{
 	text-decoration:none!important;
 }
 /*eo a*/
+
+/*file*/
+.file{
+	height:initial;
+}
+
+.file input{
+	opacity:1;
+}
+/*eo file*/
+
 /*row*/
 .row{
 	margin-bottom:10px;
