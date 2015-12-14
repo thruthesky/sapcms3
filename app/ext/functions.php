@@ -75,14 +75,15 @@ function is_email($str) {
 
 /**
  * Returns page no.
- *  if the input is not a number or less than 0, then it returns 0.
+ * @note it begins with 1.
+ *  if the input is not a number or less than 1, then it returns 1.
  * @param $no
  * @return int|string
  */
 function page_no($no) {
-    if ( ! is_numeric($no) ) return 0;
-    else if ( $no < 0 ) return 0;
-    else return -- $no;
+    if ( ! is_numeric($no) ) return 1;
+    else if ( $no < 1 ) return 1;
+    else return $no;
 }
 
 function getBrowserID() {

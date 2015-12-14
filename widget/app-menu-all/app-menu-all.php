@@ -22,5 +22,5 @@ $widget_name = $o;
 
     </div>
     <img src="http://www.philgo.com/data/upload/0/1348750">
-    <?php widget('post_latest', ['post_config_name'=>$widget_name, 'limit'=>40])?>
+
 </div>

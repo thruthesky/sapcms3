@@ -269,6 +269,7 @@ function getDirNames(&$list) {
 
 
 function get_default_theme_name() {
+    return 'default';
     return 'philzine';
 }
 

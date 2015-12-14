@@ -8,9 +8,9 @@
         |
         <a href="/user/logout">Logout</a>
         )
-    <? } else { ?>
+    <?php } else { ?>
         <a href="/user/login">Login</a>
-    <? } ?>
+    <?php } ?>
 
     <span class="slide-menu-button">MENU</span>
 
