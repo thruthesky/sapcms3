@@ -7,11 +7,9 @@ $post_config_name = $post_config->get('name');
 
 $profile_url = "/theme/philzine/img/no_primary_photo.png";
 ?>
-<div class='main-post-edit-form'>
 <script>
-	document.writeln( get_post_edit_form_philzine('<?php echo $post_config_name?>', 0, 0, 'post') );
+	document.writeln( get_post_edit_form_philzine_main('<?php echo $post_config_name?>', 0, 0, 'post') );
 </script>
-</div>
 
 
 

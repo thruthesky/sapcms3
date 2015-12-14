@@ -1,0 +1,89 @@
+.main-post-edit-form{
+	margin-bottom:10px;
+}
+
+.post-edit-wrapper.main-post-edit-form{
+	padding:10px;
+	background-color:#fff;
+}
+
+.post-edit-wrapper.main-post-edit-form .profile-image.comment{
+	width:35px;
+}
+
+.post-edit-wrapper.main-post-edit-form .content{
+	height:35px;	
+}
+
+.post-edit-wrapper.main-post-edit-form textarea{
+	height:35px;
+	width:100%;
+	resize:none;
+}
+
+.post-edit-wrapper.main-post-edit-form .media-left{
+	
+}
+
+.post-edit-wrapper.main-post-edit-form .file{	
+	position:relative;		
+}
+
+.post-edit-wrapper.main-post-edit-form .files{
+	padding:0 5px;
+}
+
+.post-edit-wrapper.main-post-edit-form .files .file{
+	max-width:100px;
+	margin-top:5px;
+}
+
+.post-edit-wrapper.main-post-edit-form .files .file img{	
+	width:100%;
+}
+
+.post-edit-wrapper.main-post-edit-form .file input[type='file']{
+	height:35px;
+	opacity:0;
+}
+
+.post-edit-wrapper.main-post-edit-form .file .img-btn-wrapper{
+	position:absolute;
+	left:0;
+	top:0;
+	height:35px;
+	width:100%;
+	padding:5px;
+	border-radius:3px;
+	background-color:#95a5a6;
+	text-align:center;
+	box-sizing:border-box;	
+}
+
+.post-edit-wrapper.main-post-edit-form .file .image-button{
+
+}
+
+.post-edit-wrapper.main-post-edit-form .submit{
+	padding:0;
+}
+
+.post-edit-wrapper.main-post-edit-form input[type='submit']{
+	height:35px;
+	width:100%;	
+	border:0;
+	border-radius:3px;
+	color:#fff;
+	background-color:#2c8ac8;
+	box-sizing:border-box;
+}
+
+.post-edit-wrapper.main-post-edit-form .content.col-sm-8{
+	float:left;
+	width: 66.666667%;
+}
+
+.post-edit-wrapper.main-post-edit-form .file.col-sm-2, .post-edit-wrapper.main-post-edit-form .submit.col-sm-2{
+	float:left;
+	width: 16.666667%;
+}

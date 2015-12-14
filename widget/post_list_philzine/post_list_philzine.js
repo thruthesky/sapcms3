@@ -27,9 +27,20 @@ $(function(){
     $body.on('click', '.post-menu .reply', click_post_reply);
     $body.on('click', '.post-menu .like', click_post_like);
 	
-	
+	$body.on('click', '.post-menu-philzine-top .edit, .post-menu-philzine-bottom .edit', click_post_edit_philzine);
+	$body.on('click', '.post-menu-philzine-top .delete, .post-menu-philzine-bottom .delete', click_post_delete);
+	$body.on('click', '.post-menu-philzine-bottom .like', click_post_like_philzine);
 	$body.on('click', '.post-menu-philzine-bottom .reply', click_post_reply_philzine);
+	
+	
+	$body.on('click', ".post .post-edit-wrapper textarea[name='content']", click_expand_textarea);
 });
+
+function click_expand_textarea(){
+	$this = $(this);
+	$this.height("100px");
+	$this.parent().height("106px");
+}
 
 /**
  *
@@ -47,7 +58,8 @@ function post_form_submit() {
 }
 
 function ajax_form_submit($this) {
-    console.log("ajax_form_submit() begin");
+    console.log("ajax_form_submit() begin");	
+	
     ajax_load({
         'url': $this.prop('action'),
         'data': $this.serialize()
@@ -60,7 +72,8 @@ function ajax_form_submit($this) {
         else {
             var $parent = post(re['id_parent']);
             if ( $parent.length ) {
-                $parent.find('.post-edit').remove();
+                //$parent.find('.post-edit').remove();
+				$parent.find('.post-edit-wrapper').remove();
                 $parent.after(re.html);
             }
             else {
@@ -108,7 +121,8 @@ function  ajax_file_upload($this) {
             }
 
             //console.log(re);
-
+			//<span class="delete">X</span>
+			console.log( callback_ajax_upload );
             if ( typeof callback_ajax_upload == 'function' ) callback_ajax_upload($this, re);
         }
     });
@@ -131,6 +145,9 @@ function  ajax_file_upload($this) {
     }
 }
 function ajax_delete() {
+	re = confirm("Are you sure you want to delete this file? ( deleting files is irreversable )");
+	if( !re ) return;
+
     var no = $(this).parent().attr('no');
     ajax_load('/data/ajax/delete/' + no, callback_ajax_delete);
 }
@@ -163,14 +180,17 @@ function get_post_edit_form(name, id, id_parent) {
     return m;
 }
 
-function get_post_edit_form_philzine(name, id, id_parent) {
+function get_post_edit_form_philzine(name, id, id_parent, type) {
+	if( type == 'post' ) action = name + "/edit/ajax/philzineSubmit";
+	else if( type == 'comment' ) action = name + "/edit/ajax/philzineCommentSubmit";
+	
     var m = '';
 	m += '<div class="media post-edit-wrapper">';
 	m += '<a class="media-left" href="#">';
-	m += '<img class="media-object profile-image" src="/theme/philzine/img/no_primary_photo.png" alt="Generic placeholder image">';
+	m += '<img class="media-object profile-image comment" src="/theme/philzine/img/no_primary_photo.png" alt="Generic placeholder image">';
 	m += '</a><div class="media-body">';
     m += '<div class="post-edit clearfix">';
-    m += '<form class="ajax-upload clearfix" action="/'+name+'/edit/ajax/submit" enctype="multipart/form-data" method="post" accept-charset="utf-8">';
+    m += '<form class="ajax-upload clearfix" action="/'+action+'" enctype="multipart/form-data" method="post" accept-charset="utf-8">';
     m += '<input type="hidden" name="id" value="'+id+'">';
     m += '<input type="hidden" name="id_parent" value="'+id_parent+'">';
     m += '<input type="hidden" name="data_id" value="">';
@@ -180,10 +200,35 @@ function get_post_edit_form_philzine(name, id, id_parent) {
     m += '<div class="content col-sm-8"><textarea name="content"></textarea></div>';
     m += '<div class="file col-sm-2"><div class="img-btn-wrapper"><img class="image-button" src="/widget/post_edit_philzine/img/image.png"/></div><input type="file" name="file" onchange="onFileChange(this);"></div>';
     m += '<div class="submit col-sm-2"><input type="submit" value="Post"></div>';
-    if ( id || id_parent ) m += '<div class="cancel">[Cancel]</div>';
+    //if ( id || id_parent ) m += '<div class="cancel">[Cancel]</div>';
     m += '</form>';
-    m += '<div class="files"></div>';
+    m += '<div class="files edit"></div>';
     m += '</div></div></div>';
+    return m;
+}
+
+function get_post_edit_form_philzine_main(name, id, id_parent, type) {
+	if( type == 'post' ) action = name + "/edit/ajax/philzineSubmit";
+	else if( type == 'comment' ) action = name + "/edit/ajax/philzineCommentSubmit";
+	
+    var m = '';
+	m += '<div class="post-edit-wrapper main-post-edit-form">';
+    m += '<div class="post-edit clearfix">';
+    m += '<form class="ajax-upload clearfix" action="/'+action+'" enctype="multipart/form-data" method="post" accept-charset="utf-8">';
+    m += '<input type="hidden" name="id" value="'+id+'">';
+    m += '<input type="hidden" name="id_parent" value="'+id_parent+'">';
+    m += '<input type="hidden" name="data_id" value="">';
+    m += '<input type="hidden" name="model" value="post">';
+    m += '<input type="hidden" name="category" value="upload">';
+    //m += '<div class="subject"><input type="text" name="subject" value=""></div>';	
+    m += '<div class="content"><textarea name="content"></textarea></div>';
+    m += '<div class="file col-sm-2"><div class="img-btn-wrapper"><img class="image-button" src="/widget/post_edit_philzine/img/image.png"/></div><input type="file" name="file" onchange="onFileChange(this);"></div>';
+	m += '<div class="col-sm-8">CATEGORY</div>';
+    m += '<div class="submit col-sm-2"><input type="submit" value="Post"></div>';
+    //if ( id || id_parent ) m += '<div class="cancel">[Cancel]</div>';
+    m += '</form>';
+    m += '<div class="files edit"></div>';
+    m += '</div></div>';
     return m;
 }
 
@@ -200,7 +245,7 @@ function click_post_reply_philzine() {
     var $this = $(this);
     var $post = $this.parents('.post');
     var id = $post.attr('no');
-    var m = get_post_edit_form_philzine(post_config_name, 0, id);
+    var m = get_post_edit_form_philzine(post_config_name, 0, id, 'comment');
     $post.append( m );
 }
 
@@ -246,6 +291,48 @@ function click_post_edit() {
     }
 }
 
+function click_post_edit_philzine() {
+    var $this = $(this);
+    var $post = $this.parents('.post');
+
+    var $content  = $post.find(".content .text");
+	
+    var content = '';
+    if ( $content.length ) content = $content.text();
+	
+    var id = $post.attr('no');
+    var id_parent = $post.attr('no-parent');
+	
+	if( id_parent == 0 ) type = 'post';
+	else type = 'comment';
+
+    var form = get_post_edit_form_philzine(post_config_name, id, id_parent, type);
+
+    $post.find('.form-area').hide();
+    $post.find(".content:first").append(form);
+	$post.find(".content:first textarea").click();
+	$post.find(".content:first textarea").focus();
+    $post.find("[name='content']:first").val(content);
+
+    var $files = $post.find(".files");
+
+    if ( $files.length ) {
+        var m = '';
+        var $file = $files.find('.file');
+        if ( $file.length ) {
+            $file.each(function(i, element){
+                $obj = $(element);
+                var id = $obj.attr('no');
+                var url = $obj.find('img').prop('src');
+                console.log(url);
+                m += get_display_file(url, id, true);
+            });
+            //$files.html(m);
+            $post.find(".files.edit").html(m);
+        }
+    }
+}
+
 function click_post_edit_cancel() {
     var $this = $(this);
     var $post = $this.parents('.post');
@@ -268,6 +355,9 @@ function get_display_file(url, id, edit) {
 
 
 function click_post_delete() {
+	re = confirm("Are you sure you want to delete this post?");
+	if( !re ) return;
+	
     var $this = $(this);
     var $post = $this.parents('.post');
     var url = '/post/ajax/delete/' + $post.attr('no');
@@ -280,6 +370,16 @@ function click_post_delete() {
 }
 
 function click_post_like() {
+    var $this = $(this);
+    var $post = $this.parents('.post');
+    var url = '/post/ajax/like/' + $post.attr('no');
+    ajax_load(url, function(re) {
+        //console.log(re);
+        $this.find(".no").text(re.like);
+    });
+}
+
+function click_post_like_philzine() {
     var $this = $(this);
     var $post = $this.parents('.post');
     var url = '/post/ajax/like/' + $post.attr('no');

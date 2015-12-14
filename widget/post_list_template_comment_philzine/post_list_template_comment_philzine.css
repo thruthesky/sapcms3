@@ -1,0 +1,201 @@
+.post.comment{
+	position:relative;
+	padding:10px 0 0 0;
+	margin:0 0 0 0;
+	background-color:#fff;	
+}
+
+.post > .post-info, .post > .post-menu-philzine-bottom{
+	padding:0 10px;
+}
+
+.post .profile-image{
+	width:50px;
+	border-radius:100%;
+}
+
+/*post info*/
+.post .post-info{
+	margin:0 0 10px 0;
+}
+
+.post .post-info .name{
+	font-size:.8em;
+	font-weight:bold;
+}
+
+.post .post-info .name .send-message{
+	position:relative;
+	top:-1px;
+	margin-left:8px;
+}
+
+.post .post-info .date, .post .location{
+	font-size:.7em;	
+}
+
+.post .post-info .separator{
+	position:relative;
+	top:-2px;
+	font-size:.6em;	
+	margin:0 5px;
+}
+/*eo post info*/
+
+/*post-menu-philzine-top*/
+.post .post-menu-philzine-top{
+	position:absolute;
+	right:5px;
+	top:0;
+	padding:0;
+}
+
+.post .post-menu-philzine-top .menu-separator{
+	float: left;
+	height: 25px;
+	padding: 5px 0;
+	margin: 7px 5px 0 5px;
+	font-size: 1.1em;
+	border-left: 1px solid #e5e5e5;
+}
+
+.post .post-menu-philzine-top .btn{
+	border:0;
+}
+
+.post .post-menu-philzine-top .btn:hover{
+	background-color:#fff;
+}
+/*eo post-menu-philzine-top*/
+
+/*content*/
+.post .content{
+	font-size:.9em;
+}
+
+.post .content .files {
+	font-size:.9em;
+}
+
+.post .content .files .file{
+	width:25%;
+	max-width:150px;
+	margin:10px 0;
+}
+
+.post .content .files .file img{
+	width:100%;
+}
+/*eo content*/
+
+/*post-menu-philzine-bottom*/
+.post .post-menu-philzine-bottom{
+	font-size:.8em;
+	padding:0 10px 10px 10px;
+}
+
+.post .post-menu-philzine-bottom img{
+	position:relative;
+	top:-2px;
+	margin-right:5px;
+}
+/*eo post-menu-philzine-bottom*/
+
+.post.comment > .nav{
+	border-bottom:1px solid #ddd;
+}
+
+/*drop down*/
+.post.comment .dropdown-toggle{
+	padding:0
+}
+/*eo drop down*/
+
+
+/*TEMPPPP*/
+.main-post-edit-form{
+	margin-bottom:10px;
+}
+
+.post-edit-wrapper{
+	padding:10px;
+	background-color:#fff;
+}
+
+.post-edit-wrapper .profile-image.comment{
+	width:35px;
+}
+
+.post-edit-wrapper .content{
+	height:35px;	
+}
+
+.post-edit-wrapper textarea{
+	height:35px;
+	width:100%;
+	resize:none;
+}
+
+.post-edit-wrapper .media-left{
+	
+}
+
+.post-edit-wrapper .file{	
+	position:relative;		
+}
+
+.post-edit-wrapper .files{
+	padding:0 5px;
+}
+
+.post-edit-wrapper .files .file{
+	max-width:100px;
+	margin-top:5px;
+}
+
+.post-edit-wrapper .files .file img{	
+	width:100%;
+}
+
+.post-edit-wrapper .file input[type='file']{
+	height:35px;
+	opacity:0;
+}
+
+.post-edit-wrapper .file .img-btn-wrapper{
+	position:absolute;
+	left:0;
+	top:0;
+	height:35px;
+	width:100%;
+	padding:5px;
+	border-radius:3px;
+	background-color:#95a5a6;
+	text-align:center;
+	box-sizing:border-box;	
+}
+
+.post-edit-wrapper .file .image-button{
+
+}
+
+.post-edit-wrapper input[type='submit']{
+	height:35px;
+	width:100%;	
+	border:0;
+	border-radius:3px;
+	color:#fff;
+	background-color:#2c8ac8;
+	box-sizing:border-box;
+}
+
+.post-edit-wrapper .content.col-sm-8{
+	float:left;
+	width: 66.666667%;
+}
+
+.post-edit-wrapper .file.col-sm-2, .post-edit-wrapper .submit.col-sm-2{
+	float:left;
+	width: 16.666667%;
+}
+/*eo TEMPPPP*/

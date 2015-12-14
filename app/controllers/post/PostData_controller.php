@@ -71,6 +71,45 @@ class PostData_controller extends MY_Controller
         ]);
 
     }
+	
+	public function ajaxEditPhilzineSubmit() {
+        $post = $this->formEditSubmit();
+
+        ob_start();
+        widget('post_list_template_post_philzine', $post);
+        $markup = ob_get_clean();
+
+        $this->renderAjax([
+            'id' => $post->get('id'),
+            'id_parent' => $post->get('id_parent'),
+            'html' => $markup
+        ]);
+
+    }
+	
+	public function ajaxCommentEditPhilzineSubmit() {
+        $post = $this->formEditSubmit();
+
+        ob_start();
+        widget('post_list_template_comment_philzine', $post);
+        $markup = ob_get_clean();
+
+        $this->renderAjax([
+            'id' => $post->get('id'),
+            'id_parent' => $post->get('id_parent'),
+            'html' => $markup
+        ]);
+
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
     public function formEditSubmit() {
         if ( in('id') ) $post = post_data()->updateFromInput();
         else if ( in('id_parent') ) {

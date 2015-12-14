@@ -1,5 +1,5 @@
 <?php
-
+/*
 function humanTiming ($time)
 {
 
@@ -22,3 +22,4 @@ function humanTiming ($time)
     }
 
 }
+*/

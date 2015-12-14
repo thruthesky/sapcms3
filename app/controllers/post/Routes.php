@@ -24,6 +24,10 @@ $route['(:any)/edit/ajax/submit'] = 'post/postdata_controller/ajaxEditSubmit';
 $route['post/ajax/comment/edit/(:num)'] = 'post/postdata_controller/ajaxCommentEdit/$1';
 $route['post/ajax/delete/(:num)'] = 'post/postdata_controller/ajaxDelete/$1';
 
+/*added by benjamin*/
+$route['(:any)/edit/ajax/philzineSubmit'] = 'post/postdata_controller/ajaxEditPhilzineSubmit';
+$route['(:any)/edit/ajax/philzineCommentSubmit'] = 'post/postdata_controller/ajaxCommentEditPhilzineSubmit';
+/*eo added by benjamin*/
 
 $route['post/ajax/like/(:num)'] = 'post/postdata_controller/ajaxLike/$1';
 $route['(:any)/ajax/endless/(:num)'] = 'post/postdata_controller/ajaxEndless/$1/$2';
