@@ -424,5 +424,8 @@ class PostData extends Post {
         ]);
     }
 
+    public function searchPost($post_config_name, $numrows, $offset) {
+        return $this->latest($post_config_name, $numrows, $offset);
+    }
 
 }

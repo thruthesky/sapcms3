@@ -17,7 +17,8 @@ $route['(:any)/list'] = 'post/PostData_controller/collection/$1';
 
 //$route['(:any)/edit/submit'] = 'post/postdata_controller/editSubmit/$1';
 //$route['post/comment/submit'] = 'post/postdata_controller/commentSubmit';
-//$route['post/comment/edit/submit'] = 'post/postdata_controller/commentEditSubmit';
+//$route['post/comment/edit/
+//submit'] = 'post/postdata_controller/commentEditSubmit';
 
 
 $route['(:any)/edit/ajax/submit'] = 'post/postdata_controller/ajaxEditSubmit';

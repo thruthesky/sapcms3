@@ -12,3 +12,6 @@ $widget_name = $o;
 <img src="http://philgo.com/theme/philgo/img/banner/nolbu.gif">
 <?php widget('post_latest', ['post_config_name'=>$widget_name, 'limit'=>40])?>
 </div>
+<div class="endless-list">
+
+</div>
