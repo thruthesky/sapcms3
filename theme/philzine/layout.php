@@ -30,7 +30,7 @@
 	<div class="error"><?php widget('error') ?></div>
 	<div class="page <?php echo $model?>"><?php include $path_theme_script ?></div>
 </div>
-<div class="footer"><div class="container"><?php include theme_script('footer') ?></div></div>
+<div class="footer"><div class="container"><?php //include theme_script('footer') ?></div></div>
 <?php echo bootstrap_js()?>
 <?php echo js('/etc/js/common')?>
 <?php echo theme_js('default')?>

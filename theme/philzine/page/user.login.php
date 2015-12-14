@@ -1,2 +1,2 @@
 <?php
-widget('login_default');
+widget('login_philzine');

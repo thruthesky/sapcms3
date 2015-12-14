@@ -92,7 +92,7 @@
 		</div>
 	<?php } ?>
 	
-	<?php if( empty( $user_id ) ){ ?>
+	<?php if( $user_id == 'anonymous' ){ ?>
 		<?php widget('login_admin'); ?>
 	<?php }?>
 </section>

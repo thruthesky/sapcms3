@@ -1,10 +1,89 @@
 .slide-menu {
+	display:none;
     position:absolute;
     right:0;
+	border-left:2px solid #344958;
     z-index:999;
-    display:none;
 }
+
 .slide-menu-inner {
     background-color:#efefef;
-    width:200px;
+    width:250px;
 }
+
+.slide-menu-inner .list-group .list-group-item{
+	position:relative;
+    border:0;
+	border-radius:0;
+}
+
+.slide-menu-inner .list-group .list-group-item .arrow{
+	position:absolute;
+    right:10px;
+	top:17px;
+}
+/*side-menu*/
+.slide-menu-inner .list-group.side-menu .list-group-item{
+    font-size:.8em;
+}
+/*eo side-menu*/
+
+/*user-info*/
+.slide-menu-inner .user-info{
+	position:relative;
+	background:url("/theme/philzine/img/side-menu/bgmenu.png");
+}
+
+.slide-menu-inner .user-info .diagonal-bg{
+    height:51px;
+	background:url("/theme/philzine/img/side-menu/bgmenu_diagonal.png");
+	background-color:#fff;
+}
+
+.slide-menu-inner .user-info .name{
+	position: relative;
+	top: -20px;
+	padding: 0 10px 0 100px;
+	color: #fff;
+	text-align: center;
+}
+
+.slide-menu-inner .user-info .side-profile-image{
+	position:absolute;
+	left:20px;
+	top:0px;
+    width:75px;
+	border-radius:100%;
+}
+/*eo user-info*/
+
+/*user-menu*/
+.slide-menu-inner .list-group.user-menu .list-group-item{
+	border-top:1px solid #fff;
+    background:url("/theme/philzine/img/side-menu/bgmenu.png");
+	font-size:.9em;
+	color:#fff;	
+}
+
+.slide-menu-inner .list-group.user-menu .list-group-item:last-child{
+	border-bottom:1px solid #fff;    
+}
+
+.slide-menu-inner .list-group.user-menu .list-group-item:hover{
+	color:yellow;
+}
+/*eo user-menu*/
+
+/*side bar copyright*/
+.slide-menu-inner .side-bar-copyright{
+	padding:10px;
+	background:url("/theme/philzine/img/side-menu/bgmenu.png");
+	font-size:.7em;
+	color:#fff;
+	text-align:center;
+}
+
+.slide-menu-inner .side-bar-copyright a{
+	color:#fff;
+}
+/*eo side bar copyright*/

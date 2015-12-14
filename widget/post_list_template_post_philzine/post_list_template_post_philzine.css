@@ -1,0 +1,105 @@
+.post{
+	position:relative;
+	padding:10px 0 0 0;
+	margin:0 0 10px 0;
+	background-color:#fff;	
+}
+
+.post > *{
+	padding:0 10px;
+}
+
+.post .profile-image{
+	width:50px;
+}
+
+/*post info*/
+.post .post-info{
+	margin:0 0 10px 0;
+}
+
+.post .post-info .name{
+	font-size:.8em;
+	font-weight:bold;
+}
+
+.post .post-info .name .send-message{
+	position:relative;
+	top:-1px;
+	margin-left:8px;
+}
+
+.post .post-info .date, .post .location{
+	font-size:.7em;	
+}
+
+.post .post-info .separator{
+	position:relative;
+	top:-2px;
+	font-size:.6em;	
+	margin:0 5px;
+}
+/*eo post info*/
+
+/*post-menu-philzine-top*/
+.post .post-menu-philzine-top{
+	position:absolute;
+	right:5px;
+	top:0;
+	padding:0;
+}
+
+.post .post-menu-philzine-top .menu-separator{
+	float: left;
+	height: 25px;
+	padding: 5px 0;
+	margin: 7px 5px 0 5px;
+	font-size: 1.1em;
+	border-left: 1px solid #e5e5e5;
+}
+
+.post .post-menu-philzine-top .btn{
+	border:0;
+}
+
+.post .post-menu-philzine-top .btn:hover{
+	background-color:#fff;
+}
+/*eo post-menu-philzine-top*/
+
+/*content*/
+.post .content{
+	font-size:.9em;
+}
+
+.post .content .files {
+	font-size:.9em;
+}
+
+.post .content .files .file{
+	width:25%;
+	max-width:150px;
+	margin:10px 0;
+}
+
+.post .content .files .file img{
+	width:100%;
+}
+/*eo content*/
+
+/*post-menu-philzine-bottom*/
+.post .post-menu-philzine-bottom{
+	font-size:.8em;
+	padding:0 10px 10px 10px;
+}
+
+.post .post-menu-philzine-bottom img{
+	position:relative;
+	top:-1px;
+	margin-right:5px;
+}
+/*eo post-menu-philzine-bottom*/
+
+.post > .nav{
+	border-bottom:1px solid #ddd;
+}

@@ -1,0 +1,75 @@
+.main-post-edit-form{
+	margin-bottom:10px;
+}
+
+.post-edit-wrapper{
+	padding:10px;
+	background-color:#fff;
+}
+
+.post-edit-wrapper .profile-image{
+	width:35px;
+}
+
+.post-edit-wrapper .content{
+	height:35px;	
+}
+
+.post-edit-wrapper textarea{
+	height:35px;
+	width:100%;
+	resize:none;
+}
+
+.post-edit-wrapper .media-left{
+	
+}
+
+.post-edit-wrapper .file{	
+	position:relative;		
+}
+
+.post-edit-wrapper .files{
+	padding:0 5px;
+}
+
+.post-edit-wrapper .files .file{
+	max-width:100px;
+	margin-top:5px;
+}
+
+.post-edit-wrapper .files .file img{	
+	width:100%;
+}
+
+.post-edit-wrapper .file input[type='file']{
+	height:35px;
+	opacity:0;
+}
+
+.post-edit-wrapper .file .img-btn-wrapper{
+	position:absolute;
+	left:0;
+	top:0;
+	height:35px;
+	width:100%;
+	padding:5px;
+	border-radius:3px;
+	background-color:#95a5a6;
+	text-align:center;
+	box-sizing:border-box;	
+}
+
+.post-edit-wrapper .file .image-button{
+
+}
+
+.post-edit-wrapper input[type='submit']{
+	height:35px;
+	width:100%;	
+	border:0;
+	border-radius:3px;
+	color:#fff;
+	background-color:#2c8ac8;
+	box-sizing:border-box;
+}
